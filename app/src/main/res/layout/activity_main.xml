@@ -5,14 +5,17 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/green_blue_dark"
     tools:context=".MainActivity">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/image_arrow_back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_margin="8dp"
-        android:src="@drawable/ic_arrow_back" />
+        android:background="null"
+        android:src="@drawable/ic_arrow_back"
+        android:contentDescription="@string/submit_left"/>
 
     <View
         android:id="@+id/view_barra"
@@ -22,7 +25,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#195E95" />
+        android:background="@color/blue_light" />
 
     <TextView
         android:id="@+id/text_resumo"
@@ -31,9 +34,9 @@
         android:layout_below="@+id/view_barra"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_weight="1"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="Resumo"
+        android:text="@string/resumo_text"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -46,7 +49,8 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="5dp"
-        android:text="Quinta, 21 mar 2023"
+        android:text="@string/date_text"
+        android:textColor="@color/white"
         android:textSize="12sp" />
 
     <ImageView
@@ -56,8 +60,8 @@
         android:layout_below="@+id/text_resumo"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/ic_arrow_drop_up"
-        app:tint="#4CAF50" />
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_arrow_drop_up" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,7 +71,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="R$ 1.800,00"
+        android:text="@string/value_text"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <View
@@ -78,7 +83,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="#969494" />
+        android:background="@color/gray" />
 
     <ImageView
         android:id="@+id/image_add_comment"
@@ -87,8 +92,8 @@
         android:layout_below="@+id/view_barra_values"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/ic_add_comment"
-        app:tint="#05599A" />
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_add_comment" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -99,8 +104,8 @@
         android:layout_toEndOf="@+id/image_add_comment"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="4dp"
-        android:text="Dinheiro que estava quardado em baixo da casa"
-        android:textColor="#004F8C"
+        android:text="@string/description_text"
+        android:textColor="@color/blue_light"
         android:textSize="14sp" />
 
     <View
@@ -111,7 +116,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:background="#969494" />
+        android:background="@color/gray" />
 
     <ImageView
         android:id="@+id/image_category"
@@ -120,9 +125,9 @@
         android:layout_below="@+id/view_barra_below_addComment"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:importantForAccessibility="no"
         android:padding="4dp"
-        android:src="@drawable/ic_category"
-        app:tint="#05599A" />
+        android:src="@drawable/ic_category" />
 
     <ImageView
         android:id="@+id/image_record"
@@ -132,52 +137,56 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_toEndOf="@id/image_category"
+        android:importantForAccessibility="no"
         android:padding="4dp"
-        android:src="@drawable/ic_smart_record"
-        app:tint="#05599A" />
+        android:src="@drawable/ic_smart_record" />
 
     <TextView
         android:id="@+id/text_category"
-        android:layout_width="50dp"
+        android:layout_width="54dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/image_category"
         android:layout_alignEnd="@+id/image_category"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="Categorias"
-        android:textSize="8sp" />
+        android:text="@string/categorias_text"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
 
     <TextView
         android:id="@+id/text_recorrencia"
-        android:layout_width="50dp"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/image_record"
-        android:layout_alignEnd="@+id/image_record"
+        android:layout_alignStart="@+id/image_record"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="Recorrência"
-        android:textSize="8sp" />
+        android:text="@string/recorrencia_text"
+        android:textColor="@color/white"
+        android:textSize="11sp" />
 
-    <ImageView
-        android:id="@+id/image_cancel"
+    <ImageButton
+        android:id="@+id/image_button_close"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_cancel"
-        app:tint="#C80547" />
+        android:background="@drawable/round_background_red"
+        android:src="@drawable/ic_close"
+        android:contentDescription="@string/submit_close"
+        />
 
-    <ImageView
-        android:id="@+id/image_arrow_riht"
+    <ImageButton
+        android:id="@+id/image_button_right"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_circle_right"
-        app:tint="#0779D3" />
-
+        android:background="@drawable/round_background_blue"
+        android:contentDescription="@string/submit_right"
+        android:src="@drawable/ic_right" />
 
 </RelativeLayout>
