@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_dark"
+    tools:context=".ui.OrcamentoActivity">
+
+    <TextView
+        android:id="@+id/text_logo_finacaFacil"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/amaranth"
+        android:gravity="center"
+        android:text="@string/financa_text"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/image_button_personal"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/image_button_personal"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/round_background_personal"
+        android:contentDescription="@string/submit_personal"
+        android:src="@drawable/ic_personal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_logo_finacaFacil"
+        app:layout_constraintTop_toTopOf="@+id/text_logo_finacaFacil" />
+
+    <TextView
+        android:id="@+id/text_date_activity_orcamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:text="@string/date_activity_orcamento_text"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_logo_finacaFacil"
+        app:layout_constraintBottom_toTopOf="@+id/text_disponivel_activity_orcamento"/>
+
+    <TextView
+        android:id="@+id/text_disponivel_activity_orcamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray"
+        android:text="@string/disponivel_activity_orcamento_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_date_activity_orcamento"
+        app:layout_constraintBottom_toTopOf="@+id/text_value_activity_orcamento"/>
+
+    <TextView
+        android:id="@+id/text_value_activity_orcamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="38sp"
+        android:text="@string/value_activity_orcamento_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_disponivel_activity_orcamento"
+        app:layout_constraintBottom_toTopOf="@+id/value_low_value_activity_orcamento"/>
+
+    <TextView
+        android:id="@+id/value_low_value_activity_orcamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray"
+        android:text="@string/value_low_activity_orcamento_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_value_activity_orcamento"
+        app:layout_constraintBottom_toTopOf="@+id/view_barra_activity_orcamento"/>
+
+    <View
+        android:id="@+id/view_barra_activity_orcamento"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/value_low_value_activity_orcamento" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
