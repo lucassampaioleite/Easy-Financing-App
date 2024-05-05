@@ -20,5 +20,11 @@
     <string name="value_activity_orcamento_text">R$ 4.697,88</string>
     <string name="value_low_activity_orcamento_text">R$ 10.697,88</string>
     <string name="orcamentos_text">Orçamentos</string>
+    <string name="extrato_text">Extrato</string>
+    <string name="entradas_text">Entradas 15.284,50</string>
+    <string name="saidas_text">Saídas 4.586,62</string>
+    <string name="quarta_20_mar_2024_text">Quarta, 20 mar 2024</string>
+    <string name="recebimento_view_show_extrato">Recebimento</string>
+    <string name="salario_view_show_extrato">Salário</string>
 
 </resources>
