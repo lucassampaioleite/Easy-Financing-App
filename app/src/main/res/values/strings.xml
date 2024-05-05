@@ -19,5 +19,6 @@
     <string name="disponivel_activity_orcamento_text">Disponível</string>
     <string name="value_activity_orcamento_text">R$ 4.697,88</string>
     <string name="value_low_activity_orcamento_text">R$ 10.697,88</string>
+    <string name="orcamentos_text">Orçamentos</string>
 
 </resources>
