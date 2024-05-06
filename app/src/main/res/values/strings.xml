@@ -13,8 +13,24 @@
     <string name="description_text">Dinheiro que estava quardado em baixo da casa</string>
     <string name="recorrencia_text">Recorrência</string>
     <string name="categorias_text">Categorias</string>
+
+    <string name="financa_text">FinançaFácil</string>
+    <string name="submit_personal">submit_personal</string>
+    <string name="date_activity_orcamento_text">MAR 2023</string>
+    <string name="disponivel_activity_orcamento_text">Disponível</string>
+    <string name="value_activity_orcamento_text">R$ 4.697,88</string>
+    <string name="value_low_activity_orcamento_text">R$ 10.697,88</string>
+    <string name="orcamentos_text">Orçamentos</string>
+    <string name="extrato_text">Extrato</string>
+    <string name="entradas_text">Entradas 15.284,50</string>
+    <string name="saidas_text">Saídas 4.586,62</string>
+    <string name="quarta_20_mar_2024_text">Quarta, 20 mar 2024</string>
+    <string name="recebimento_view_show_extrato">Recebimento</string>
+    <string name="salario_view_show_extrato">Salário</string>
+<!-- Lucas cardoso -->
     <string name="qual_a_data_da_movimenta_o">Qual a data da Movimentação?</string>
     <string name="botaoAvancar">Botão Avançar</string>
     <string name="botaoCancelar">Botão Cancelar</string>
+
 
 </resources>
