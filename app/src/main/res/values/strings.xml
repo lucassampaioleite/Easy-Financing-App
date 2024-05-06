@@ -1,17 +1,20 @@
 <resources>
     <string name="app_name">EasyFinancing</string>
 
-<!-- ImageButton -->
+    <!-- ImageButton -->
     <string name="submit_right">Ao acionado, passa para próxima view</string>
     <string name="submit_close">Ao acionado, finaliza a view</string>
     <string name="submit_left">Ao acionado, passa para próxima view</string>
 
-<!-- TextView -->
+    <!-- TextView -->
     <string name="resumo_text">Resumo</string>
     <string name="date_text">Quinta, 21 mar 2023</string>
     <string name="value_text">R$ 1.800,00</string>
     <string name="description_text">Dinheiro que estava quardado em baixo da casa</string>
     <string name="recorrencia_text">Recorrência</string>
     <string name="categorias_text">Categorias</string>
+    <string name="qual_a_data_da_movimenta_o">Qual a data da Movimentação?</string>
+    <string name="botaoAvancar">Botão Avançar</string>
+    <string name="botaoCancelar">Botão Cancelar</string>
 
 </resources>
