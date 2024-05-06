@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green_blue_dark"
+    tools:context=".SelectDate">
+
+
+    <CalendarView
+        android:id="@+id/calendario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/calendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/linha_base"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@id/calendario"
+        app:layout_constraintStart_toStartOf="@id/tv_data"
+        app:layout_constraintTop_toBottomOf="@id/bt_voltar" />
+
+    <View
+        android:id="@+id/linha"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/white"
+        app:layout_constraintStart_toStartOf="@id/tv_data"
+        app:layout_constraintTop_toBottomOf="@id/bt_voltar"
+        app:layout_constraintWidth_percent="0.25" />
+
+
+    <TextView
+        android:id="@+id/tv_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="@string/qual_a_data_da_movimenta_o"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/calendario"
+        app:layout_constraintLeft_toLeftOf="@id/calendario" />
+
+    <Button
+        android:id="@+id/bt_voltar"
+        android:layout_width="65dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_arrow_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_avancar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/botaoAvancar"
+        android:src="@drawable/bt_next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_cancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/red"
+        android:contentDescription="@string/botaoCancelar"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
