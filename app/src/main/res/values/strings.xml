@@ -27,10 +27,12 @@
     <string name="quarta_20_mar_2024_text">Quarta, 20 mar 2024</string>
     <string name="recebimento_view_show_extrato">Recebimento</string>
     <string name="salario_view_show_extrato">Salário</string>
-<!-- Lucas cardoso -->
+    <!-- Lucas cardoso -->
     <string name="qual_a_data_da_movimenta_o">Qual a data da Movimentação?</string>
     <string name="botaoAvancar">Botão Avançar</string>
     <string name="botaoCancelar">Botão Cancelar</string>
+    <string name="add_comentario">add comentário</string>
+    <string name="adicionar_uma_descr">Adicionar uma descrição</string>
 
 
 </resources>

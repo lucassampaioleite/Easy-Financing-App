@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_blue_dark"
-    tools:context=".SelectDate">
+    tools:context=".ui.SelectDateActivity">
 
 
     <CalendarView
@@ -57,6 +57,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:contentDescription="botao_voltar"
         android:background="@drawable/ic_arrow_back"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
