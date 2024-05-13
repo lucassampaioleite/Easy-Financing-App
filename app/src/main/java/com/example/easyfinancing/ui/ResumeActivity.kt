@@ -33,7 +33,7 @@ class ResumeActivity : AppCompatActivity() {
 
         binding.imageButtonRight.setOnClickListener(object : OnClickListener {
             override fun onClick(v: View?) {
-                startActivity(Intent(applicationContext, OrcamentoActivity::class.java))
+                startActivity(Intent(applicationContext, ExtratoActivity::class.java))
             }
         })
     }
