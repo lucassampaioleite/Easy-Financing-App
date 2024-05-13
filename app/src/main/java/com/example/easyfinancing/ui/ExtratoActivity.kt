@@ -6,15 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.easyfinancing.R
-import com.example.easyfinancing.databinding.ActivityOrcamentoBinding
+import com.example.easyfinancing.databinding.ActivityExtratoBinding
 
-class OrcamentoActivity : AppCompatActivity() {
+class ExtratoActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOrcamentoBinding
+    private lateinit var binding: ActivityExtratoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityOrcamentoBinding.inflate(layoutInflater)
+        binding = ActivityExtratoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

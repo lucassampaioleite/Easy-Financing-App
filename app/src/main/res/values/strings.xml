@@ -33,6 +33,7 @@
     <string name="botaoCancelar">Botão Cancelar</string>
     <string name="add_comentario">add comentário</string>
     <string name="adicionar_uma_descr">Adicionar uma descrição</string>
+    <string name="bt_flutuante_add_extrato">Botão que adiciona extrato</string>
 
 
 </resources>
