@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.easyfinancing.R
 import com.example.easyfinancing.databinding.ActivityInformsValuesBinding
 
-class InformsValuesActivity : AppCompatActivity() {
+class InformsValuesActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var binding: ActivityInformsValuesBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,29 +27,26 @@ class InformsValuesActivity : AppCompatActivity() {
             insets
         }
 
-        binding.linearImageText.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                Toast.makeText(applicationContext, "FUNCIONOU!", Toast.LENGTH_SHORT).show()
-            }
-        })
+        binding.linearImageText.setOnClickListener(this)
+        binding.textSaidas.setOnClickListener(this)
+        binding.textEntradas.setOnClickListener(this)
+        binding.imageButtonBtNext.setOnClickListener(this)
+        binding.imageButtonArrowBack.setOnClickListener(this)
+        binding.imageButtonBtClose.setOnClickListener(this)
 
-        binding.textSaidas.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View) {
-                handlerFilter(v.id)
-            }
-        })
+    }
 
-        binding.textEntradas.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View) {
-                handlerFilter(v.id)
-            }
-        })
-
-        binding.imageButtonBtNext.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                startActivity(Intent(applicationContext, SelectDateActivity::class.java))
-            }
-        })
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.text_saidas -> handlerFilter(view.id)
+            R.id.text_entradas -> handlerFilter(view.id)
+            R.id.linear_image_text -> Toast.makeText(applicationContext,
+                "FUNCIONOU!", Toast.LENGTH_SHORT).show()
+            R.id.imageButton_arrow_back -> finish()
+            R.id.imageButton_btNext -> startActivity(Intent(applicationContext,
+                SelectDateActivity::class.java))
+            R.id.imageButton_btClose -> finish()
+        }
     }
 
     private fun handlerFilter(id: Int) {
@@ -64,5 +61,6 @@ class InformsValuesActivity : AppCompatActivity() {
             }
         }
     }
+
 
 }

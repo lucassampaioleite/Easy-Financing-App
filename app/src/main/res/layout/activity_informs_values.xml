@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_blue_dark"
-    android:orientation="vertical"
     tools:context=".ui.InformsValuesActivity">
 
     <ImageButton
@@ -25,7 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_below="@+id/imageButton_arrow_back"
-        android:layout_alignStart="@+id/imageButton_arrow_back"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:background="@color/blue_light" />
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_barra_right"
-        android:layout_marginStart="102dp"
+        android:layout_centerHorizontal="true"
         android:background="@color/blue_light"
         android:orientation="horizontal"
         android:padding="4dp">
@@ -81,11 +81,10 @@
 
     <TextView
         android:id="@+id/text_pergunta"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_entradaSaida"
-        android:layout_alignStart="@+id/imageButton_arrow_back"
-        android:layout_marginHorizontal="8dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginVertical="32dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
@@ -99,13 +98,14 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@+id/text_pergunta"
+        android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="16dp"
         android:background="@color/green_blue_dark"
         android:fontFamily="sans-serif-condensed"
         android:gravity="end"
         android:hint="R$ 1.800,00"
         android:inputType="numberDecimal"
-        android:paddingEnd="32dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="34sp"
@@ -116,7 +116,8 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_below="@+id/edit_value"
-        android:layout_alignStart="@+id/edit_value"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:background="@color/gray" />
@@ -126,8 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_barra_abaixo_edit"
-        android:layout_alignStart="@+id/linear_entradaSaida"
-        android:layout_alignEnd="@+id/linear_entradaSaida"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -152,6 +152,7 @@
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/imageButton_btClose"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
