@@ -9,48 +9,6 @@
     tools:context=".ui.SelectDateActivity">
 
 
-    <CalendarView
-        android:id="@+id/calendario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/calendar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/linha_base"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/blue_light"
-        app:layout_constraintEnd_toEndOf="@id/calendario"
-        app:layout_constraintStart_toStartOf="@id/tv_data"
-        app:layout_constraintTop_toBottomOf="@id/bt_voltar" />
-
-    <View
-        android:id="@+id/linha"
-        android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/blue_light"
-        app:layout_constraintStart_toStartOf="@id/tv_data"
-        app:layout_constraintTop_toBottomOf="@id/bt_voltar"
-        app:layout_constraintWidth_percent="0.25" />
-
-
-    <TextView
-        android:id="@+id/tv_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="@string/qual_a_data_da_movimenta_o"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/calendario"
-        app:layout_constraintLeft_toLeftOf="@id/calendario" />
-
     <ImageButton
         android:id="@+id/bt_voltar"
         android:layout_width="64dp"
@@ -61,6 +19,53 @@
         android:contentDescription="botao_voltar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/linha_base"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/blue_light"
+        app:layout_constraintBottom_toTopOf="@+id/linha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_voltar"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <View
+        android:id="@+id/linha"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:background="@color/blue_light"
+        app:layout_constraintBottom_toTopOf="@id/tv_data"
+        app:layout_constraintStart_toStartOf="@id/linha_base"
+        app:layout_constraintTop_toBottomOf="@id/linha_base"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <TextView
+        android:id="@+id/tv_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/qual_a_data_da_movimenta_o"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@id/calendario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linha_base"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <CalendarView
+        android:id="@+id/calendario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/calendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_data" />
 
     <ImageButton
         android:id="@+id/bt_cancelar"
@@ -87,27 +92,3 @@
         app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--android:id="@+id/bt_avancar"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginEnd="20dp"-->
-    <!--android:layout_marginBottom="20dp"-->
-    <!--android:contentDescription="@string/botaoAvancar"-->
-    <!--android:src="@drawable/bt_next"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent" />-->
-
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--android:id="@+id/bt_cancelar"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginStart="20dp"-->
-    <!--android:layout_marginBottom="20dp"-->
-    <!--android:backgroundTint="@color/red"-->
-    <!--android:contentDescription="@string/botaoCancelar"-->
-    <!--android:src="@drawable/ic_close"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent" />-->
