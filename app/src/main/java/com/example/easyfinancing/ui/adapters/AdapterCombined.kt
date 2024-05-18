@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.easyfinancing.R
@@ -34,7 +37,7 @@ class AdapterCombined (private val context : Context, private val list : Mutable
             }
             VIEW_TYPE_MOV -> {
                 val view = LayoutInflater.from(context).inflate(R.layout.activity_extratct_movimentation, parent, false)
-                MovimentationViewHolder(view)
+                MovimentationViewHolder(view, list)
             }
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -57,12 +60,35 @@ class AdapterCombined (private val context : Context, private val list : Mutable
         }
     }
 
-    class MovimentationViewHolder(itemView: View) : ViewHolder(itemView) {
+    class MovimentationViewHolder(itemView: View, private val list : MutableList<Any>) :
+        ViewHolder(itemView) {
+        private val outerCardView = itemView.findViewById<CardView>(R.id.outer_card)
         val img = itemView.findViewById<ImageView>(R.id.mov_icon)
         val mainDescription = itemView.findViewById<TextView>(R.id.mov_main_text)
         val auxDescription = itemView.findViewById<TextView>(R.id.mov_aux_text)
         val movAmount = itemView.findViewById<TextView>(R.id.mov_amount)
 
+        init{
+            itemView.setOnLongClickListener(){
+                val position = adapterPosition
+
+                if(position != RecyclerView.NO_POSITION && list[position] is Movimentation){
+                    val item = list[position] as Movimentation
+                    outerCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.blue_line))
+                }
+
+                true
+            }
+
+            itemView.setOnClickListener(){
+                val position = adapterPosition
+
+                if(position != RecyclerView.NO_POSITION && list[position] is Movimentation){
+                    val item = list[position] as Movimentation
+                    outerCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.card_color))
+                }
+            }
+        }
         fun bind(movimentation: Movimentation) {
             img.setImageResource(movimentation.img)
             mainDescription.text = movimentation.mainDescription

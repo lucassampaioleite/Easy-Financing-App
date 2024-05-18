@@ -1,6 +1,8 @@
 package com.example.easyfinancing.ui
 
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,10 +19,6 @@ class ExtractActivity : AppCompatActivity() {
         val recyclerView_Extract = findViewById<RecyclerView>(R.id.recyclerView_extract)
         recyclerView_Extract.layoutManager = LinearLayoutManager(this)
         recyclerView_Extract.setHasFixedSize(true)
-
-        //val movimentationList: MutableList<Movimentation> = mutableListOf()
-        //val adapterMovimentation = AdapterMovimentation(this, movimentationList)
-        //recyclerView_Extract.adapter = adapterMovimentation
 
         val itensList : MutableList<Any> = mutableListOf()
 
@@ -57,5 +55,10 @@ class ExtractActivity : AppCompatActivity() {
         /*FIM AREA DESTINADA A TESTES DA ACTIVITY*/
         val combinedAdapter = AdapterCombined(this, itensList)
         recyclerView_Extract.adapter = combinedAdapter
+
+        val addNewMovBtn : ImageButton = findViewById(R.id.addMov)
+        addNewMovBtn.setOnClickListener{
+            Toast.makeText(this, "callNewMovActivity()", Toast.LENGTH_SHORT).show()
+        }
     }
 }
