@@ -34,6 +34,9 @@
     <string name="add_comentario">add comentário</string>
     <string name="adicionar_uma_descr">Adicionar uma descrição</string>
     <string name="bt_flutuante_add_extrato">Botão que adiciona extrato</string>
+    <string name="orcamentos">Orçamentos</string>
+    <string name="reserva_de_emergencia">Reserva de emergência</string>
+    <string name="submit_payment">imagemView de pagamento</string>
 
 
 </resources>
