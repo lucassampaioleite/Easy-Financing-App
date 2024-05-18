@@ -14,27 +14,24 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.easyfinancing.R
 import com.example.easyfinancing.databinding.ActivitySelectDateBinding
 
-class SelectDateActivity : AppCompatActivity() {
+class SelectDateActivity : AppCompatActivity(), OnClickListener {
 
-    private lateinit var bindingDate: ActivitySelectDateBinding
+    private lateinit var binding: ActivitySelectDateBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        bindingDate = ActivitySelectDateBinding.inflate(layoutInflater)
-        setContentView(bindingDate.root)
+        binding = ActivitySelectDateBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        bindingDate.btAvancar.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                startActivity(Intent(applicationContext, ResumeActivity::class.java))
-            }
-        })
-
-        bindingDate.calendario.setOnDateChangeListener(object : OnDateChangeListener {
+        binding.btVoltar.setOnClickListener(this)
+        binding.btCancelar.setOnClickListener(this)
+        binding.btAvancar.setOnClickListener(this)
+        binding.calendario.setOnDateChangeListener(object : OnDateChangeListener {
             override fun onSelectedDayChange(
                 view: CalendarView,
                 year: Int,
@@ -43,9 +40,19 @@ class SelectDateActivity : AppCompatActivity() {
             ) {
                 Toast.makeText(applicationContext, "$year-${month+1}-$dayOfMonth", Toast.LENGTH_SHORT).show()
             }
-
         })
 
-
     }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.bt_voltar -> finish()
+            R.id.bt_cancelar -> {
+                startActivity(Intent(applicationContext, ExtratoActivity::class.java))
+                finishAffinity()
+            }
+            R.id.bt_avancar -> startActivity(Intent(applicationContext, ResumeActivity::class.java))
+        }
+    }
+
 }
