@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
 }
+
 
 android {
     namespace = "com.example.easyfinancing"
@@ -36,6 +38,9 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+    viewBinding{
+        enable = true
     }
 }
 

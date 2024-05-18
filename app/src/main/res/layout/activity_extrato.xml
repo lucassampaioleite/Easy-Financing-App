@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -332,9 +333,9 @@
         android:id="@+id/view_chainExtrato"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/gray"
         android:layout_marginHorizontal="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/floating_show_extrato"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_extrato" />
@@ -367,19 +368,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:tint="@color/green"
         android:contentDescription="@string/submit_right"
         android:src="@drawable/ic_arrow_drop_up"
         app:layout_constraintBottom_toBottomOf="@+id/view_show_extrato"
         app:layout_constraintStart_toStartOf="@+id/view_show_extrato"
-        app:layout_constraintTop_toTopOf="@+id/view_show_extrato" />
+        app:layout_constraintTop_toTopOf="@+id/view_show_extrato"
+        app:tint="@color/green" />
 
     <TextView
         android:id="@+id/text_recebimento_view_show_extrato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/recebimento_view_show_extrato"
         android:layout_marginStart="8dp"
+        android:text="@string/recebimento_view_show_extrato"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text_salario_view_show_extrato"
@@ -426,20 +427,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:rotation="180"
-        app:tint="@color/red"
         android:contentDescription="@string/submit_right"
+        android:rotation="180"
         android:src="@drawable/ic_arrow_drop_up"
         app:layout_constraintBottom_toBottomOf="@+id/view_down_show_extrato"
         app:layout_constraintStart_toStartOf="@+id/view_down_show_extrato"
-        app:layout_constraintTop_toTopOf="@+id/view_down_show_extrato" />
+        app:layout_constraintTop_toTopOf="@+id/view_down_show_extrato"
+        app:tint="@color/red" />
 
     <TextView
         android:id="@+id/text_recebimento_view_down_show_extrato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/recebimento_view_show_extrato"
         android:layout_marginStart="8dp"
+        android:text="@string/recebimento_view_show_extrato"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text_salario_view_show_down_extrato"
@@ -451,8 +452,8 @@
         android:id="@+id/text_salario_view_show_down_extrato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/salario_view_show_extrato"
         android:layout_marginStart="8dp"
+        android:text="@string/salario_view_show_extrato"
         android:textColor="@color/gray"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view_down_show_extrato"
@@ -470,16 +471,17 @@
         app:layout_constraintTop_toTopOf="@+id/view_down_show_extrato" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_show_extrato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue_light"
         android:contentDescription="@string/bt_flutuante_add_extrato"
-        android:src="@drawable/ic_add"
         android:elevation="4dp"
+        android:src="@drawable/ic_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_down_show_extrato" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
 

@@ -12,19 +12,23 @@
         android:id="@+id/image_arrow_back"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_margin="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@null"
-        android:src="@drawable/ic_arrow_back"
-        android:contentDescription="@string/submit_left"/>
+        android:contentDescription="@string/submit_left"
+        android:src="@drawable/ic_arrow_back" />
 
     <View
         android:id="@+id/view_barra"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="5dp"
         android:layout_below="@+id/image_arrow_back"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="16dp"
         android:background="@color/blue_light" />
 
     <TextView
@@ -32,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_barra"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-condensed-medium"
@@ -60,6 +65,8 @@
         android:layout_below="@+id/text_resumo"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_alignParentStart="true"
+        app:tint="@color/green"
         android:importantForAccessibility="no"
         android:src="@drawable/ic_arrow_drop_up" />
 
@@ -80,6 +87,8 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_below="@+id/image_drop_up"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
@@ -90,8 +99,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_barra_values"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:importantForAccessibility="no"
         android:src="@drawable/ic_add_comment" />
 
@@ -100,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_barra_values"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_toEndOf="@+id/image_add_comment"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="4dp"
@@ -113,6 +123,8 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_below="@+id/image_add_comment"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
@@ -170,23 +182,24 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/round_background_red"
-        android:src="@drawable/ic_close"
         android:contentDescription="@string/submit_close"
-        />
+        android:src="@drawable/ic_close" />
 
     <ImageButton
-        android:id="@+id/image_button_right"
+        android:id="@+id/imageButton_save"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/round_background_blue"
+        android:layout_marginBottom="8dp"
+        app:tint="@color/white"
+        android:background="@drawable/round_background_green"
         android:contentDescription="@string/submit_right"
-        android:src="@drawable/ic_right" />
+        android:src="@drawable/ic_check" />
 
 </RelativeLayout>

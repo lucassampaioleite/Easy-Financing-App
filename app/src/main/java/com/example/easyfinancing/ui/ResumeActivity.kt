@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.easyfinancing.R
 import com.example.easyfinancing.databinding.ActivityResumeBinding
 
-class ResumeActivity : AppCompatActivity() {
+class ResumeActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var binding: ActivityResumeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,16 +26,20 @@ class ResumeActivity : AppCompatActivity() {
             insets
         }
 
-        binding.imageArrowBack.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
-                startActivity(Intent(applicationContext, SelectDateActivity::class.java))
-            }
-        })
+        binding.imageArrowBack.setOnClickListener(this)
+        binding.imageButtonClose.setOnClickListener(this)
+        binding.imageButtonSave.setOnClickListener(this)
 
-        binding.imageButtonRight.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) {
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.image_arrow_back -> finish()
+            R.id.image_button_close -> {
                 startActivity(Intent(applicationContext, ExtratoActivity::class.java))
+                finishAffinity()
             }
-        })
+            R.id.imageButton_save -> Toast.makeText(this, "SALVO!", Toast.LENGTH_SHORT).show()
+        }
     }
 }
