@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_blue_dark"
-    tools:context=".MainActivity">
+    tools:context=".ui.ResumeActivity">
 
     <ImageButton
         android:id="@+id/image_arrow_back"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="8dp"
-        android:background="null"
+        android:background="@null"
         android:src="@drawable/ic_arrow_back"
         android:contentDescription="@string/submit_left"/>
 
