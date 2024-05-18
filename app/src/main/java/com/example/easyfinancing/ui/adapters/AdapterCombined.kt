@@ -62,14 +62,13 @@ class AdapterCombined (private val context : Context, private val list : Mutable
 
     class MovimentationViewHolder(itemView: View, private val list : MutableList<Any>) :
         ViewHolder(itemView) {
-        private val outerCardView = itemView.findViewById<CardView>(R.id.outer_card)
         val img = itemView.findViewById<ImageView>(R.id.mov_icon)
         val mainDescription = itemView.findViewById<TextView>(R.id.mov_main_text)
         val auxDescription = itemView.findViewById<TextView>(R.id.mov_aux_text)
         val movAmount = itemView.findViewById<TextView>(R.id.mov_amount)
 
         init{
-            itemView.setOnLongClickListener(){
+            /*itemView.setOnLongClickListener(){
                 val position = adapterPosition
 
                 if(position != RecyclerView.NO_POSITION && list[position] is Movimentation){
@@ -78,14 +77,15 @@ class AdapterCombined (private val context : Context, private val list : Mutable
                 }
 
                 true
-            }
+            }*/
 
             itemView.setOnClickListener(){
                 val position = adapterPosition
 
                 if(position != RecyclerView.NO_POSITION && list[position] is Movimentation){
                     val item = list[position] as Movimentation
-                    outerCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.card_color))
+
+                    Toast.makeText(itemView.context, "callResumeActivityById(${item.id})", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -2,6 +2,7 @@ package com.example.easyfinancing.ui
 
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,12 +24,15 @@ class ExtractActivity : AppCompatActivity() {
         val itensList : MutableList<Any> = mutableListOf()
 
         /*AREA DESTINADA A TESTES DA ACTIVITY*/
+        var idItemCount = 0
+
         val date = MovDate("Sábado, 18 mai 2024")
 
         itensList.add(date)
 
         for(i in 1..5){
             val movimentation = Movimentation(
+                ++idItemCount,
                 R.drawable.arrow_drop_up,
                 "Descricao Principal",
                 "Descricao Auxiliar",
@@ -44,6 +48,7 @@ class ExtractActivity : AppCompatActivity() {
 
         for(i in 1..10){
             val movimentation = Movimentation(
+                ++idItemCount,
                 R.drawable.arrow_drop_up,
                 "Descricao Principal",
                 "Descricao Auxiliar",
@@ -53,12 +58,20 @@ class ExtractActivity : AppCompatActivity() {
             itensList.add(movimentation)
         }
         /*FIM AREA DESTINADA A TESTES DA ACTIVITY*/
+
         val combinedAdapter = AdapterCombined(this, itensList)
         recyclerView_Extract.adapter = combinedAdapter
 
+        /* BOTAO NOVA MOVIMENTACAO -> CHAMA A ACTIVITY DE INCLUSADO DE NOVA MOVIMENTACAO */
         val addNewMovBtn : ImageButton = findViewById(R.id.addMov)
         addNewMovBtn.setOnClickListener{
             Toast.makeText(this, "callNewMovActivity()", Toast.LENGTH_SHORT).show()
+        }
+
+        /* BOTAO VOLTAR -> VOLTA PARA ACTIVITY ANTERIOR */
+        val getBackBtn : ImageView = findViewById(R.id.back_button)
+        getBackBtn.setOnClickListener{
+            Toast.makeText(this, "callLastActivity()", Toast.LENGTH_SHORT).show()
         }
     }
 }
