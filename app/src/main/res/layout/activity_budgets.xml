@@ -26,11 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageButton_arrow_back"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:text="@string/orcamentos"
         android:textColor="@color/white"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/view_barra_activity_budgets"
@@ -46,10 +47,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/view_barra_activity_budgets"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#193F44"
-        android:elevation="16dp"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="16dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -156,43 +158,32 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/carView_add_budgets"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:layout_below="@id/cadView_reserva_emergencia"
-        android:layout_centerInParent="true"
-        android:backgroundTint="#193F44"
-        android:elevation="16dp"
-        app:cardCornerRadius="16dp"
-        app:contentPadding="50dp">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_orcamento"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/fab_add_orcamento"
+        app:backgroundTint="#193F44"
+        app:borderWidth="1dp"
+        app:elevation="5dp"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/blue_light" />
 
-        <ImageButton
-            android:id="@+id/imageButton_add_budgets"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:background="@drawable/round_background_green"
-            android:contentDescription="@string/submit_left"
-            android:padding="0dp"
-            android:src="@drawable/ic_add" />
+    <FrameLayout
+        android:id="@+id/frame_list_budgets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cadView_reserva_emergencia"
+        android:visibility="visible"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:text="Novo"
-            android:textColor="@color/blue_light"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/carView_add_budgets"
-        android:layout_marginVertical="16dp"
-        android:layout_centerHorizontal="true"/>
+    <FrameLayout
+        android:id="@+id/frame_access_budgets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </RelativeLayout>
+
