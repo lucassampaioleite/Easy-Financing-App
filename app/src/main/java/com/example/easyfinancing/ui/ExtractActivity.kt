@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
+
 import com.example.easyfinancing.ui.adapters.extract.AdapterCombined
 import com.example.easyfinancing.ui.models.extract.MovDate
 import com.example.easyfinancing.ui.models.extract.Movimentation
@@ -15,9 +16,11 @@ import com.example.easyfinancing.ui.models.extract.Movimentation
 class ExtractActivity : AppCompatActivity() {
 
     lateinit var recyclerView_Extract : RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_extract)
+
 
         recyclerView_Extract = findViewById(R.id.recyclerView_extract)
         val movimentacoes : MutableList<Any> = mutableListOf()
