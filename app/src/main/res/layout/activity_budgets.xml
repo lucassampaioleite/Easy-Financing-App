@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green_blue_dark"
+    tools:context=".ui.BudgetsActivity">
+
+    <ImageButton
+        android:id="@+id/imageButton_arrow_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:background="@null"
+        android:contentDescription="@string/submit_left"
+        android:padding="0dp"
+        android:src="@drawable/ic_arrow_back" />
+
+    <TextView
+        android:id="@+id/text_orcamento_activity_budgets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageButton_arrow_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/orcamentos"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view_barra_activity_budgets"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/text_orcamento_activity_budgets"
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/blue_light" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cadView_reserva_emergencia"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_barra_activity_budgets"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#193F44"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/imageView_payments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/submit_payment"
+                android:padding="0dp"
+                android:src="@drawable/ic_payments"
+                app:tint="@color/blue_light" />
+
+            <TextView
+                android:id="@+id/text_reserva_emergencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView_payments"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="8dp"
+                android:text="@string/reserva_de_emergencia"
+                android:textColor="@color/blue_light"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_valor_reservado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_reserva_emergencia"
+                android:layout_alignParentStart="true"
+                android:text="Valor Reservado:"
+                android:textColor="#969696"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_valor_5000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_reserva_emergencia"
+                android:layout_alignParentEnd="true"
+                android:text="R$ 5.000,00"
+                android:textColor="#969696"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_valor_atualizado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_valor_reservado"
+                android:layout_alignParentStart="true"
+                android:text="Valor Utilizado:"
+                android:textColor="#969696"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_valor_1738"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_valor_5000"
+                android:layout_alignParentEnd="true"
+                android:text="R$ 1.738,00"
+                android:textColor="@color/blue_light"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view_barra_graphic"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_below="@id/text_valor_atualizado"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/green_blue_dark" />
+
+            <View
+                android:id="@+id/view_barra_graphic_moving"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:layout_alignStart="@+id/view_barra_graphic"
+                android:layout_alignTop="@+id/view_barra_graphic"
+                android:layout_alignBottom="@+id/view_barra_graphic"
+                android:layout_margin="2dp"
+                android:background="@color/blue_light" />
+
+            <TextView
+                android:id="@+id/text_porcento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/view_barra_graphic"
+                android:layout_alignBottom="@+id/view_barra_graphic"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="35%"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_orcamento"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/fab_add_orcamento"
+        app:backgroundTint="#193F44"
+        app:borderWidth="1dp"
+        app:elevation="5dp"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/blue_light" />
+
+    <FrameLayout
+        android:id="@+id/frame_list_budgets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cadView_reserva_emergencia"
+        android:visibility="visible"/>
+
+    <FrameLayout
+        android:id="@+id/frame_access_budgets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+</RelativeLayout>
+
