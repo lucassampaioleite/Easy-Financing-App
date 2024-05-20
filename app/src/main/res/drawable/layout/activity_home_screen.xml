@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/card_color"
+    tools:context=".ui.ExtratoActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="25sp"
+        android:layout_marginLeft="25sp"
+        android:layout_marginRight="25sp">
+
+        <TextView android:id="@+id/text_logo_finacaFacil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="@string/financa_text"
+            android:textColor="@color/blue_line"
+            android:textSize="28sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageButton android:id="@+id/menu_border"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:background="@drawable/bg_add_movimentation_btn"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageButton android:id="@+id/menu"
+            android:layout_width="63dp"
+            android:layout_height="63dp"
+            android:background="@drawable/round_background_personal"
+            android:src="@drawable/person"
+
+            app:layout_constraintTop_toTopOf="@+id/menu_border"
+            app:layout_constraintBottom_toBottomOf="@+id/menu_border"
+            app:layout_constraintStart_toStartOf="@+id/menu_border"
+            app:layout_constraintEnd_toEndOf="@+id/menu_border" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout android:id="@+id/balance_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+
+        android:layout_marginTop="20sp"
+
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+            <TextView android:id="@+id/text_date_activity_orcamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/date_activity_orcamento_text"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/text_disponivel_activity_orcamento"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_logo_finacaFacil"
+                app:layout_constraintVertical_bias="0.0512"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView android:id="@+id/text_disponivel_activity_orcamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disponivel_activity_orcamento_text"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toTopOf="@+id/text_value_activity_orcamento"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_date_activity_orcamento" />
+
+            <TextView android:id="@+id/text_value_activity_orcamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/value_activity_orcamento_text"
+                android:textColor="@color/white"
+                android:textSize="38sp"
+                android:fontFamily="@font/inter_extrabold"
+                app:layout_constraintBottom_toTopOf="@+id/value_low_value_activity_orcamento"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_disponivel_activity_orcamento" />
+
+            <TextView android:id="@+id/value_low_value_activity_orcamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/value_low_activity_orcamento_text"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toTopOf="@+id/view_barra_activity_orcamento"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_value_activity_orcamento" />
+
+            <View android:id="@+id/view_barra_activity_orcamento"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@color/gray"/>
+    </LinearLayout>
+
+    <View android:id="@+id/overlay"
+        android:layout_width="350sp"
+        android:layout_height="165sp"
+        android:background="@drawable/overlay_homescreen"
+        android:layout_marginTop="20sp"
+        app:circularflow_radiusInDP="20"
+
+        app:layout_constraintTop_toBottomOf="@+id/balance_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View android:id="@+id/side_circle"
+        android:layout_width="164sp"
+        android:layout_height="164sp"
+        android:background="@drawable/homescreen_circle"
+        android:layout_marginTop="20sp"
+
+        app:layout_constraintTop_toBottomOf="@+id/balance_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"/>
+
+    <HorizontalScrollView android:id="@+id/horizontal_scrollView_activity_orcamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:scrollbars="none"
+
+        app:layout_constraintTop_toTopOf="@+id/side_circle"
+        app:layout_constraintBottom_toBottomOf="@+id/side_circle">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/page1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout android:id="@+id/page1_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="125dp"
+                    android:fontFamily="@font/inter_extrabold"
+                    android:gravity="center"
+                    android:paddingTop="15dp"
+                    android:rotation="-90"
+                    android:text="Orçamentos"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/page1_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/page1_title"
+                app:layout_constraintStart_toEndOf="@id/page1_title"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:id="@+id/budget_outer_circle"
+                    android:layout_width="66dp"
+                    android:layout_height="66dp"
+
+                    android:background="@drawable/homescreen_circle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+
+                    android:background="@drawable/round_background_personal"
+                    android:src="@drawable/ic_category"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout android:id="@+id/budget_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_marginStart="5dp"
+
+                app:layout_constraintStart_toEndOf="@id/page1_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView android:id="@+id/budget_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blue_line"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:text="Reservado: R$ 6.000,00"
+                        android:textSize="20dp"/>
+
+                    <TextView android:id="@+id/budget_used"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blue_line"
+                        android:fontFamily="@font/inter"
+                        android:text="Utilizado: R$ 2.870,00"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/budget_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
+
+                        <View android:id="@+id/outer_budget_bar"
+                            android:layout_width="610px"
+                            android:layout_height="120px"
+                            android:background="@color/card_color"
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <View android:id="@+id/inner_budget_bar"
+                            android:layout_width="288px"
+                            android:layout_height="110px"
+                            android:background="@color/blue_line"
+                            android:layout_marginLeft="5px"
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+
+                        <TextView android:id="@+id/budget_bar_porcent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="48%"
+                            android:fontFamily="@font/inter_extrabold"
+                            android:textColor="@color/white"
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/page2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout android:id="@+id/page2_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="125dp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:gravity="center"
+                        android:paddingTop="15dp"
+                        android:rotation="-90"
+                        android:text="Faturas"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <ImageView android:id="@+id/card_icon"
+                    android:layout_width="114dp"
+                    android:layout_height="72dp"
+
+                    android:src="@drawable/credit_card"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/page2_title" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="end"
+
+                    android:layout_marginStart="65dp"
+                    app:layout_constraintStart_toEndOf="@+id/card_icon"
+                    app:layout_constraintEnd_toEndOf="@+id/page2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="789,00"
+                        android:textSize="32sp"
+                        android:fontFamily="@font/inter_extrabold"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="17/04"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textColor="@color/blue_line"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

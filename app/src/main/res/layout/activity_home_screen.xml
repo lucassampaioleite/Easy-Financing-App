@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/card_color">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginRight="25sp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_logo_finacaFacil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="@string/financa_text"
+            android:textColor="@color/blue_line"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/menu_border"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:background="@drawable/bg_add_movimentation_btn"
+            android:contentDescription="@string/submit_personal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/menu"
+            android:layout_width="63dp"
+            android:layout_height="63dp"
+            android:background="@drawable/round_background_personal"
+            android:contentDescription="@string/submit_personal"
+            android:src="@drawable/person"
+            app:layout_constraintBottom_toBottomOf="@+id/menu_border"
+            app:layout_constraintEnd_toEndOf="@+id/menu_border"
+            app:layout_constraintStart_toStartOf="@+id/menu_border"
+            app:layout_constraintTop_toTopOf="@+id/menu_border" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/balance_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <TextView
+            android:id="@+id/period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/date_activity_orcamento_text"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_disponivel_activity_orcamento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_logo_finacaFacil"
+            app:layout_constraintVertical_bias="0.0512"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/text_disponivel_activity_orcamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disponivel_activity_orcamento_text"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@+id/text_value_activity_orcamento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_date_activity_orcamento" />
+
+        <TextView
+            android:id="@+id/value_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_extrabold"
+            android:text="@string/value_activity_orcamento_text"
+            android:textColor="@color/white"
+            android:textSize="38sp"
+            app:layout_constraintBottom_toTopOf="@+id/value_low_value_activity_orcamento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_disponivel_activity_orcamento" />
+
+        <TextView
+            android:id="@+id/value_low_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/value_low_activity_orcamento_text"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@+id/view_barra_activity_orcamento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_value_activity_orcamento" />
+
+        <View
+            android:id="@+id/view_barra_activity_orcamento"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:background="@color/gray" />
+    </LinearLayout>
+
+    <!--    <View android:id="@+id/overlay_resumes"-->
+    <!--        android:layout_width="350sp"-->
+    <!--        android:layout_height="165sp"-->
+    <!--        android:background="@drawable/overlay_homescreen"-->
+    <!--        android:layout_marginTop="20sp"-->
+
+    <!--        app:layout_constraintTop_toBottomOf="@+id/balance_info"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+    <View
+        android:id="@+id/side_circle"
+        android:layout_width="164sp"
+        android:layout_height="164sp"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/homescreen_circle"
+
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/balance_info" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resumes_homescreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/side_circle"
+        app:layout_constraintTop_toTopOf="@+id/side_circle" />
+
+    <View
+        android:id="@+id/overlay_extract"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/homescreen_extract_overlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resumes_homescreen" />
+
+    <LinearLayout
+        android:id="@+id/resume_categories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/overlay_extract">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="35dp">
+
+            <LinearLayout
+                android:id="@+id/income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/income_icon"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/round_background_green"
+                    android:contentDescription="@string/submit_Entrada_Saída"
+                    android:padding="16dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_east" />
+
+                <LinearLayout
+                    android:id="@+id/income_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center_vertical"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/income_title"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="Entradas"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/income_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="0,00"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/outcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/outcome_icon"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/round_background_red"
+                    android:contentDescription="@string/submit_Entrada_Saída"
+                    android:padding="16dp"
+                    android:rotation="180"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_east" />
+
+                <LinearLayout
+                    android:id="@+id/outcome_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center_vertical"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/outcome_title"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="Saídas"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/outcome_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semibold"
+                        android:singleLine="true"
+                        android:text="0,00"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/extract_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        app:layout_constraintTop_toBottomOf="@+id/resume_categories">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/inter_semibold"
+            android:gravity="center"
+            android:text="EXTRATO"
+
+            android:textColor="@color/white" />
+
+        <View
+            android:id="@+id/division_line"
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="35dp"
+            android:background="@color/blue_line"
+            android:elevation="30dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/HSmovimentation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="20dp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/addMov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_add_movimentation_btn"
+        android:contentDescription="@string/submit_botao_add"
+        android:padding="20dp"
+        android:src="@drawable/add"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
