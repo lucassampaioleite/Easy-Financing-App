@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout android:id="@+id/page2_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="125dp"
+            android:fontFamily="@font/inter_extrabold"
+            android:gravity="center"
+            android:paddingTop="15dp"
+            android:rotation="-90"
+            android:text="Faturas"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <ImageView android:id="@+id/card_icon"
+        android:layout_width="114dp"
+        android:layout_height="72dp"
+
+        android:src="@drawable/credit_card"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/page2_title" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end"
+
+        android:layout_marginStart="65dp"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintStart_toEndOf="@+id/card_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView android:id="@+id/TotalBill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="789,00"
+            android:textSize="32sp"
+            android:fontFamily="@font/inter_extrabold"
+            android:textColor="@color/white"/>
+
+        <TextView android:id="@+id/DueDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="17/04"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/blue_line"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

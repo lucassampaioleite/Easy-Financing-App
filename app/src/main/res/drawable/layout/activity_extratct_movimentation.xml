@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="15dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mov_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:cardCornerRadius="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        app:cardBackgroundColor="@color/card_color"
+        app:cardElevation="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:padding="12dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/mov_icon"
+                    android:src="@drawable/arrow_drop_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/mov_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/mov_icon"
+
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/mov_main_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Recebimento"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textFontWeight="400"
+                        />
+
+                    <TextView
+                        android:id="@+id/mov_aux_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Salário"
+                        android:textColor="@color/light_gray"
+                        android:textSize="9.5sp"
+                        android:fontFamily="@font/inter_semibold"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/mov_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/mov_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="R$ 4.000,00"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textFontWeight="600"
+
+                        android:layout_marginRight="20dp"
+                        />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

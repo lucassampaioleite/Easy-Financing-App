@@ -37,6 +37,10 @@
     <string name="orcamentos">Orçamentos</string>
     <string name="reserva_de_emergencia">Reserva de emergência</string>
     <string name="submit_payment">imagemView de pagamento</string>
+    <string name="fab_add_orcamento">add novos orçamentos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="submit_Entrada_Saída">Entrada ou Saída de valores</string>
 
 
 </resources>
