@@ -13,7 +13,7 @@ import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.models.extract.MovDate
 import com.example.easyfinancing.ui.models.extract.Movimentation
 
-class AdapterCombined (private val context : Context, private val list : MutableList<Any>) :
+class AdapterCombinedEx (private val context : Context, private val list : MutableList<Any>) :
     RecyclerView.Adapter<ViewHolder>() {
 
     private val VIEW_TYPE_DATE = 1

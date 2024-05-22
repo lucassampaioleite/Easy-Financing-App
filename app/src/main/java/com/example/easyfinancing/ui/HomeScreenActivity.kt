@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
-import com.example.easyfinancing.ui.adapters.extract.AdapterCombined
-import com.example.easyfinancing.ui.adapters.home_screen.AdpaterCombined
+import com.example.easyfinancing.ui.adapters.extract.AdapterCombinedEx
+import com.example.easyfinancing.ui.adapters.home_screen.AdapaterCombinedHs
 import com.example.easyfinancing.ui.models.extract.MovDate
 import com.example.easyfinancing.ui.models.extract.Movimentation
 import com.example.easyfinancing.ui.models.home_screen.Page1
@@ -105,7 +105,7 @@ class HomeScreenActivity : AppCompatActivity() {
     fun recyclerViewResumos(){
         recyclerView_HomeScreen_Resumos.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView_HomeScreen_Resumos.setHasFixedSize(true)
-        val combinedAdapterPages = AdpaterCombined(this, mutableListOf(orcamentos.getValores(), faturas.getValores()))
+        val combinedAdapterPages = AdapaterCombinedHs(this, mutableListOf(orcamentos.getValores(), faturas.getValores()))
         recyclerView_HomeScreen_Resumos.adapter = combinedAdapterPages
 
         val snapHelper = LinearSnapHelper()
@@ -169,7 +169,7 @@ class HomeScreenActivity : AppCompatActivity() {
     fun recyclerViewExtrato(list : MutableList<Any>){
         recyclerViewHSmovimentation.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewHSmovimentation.setHasFixedSize(true)
-        val combinedAdapterExtract = AdapterCombined(this, list)
+        val combinedAdapterExtract = AdapterCombinedEx(this, list)
         recyclerViewHSmovimentation.adapter = combinedAdapterExtract
     }
 }
