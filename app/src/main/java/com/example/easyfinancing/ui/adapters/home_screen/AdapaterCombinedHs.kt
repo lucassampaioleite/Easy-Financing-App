@@ -1,11 +1,9 @@
 package com.example.easyfinancing.ui.adapters.home_screen
 
 import android.content.Context
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -13,7 +11,7 @@ import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.models.home_screen.Page1
 import com.example.easyfinancing.ui.models.home_screen.Page2
 
-class AdpaterCombined (private val context : Context, private val list: MutableList<Any>):
+class AdapaterCombinedHs (private val context : Context, private val list: MutableList<Any>):
     RecyclerView.Adapter<ViewHolder>() {
 
     private val VIEW_PAGE1 = 1

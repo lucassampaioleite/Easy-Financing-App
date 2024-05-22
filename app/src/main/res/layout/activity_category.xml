@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="@+id/view_up_actiCategory"
         app:layout_constraintStart_toStartOf="@+id/view_up_actiCategory"
         app:layout_constraintTop_toTopOf="@+id/view_up_actiCategory"
-        app:tint="@color/blue_light" />
+        app:tint="@color/blue_light"/>
 
     <TextView
         android:id="@+id/text_categorizaTipoEntrada_actiCategory"

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
 
-import com.example.easyfinancing.ui.adapters.extract.AdapterCombined
+import com.example.easyfinancing.ui.adapters.extract.AdapterCombinedEx
 import com.example.easyfinancing.ui.models.extract.MovDate
 import com.example.easyfinancing.ui.models.extract.Movimentation
 
@@ -96,7 +96,7 @@ class ExtractActivity : AppCompatActivity() {
     fun recyclerView(list : MutableList<Any>){
         recyclerView_Extract.layoutManager = LinearLayoutManager(this)
         recyclerView_Extract.setHasFixedSize(true)
-        val combinedAdapter = AdapterCombined(this, list)
+        val combinedAdapter = AdapterCombinedEx(this, list)
         recyclerView_Extract.adapter = combinedAdapter
     }
 }
