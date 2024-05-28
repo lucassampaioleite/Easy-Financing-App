@@ -1,5 +1,6 @@
 package com.example.easyfinancing.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -41,9 +42,11 @@ class ExtractActivity : AppCompatActivity() {
         }
 
         /* BOTAO VOLTAR -> VOLTA PARA ACTIVITY ANTERIOR */
-        val getBackBtn : ImageView = findViewById(R.id.back_button)
-        getBackBtn.setOnClickListener{
-            Toast.makeText(this, "callLastActivity()", Toast.LENGTH_SHORT).show()
+        findViewById<ImageView>(R.id.back_button).setOnClickListener{finish()}
+
+        findViewById<ImageButton>(R.id.addMov).setOnClickListener{
+            val NEW_MOV = Intent(this, NewMovActivity::class.java)
+            startActivity(NEW_MOV)
         }
     }
 
