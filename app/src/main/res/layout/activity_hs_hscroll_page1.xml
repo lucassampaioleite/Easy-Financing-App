@@ -20,7 +20,8 @@
             android:paddingTop="15dp"
             android:rotation="-90"
             android:text="Orçamentos"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:textColor="@color/card_color"/>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

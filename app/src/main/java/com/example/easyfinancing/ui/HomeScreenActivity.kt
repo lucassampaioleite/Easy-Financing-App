@@ -1,6 +1,9 @@
 package com.example.easyfinancing.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,6 +51,15 @@ class HomeScreenActivity : AppCompatActivity() {
 
         recyclerViewExtrato(movimentacoes)
 
+        findViewById<LinearLayout>(R.id.extract_content).setOnClickListener{
+            val EXTRATO = Intent(this, ExtractActivity::class.java)
+            startActivity(EXTRATO)
+        }
+
+        findViewById<ImageButton>(R.id.addMov).setOnClickListener{
+            val NEW_MOV = Intent(this, NewMovActivity::class.java)
+            startActivity(NEW_MOV)
+        }
     }
 
     fun setPeriodo(periodo : String){

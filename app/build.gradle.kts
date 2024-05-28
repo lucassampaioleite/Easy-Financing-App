@@ -39,9 +39,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    viewBinding{
-        enable = true
-    }
 }
 
 dependencies {
@@ -54,4 +51,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    val lifecycle_version = "2.8.0"
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
+    implementation("androidx.fragment:fragment-ktx:1.7.1")
 }

@@ -3,9 +3,7 @@
     android:shape="oval">
 
     <gradient
-        android:angle="270"
-        android:endColor="#8BC"
-        android:type="radial"
-        />
+        android:endColor="@color/card_color"
+        android:type="radial"/>
 
 </shape>
