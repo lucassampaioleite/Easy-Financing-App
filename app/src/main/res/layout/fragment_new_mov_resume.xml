@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.newmov.Resume"
-    android:background="@color/card_color">
+    android:background="#384C59">
 
     <TextView
         android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
 
             android:layout_width="64.5dp"
             android:layout_height="64.5dp"
-            android:background="@drawable/round_dark_blue"
+            android:background="@drawable/round_mid_blue"
             android:contentDescription="@string/submit_personal"
             android:src="@drawable/ic_category"
             app:layout_constraintBottom_toBottomOf="@+id/category_selection_border"
@@ -181,7 +181,7 @@
 
             android:layout_width="64.5dp"
             android:layout_height="64.5dp"
-            android:background="@drawable/round_dark_blue"
+            android:background="@drawable/round_mid_blue"
             android:contentDescription="@string/submit_personal"
             android:src="@drawable/fiber_smart_record"
             app:layout_constraintBottom_toBottomOf="@+id/recurence_selection_border"
@@ -228,7 +228,7 @@
 
             android:layout_width="64.5dp"
             android:layout_height="64.5dp"
-            android:background="@drawable/round_dark_blue"
+            android:background="@drawable/round_mid_blue"
             android:contentDescription="@string/submit_personal"
             android:src="@drawable/savings"
             app:layout_constraintBottom_toBottomOf="@+id/budget_selection_border"

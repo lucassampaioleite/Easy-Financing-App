@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/card_color">
+        android:background="#384C59">
 
 
         <ImageButton android:id="@+id/arrow_back_inform_values"
@@ -23,7 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="25dp"
-            android:background="@color/card_color"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/submit_left"
             android:src="@drawable/arrow_back"
             app:layout_constraintLeft_toLeftOf="parent"

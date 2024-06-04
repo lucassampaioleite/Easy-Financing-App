@@ -13,8 +13,7 @@
         android:theme="@style/Theme.EasyFinancing"
         tools:targetApi="31">
 
-        <activity
-            android:name=".ui.HomeScreenActivity"
+        <activity android:name=".ui.HomeScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,49 +21,28 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.ExtractActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ui.CategoryActivity"
+        <activity android:name=".ui.ExtractActivity"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
 
-        <activity
-            android:name=".ui.AccessBudgetsActivity"
+        <activity android:name=".ui.CategoriesActivity"
             android:exported="false">
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
         </activity>
 
-        <activity
-            android:name=".ui.BudgetsActivity"
+        <activity android:name=".ui.NewCategoryForm"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
 
-        <activity
-            android:name=".ui.NewMovActivity"
-            android:exported="true">
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+        <activity android:name=".ui.BudgetsActivity"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".ui.NewMovActivity"
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".ui.CardActivity"
+            android:exported="false">
         </activity>
 
         <meta-data

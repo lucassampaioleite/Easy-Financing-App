@@ -6,16 +6,22 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
+import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.MovimetationDao
 import com.example.easyfinancing.ui.adapters.extract.AdapterCombinedEx
 import com.example.easyfinancing.ui.adapters.home_screen.AdapaterCombinedHs
 import com.example.easyfinancing.ui.models.extract.MovDate
 import com.example.easyfinancing.ui.models.extract.Movimentation
 import com.example.easyfinancing.ui.models.home_screen.Page1
 import com.example.easyfinancing.ui.models.home_screen.Page2
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeScreenActivity : AppCompatActivity() {
     private lateinit var recyclerView_HomeScreen_Resumos: RecyclerView
@@ -23,9 +29,16 @@ class HomeScreenActivity : AppCompatActivity() {
     private val orcamentos = Orcamentos()
     private val faturas = Faturas()
 
+    lateinit var dataBase : AppDatabase
+    lateinit var addMovimentation : MovimetationDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
+
+        setButtonStartActivityExtract()
+        setButtonStartActivityNewMovimentation()
+        setButtonStartActivityCategories()
 
         setPeriodo("MAI 2024")
         setSaldoDisponivel("R$ 0,00")
@@ -38,27 +51,44 @@ class HomeScreenActivity : AppCompatActivity() {
 
         setEntradas("0,00")
         setSaidas("0,00")
+    }
 
-        recyclerViewHSmovimentation = findViewById(R.id.HSmovimentation)
+    override fun onResume() {
+        super.onResume()
+
         val movimentacoes : MutableList<Any> = mutableListOf()
 
-        for(i in 1..10){
-            setNovaMovimentacao(arrayOf("Domingo, 19 mai 2024", "E", "Teste", "Teste", "R$ 0,00", "0"), movimentacoes)
-        }
-        for(i in 1..10){
-            setNovaMovimentacao(arrayOf("Segunda, 20 mai 2024", "S", "Teste", "Teste", "R$ 0,00", "1"), movimentacoes)
-        }
+        this.dataBase = AppDatabase.getInstance(this)
+        this.addMovimentation = dataBase.movimentationDao()
 
-        recyclerViewExtrato(movimentacoes)
+        recyclerViewHSmovimentation = findViewById(R.id.HSmovimentation)
 
+        CoroutineScope(Dispatchers.Main).launch {
+            for (mov in addMovimentation.getMovs().toTypedArray()){
+                setNovaMovimentacao(arrayOf(mov.date, mov.tipo, mov.descricao1, mov.descricao2, mov.valor, mov.id.toString()), movimentacoes)
+            }
+            recyclerViewExtrato(movimentacoes)
+        }
+    }
+
+    private fun setButtonStartActivityExtract(){
         findViewById<LinearLayout>(R.id.extract_content).setOnClickListener{
             val EXTRATO = Intent(this, ExtractActivity::class.java)
             startActivity(EXTRATO)
         }
+    }
 
+    private fun setButtonStartActivityNewMovimentation(){
         findViewById<ImageButton>(R.id.addMov).setOnClickListener{
             val NEW_MOV = Intent(this, NewMovActivity::class.java)
             startActivity(NEW_MOV)
+        }
+    }
+
+    private fun setButtonStartActivityCategories(){
+        findViewById<ConstraintLayout>(R.id.category_resume).setOnClickListener{
+            val CATEGORIES = Intent(this, CategoriesActivity::class.java)
+            startActivity(CATEGORIES)
         }
     }
 

@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.viewmodels.NewMovViewModel
@@ -20,7 +21,7 @@ import java.util.Locale
 
 class Value : Fragment() {
 
-    lateinit var viewModel : NewMovViewModel
+    val viewModel : NewMovViewModel by activityViewModels()
     var type : Boolean = true
     lateinit var value: EditText
     lateinit var description : EditText
@@ -29,7 +30,7 @@ class Value : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_new_mov_values, container, false)
 
-        viewModel = ViewModelProvider(requireActivity()).get(NewMovViewModel::class.java)
+        //viewModel = ViewModelProvider(requireActivity()).get(NewMovViewModel::class.java)
 
         val btnEntrada = view.findViewById<Button>(R.id.btn_type_entrada)
         val btnSaida = view.findViewById<Button>(R.id.btn_type_saida)
