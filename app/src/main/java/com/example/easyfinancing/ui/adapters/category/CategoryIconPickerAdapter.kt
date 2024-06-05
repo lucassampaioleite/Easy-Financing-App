@@ -18,6 +18,7 @@ import com.example.easyfinancing.ui.models.icons.Icons
 class CategoryIconPickerAdapter (val context: Context, val list: MutableList<Icons>):
     RecyclerView.Adapter<CategoryIconPickerAdapter.IconViewHolder>() {
         private val viewHolders = mutableListOf<IconViewHolder>()
+        var selectedItemPosition = RecyclerView.NO_POSITION
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IconViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.icon_category_picker, parent, false)
         viewHolders.add(IconViewHolder(view))
@@ -27,40 +28,56 @@ class CategoryIconPickerAdapter (val context: Context, val list: MutableList<Ico
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: IconViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position], position == selectedItemPosition)
     }
 
-    inner class IconViewHolder(itemView : View) : ViewHolder(itemView){
-        var selected = false
+    inner class IconViewHolder(itemView : View) : ViewHolder(itemView) {
 
         init {
+
             itemView.findViewById<ImageButton>(R.id.category_icon_selection).setOnClickListener {
-                if (!selected){
-                    for (i in 0 until  viewHolders.size){
-                        viewHolders[i].unselect()
-                        viewHolders[i].selected = false
-                    }
-                    select()
-                    selected = true
-                }else{
-                    unselect()
-                    selected = false
+
+                val position = adapterPosition
+
+                if (position != RecyclerView.NO_POSITION) {
+
+                    selectedItemPosition = position
+
+                    notifyDataSetChanged()
+
                 }
+
             }
+
         }
 
-        fun bind(icons: Icons) {
-            itemView.findViewById<ImageButton>(R.id.category_icon_selection).setImageResource(icons.icon)
-            itemView.findViewById<ImageButton>(R.id.category_icon_selection).setColorFilter(ContextCompat.getColor(itemView.context, R.color.blue_light))
-        }
+        fun bind(icon: Icons, isSelected: Boolean) {
 
-        private fun select(){
-            itemView.findViewById<ImageButton>(R.id.category_icon_selection).background = ContextCompat.getDrawable(itemView.context, R.drawable.round_background_blue)
-            itemView.findViewById<ImageButton>(R.id.category_icon_selection).setColorFilter(ContextCompat.getColor(itemView.context, R.color.white))
-        }
-        private fun unselect(){
-            itemView.findViewById<ImageButton>(R.id.category_icon_selection).background = ContextCompat.getDrawable(itemView.context, R.drawable.transparent)
-            itemView.findViewById<ImageButton>(R.id.category_icon_selection).setColorFilter(ContextCompat.getColor(itemView.context, R.color.blue_light))
+            val iconButton = itemView.findViewById<ImageButton>(R.id.category_icon_selection)
+
+            iconButton.setImageResource(icon.icon)
+
+            if (isSelected) {
+
+                iconButton.background =
+                    ContextCompat.getDrawable(itemView.context, R.drawable.round_background_blue)
+
+                iconButton.setColorFilter(ContextCompat.getColor(itemView.context, R.color.white))
+
+            } else {
+
+                iconButton.background =
+                    ContextCompat.getDrawable(itemView.context, R.drawable.transparent)
+
+                iconButton.setColorFilter(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        R.color.blue_light
+                    )
+                )
+
+            }
+
         }
     }
 }
