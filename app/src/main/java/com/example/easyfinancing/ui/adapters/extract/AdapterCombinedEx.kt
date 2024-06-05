@@ -66,17 +66,6 @@ class AdapterCombinedEx (private val context : Context, private val list : Mutab
         val movAmount = itemView.findViewById<TextView>(R.id.mov_amount)
 
         init{
-            /*itemView.setOnLongClickListener(){
-                val position = adapterPosition
-
-                if(position != RecyclerView.NO_POSITION && list[position] is Movimentation){
-                    val item = list[position] as Movimentation
-                    outerCardView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.blue_line))
-                }
-
-                true
-            }*/
-
             itemView.setOnClickListener(){
                 val position = adapterPosition
 

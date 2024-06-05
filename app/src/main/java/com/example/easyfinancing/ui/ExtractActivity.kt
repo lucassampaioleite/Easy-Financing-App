@@ -1,38 +1,56 @@
 package com.example.easyfinancing.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
+import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.MovimetationDao
 
 import com.example.easyfinancing.ui.adapters.extract.AdapterCombinedEx
 import com.example.easyfinancing.ui.models.extract.MovDate
 import com.example.easyfinancing.ui.models.extract.Movimentation
+import com.example.easyfinancing.ui.viewmodels.NewMovViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ExtractActivity : AppCompatActivity() {
 
     lateinit var recyclerView_Extract : RecyclerView
+    val viewModel: NewMovViewModel by viewModels()
+    val movimentacoes : MutableList<Any> = mutableListOf()
+
+    lateinit var dataBase : AppDatabase
+    lateinit var addMovimentation : MovimetationDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_extract)
 
+        this.dataBase = AppDatabase.getInstance(this)
+        this.addMovimentation = dataBase.movimentationDao()
+
 
         recyclerView_Extract = findViewById(R.id.recyclerView_extract)
-        val movimentacoes : MutableList<Any> = mutableListOf()
         /*AREA DESTINADA A TESTES DA ACTIVITY*/
-        for(i in 1..10){
-            setNovaMovimentacao(arrayOf("Domingo, 19 mai 2024", "E", "Teste", "Teste", "R$ 0,00", "0"), movimentacoes)
-        }
-        for(i in 1..10){
-            setNovaMovimentacao(arrayOf("Segunda, 20 mai 2024", "S", "Teste", "Teste", "R$ 0,00", "1"), movimentacoes)
+
+        CoroutineScope(Dispatchers.Main).launch {
+            for (mov in addMovimentation.getMovs().toTypedArray()){
+                setNovaMovimentacao(arrayOf(mov.date, mov.tipo, mov.descricao1, mov.descricao2, mov.valor, mov.id.toString()), movimentacoes)
+            }
+            recyclerView(movimentacoes)
         }
         /*FIM AREA DESTINADA A TESTES DA ACTIVITY*/
-        recyclerView(movimentacoes)
 
         /* BOTAO NOVA MOVIMENTACAO -> CHAMA A ACTIVITY DE INCLUSADO DE NOVA MOVIMENTACAO */
         val addNewMovBtn : ImageButton = findViewById(R.id.addMov)
@@ -41,9 +59,11 @@ class ExtractActivity : AppCompatActivity() {
         }
 
         /* BOTAO VOLTAR -> VOLTA PARA ACTIVITY ANTERIOR */
-        val getBackBtn : ImageView = findViewById(R.id.back_button)
-        getBackBtn.setOnClickListener{
-            Toast.makeText(this, "callLastActivity()", Toast.LENGTH_SHORT).show()
+        findViewById<ImageView>(R.id.back_button).setOnClickListener{finish()}
+
+        findViewById<ImageButton>(R.id.addMov).setOnClickListener{
+            val NEW_MOV = Intent(this, NewMovActivity::class.java)
+            startActivity(NEW_MOV)
         }
     }
 

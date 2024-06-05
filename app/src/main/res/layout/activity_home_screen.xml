@@ -123,20 +123,10 @@
             android:background="@color/gray" />
     </LinearLayout>
 
-<!--        <View android:id="@+id/overlay_resumes"-->
-<!--            android:layout_width="350sp"-->
-<!--            android:layout_height="165sp"-->
-<!--            android:background="@drawable/overlay_homescreen"-->
-<!--            android:layout_marginTop="20sp"-->
-
-<!--            app:layout_constraintTop_toBottomOf="@+id/balance_info"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"/>-->
-
     <View
         android:id="@+id/side_circle"
-        android:layout_width="164sp"
-        android:layout_height="164sp"
+        android:layout_width="164dp"
+        android:layout_height="164dp"
         android:layout_marginTop="20sp"
         android:background="@drawable/homescreen_circle"
 
@@ -164,13 +154,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resumes_homescreen" />
 
-    <LinearLayout
-        android:id="@+id/resume_categories"
+    <LinearLayout android:id="@+id/resume_categories"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@+id/overlay_extract">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/category_resume"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
@@ -307,8 +296,8 @@
             android:elevation="30dp" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/HSmovimentation"
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/HSmovimentation"
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
         tools:listitem="@layout/activity_extratct_movimentation"
@@ -317,8 +306,8 @@
         app:layout_constraintTop_toBottomOf="@+id/extract_content"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <ImageButton
-        android:id="@+id/addMov"
+    <ImageButton android:id="@+id/addMov"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"

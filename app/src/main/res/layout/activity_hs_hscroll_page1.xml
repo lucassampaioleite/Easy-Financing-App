@@ -20,7 +20,8 @@
             android:paddingTop="15dp"
             android:rotation="-90"
             android:text="Orçamentos"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:textColor="@color/card_color"/>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,8 +86,8 @@
             android:text="Utilizado: R$ 2.870,00"
             android:textColor="@color/blue_line" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/budget_bar"
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/budget_bar"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">

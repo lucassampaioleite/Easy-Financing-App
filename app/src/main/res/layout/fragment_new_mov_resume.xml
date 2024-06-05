@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.newmov.Resume"
+    android:background="#384C59">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Resumo"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:fontFamily="@font/inter_semibold"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView android:id="@+id/mov_date_resume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Quinta, 23 mai 2024"
+        android:textAlignment="textEnd"
+        android:textColor="#C98BCAD9"
+        android:textSize="16sp"
+        android:fontFamily="@font/inter_semibold"
+
+        android:layout_margin="15dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView android:id="@+id/mov_value_resume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="R$ 0,00"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:fontFamily="@font/inter_extrabold"
+
+        android:layout_marginTop="45dp"
+        android:layout_marginHorizontal="15dp"
+
+
+        app:layout_constraintTop_toBottomOf="@+id/mov_date_resume"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView android:id="@+id/mov_type_resume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_drop_up"
+
+        android:layout_marginLeft="20dp"
+
+        app:layout_constraintTop_toTopOf="@+id/mov_value_resume"
+        app:layout_constraintBottom_toTopOf="@+id/division_line_resume"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1"/>
+
+    <View android:id="@+id/division_line_resume"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray"
+
+        android:layout_marginHorizontal="15dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/mov_value_resume"/>
+
+    <ImageView android:id="@+id/comment_icon_resume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_comment"
+
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="25dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/division_line_resume"/>
+
+    <TextView android:id="@+id/mov_desc_resume"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+
+        android:text="Sem Descrição"
+        android:textSize="16dp"
+        android:textColor="@color/blue_line"
+        android:layout_marginLeft="10dp"
+
+        app:layout_constraintStart_toEndOf="@+id/comment_icon_resume"
+        app:layout_constraintTop_toTopOf="@+id/comment_icon_resume"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_icon_resume"/>
+
+    <View android:id="@+id/division_line_resume2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray"
+
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="15dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/comment_icon_resume"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/category_selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="20dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/division_line_resume2"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton android:id="@+id/category_selection_border"
+
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:background="@drawable/bg_add_movimentation_btn"
+            android:contentDescription="@string/submit_personal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton android:id="@+id/category_selection_inner"
+
+            android:layout_width="64.5dp"
+            android:layout_height="64.5dp"
+            android:background="@drawable/round_mid_blue"
+            android:contentDescription="@string/submit_personal"
+            android:src="@drawable/ic_category"
+            app:layout_constraintBottom_toBottomOf="@+id/category_selection_border"
+            app:layout_constraintEnd_toEndOf="@+id/category_selection_border"
+            app:layout_constraintStart_toStartOf="@+id/category_selection_border"
+            app:layout_constraintTop_toTopOf="@+id/category_selection_border" />
+
+        <TextView android:id="@+id/text_category_selection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="3dp"
+            android:text="Categorias"
+            android:textColor="@color/blue_line"
+            android:fontFamily="@font/inter"
+
+            app:layout_constraintTop_toBottomOf="@+id/category_selection_border"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/recurence_selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="20dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/division_line_resume2"
+        app:layout_constraintStart_toEndOf="@+id/category_selection">
+
+        <ImageButton android:id="@+id/recurence_selection_border"
+
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:background="@drawable/bg_add_movimentation_btn"
+            android:contentDescription="@string/submit_personal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton android:id="@+id/recurence_selection_inner"
+
+            android:layout_width="64.5dp"
+            android:layout_height="64.5dp"
+            android:background="@drawable/round_mid_blue"
+            android:contentDescription="@string/submit_personal"
+            android:src="@drawable/fiber_smart_record"
+            app:layout_constraintBottom_toBottomOf="@+id/recurence_selection_border"
+            app:layout_constraintEnd_toEndOf="@+id/recurence_selection_border"
+            app:layout_constraintStart_toStartOf="@+id/recurence_selection_border"
+            app:layout_constraintTop_toTopOf="@+id/recurence_selection_border" />
+
+        <TextView android:id="@+id/text_recurence_selection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="3dp"
+            android:text="Recorrência"
+            android:textColor="@color/blue_line"
+            android:fontFamily="@font/inter"
+
+            app:layout_constraintTop_toBottomOf="@+id/recurence_selection_border"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/budget_selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="20dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/division_line_resume2"
+        app:layout_constraintStart_toEndOf="@+id/recurence_selection">
+
+        <ImageButton android:id="@+id/budget_selection_border"
+
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:background="@drawable/bg_add_movimentation_btn"
+            android:contentDescription="@string/submit_personal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton android:id="@+id/budget_selection_inner"
+
+            android:layout_width="64.5dp"
+            android:layout_height="64.5dp"
+            android:background="@drawable/round_mid_blue"
+            android:contentDescription="@string/submit_personal"
+            android:src="@drawable/savings"
+            app:layout_constraintBottom_toBottomOf="@+id/budget_selection_border"
+            app:layout_constraintEnd_toEndOf="@+id/budget_selection_border"
+            app:layout_constraintStart_toStartOf="@+id/budget_selection_border"
+            app:layout_constraintTop_toTopOf="@+id/budget_selection_border" />
+
+        <TextView android:id="@+id/text_budget_selection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="3dp"
+            android:text="Orçamento"
+            android:textColor="@color/blue_line"
+            android:fontFamily="@font/inter"
+
+            app:layout_constraintTop_toBottomOf="@+id/budget_selection_border"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
