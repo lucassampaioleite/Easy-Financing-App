@@ -36,7 +36,7 @@ class Resume : Fragment() {
                 2 -> view.findViewById<TextView>(R.id.text_recurence_selection).setText("Semanal")
                 3 -> view.findViewById<TextView>(R.id.text_recurence_selection).setText("Mensal")
                 else -> {
-                    view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_dark_blue)
+                    view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_medium_blue)
                     view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_light))
                     view.findViewById<TextView>(R.id.text_recurence_selection).setText("Recorrência")
                     recurenceIndex = 0

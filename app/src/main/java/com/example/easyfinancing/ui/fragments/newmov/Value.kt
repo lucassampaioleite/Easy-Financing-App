@@ -30,8 +30,6 @@ class Value : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_new_mov_values, container, false)
 
-        //viewModel = ViewModelProvider(requireActivity()).get(NewMovViewModel::class.java)
-
         val btnEntrada = view.findViewById<Button>(R.id.btn_type_entrada)
         val btnSaida = view.findViewById<Button>(R.id.btn_type_saida)
 

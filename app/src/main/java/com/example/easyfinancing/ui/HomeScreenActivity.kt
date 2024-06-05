@@ -1,12 +1,22 @@
 package com.example.easyfinancing.ui
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +29,7 @@ import com.example.easyfinancing.ui.models.extract.MovDate
 import com.example.easyfinancing.ui.models.extract.Movimentation
 import com.example.easyfinancing.ui.models.home_screen.Page1
 import com.example.easyfinancing.ui.models.home_screen.Page2
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,6 +50,10 @@ class HomeScreenActivity : AppCompatActivity() {
         setButtonStartActivityExtract()
         setButtonStartActivityNewMovimentation()
         setButtonStartActivityCategories()
+
+        findViewById<ImageButton>(R.id.menu).setOnClickListener {
+            openMenuPopUp()
+        }
 
         setPeriodo("MAI 2024")
         setSaldoDisponivel("R$ 0,00")
@@ -69,6 +84,35 @@ class HomeScreenActivity : AppCompatActivity() {
             }
             recyclerViewExtrato(movimentacoes)
         }
+    }
+
+    private fun openMenuPopUp(){
+        val view = LayoutInflater.from(this).inflate(R.layout.activity_side_menu, null)
+        val dialog = Dialog(this)
+
+        view.findViewById<ImageButton>(R.id.extract_side_menu_inner).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, ExtractActivity::class.java))
+        }
+
+        view.findViewById<ImageButton>(R.id.budget_side_menu_inner).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, BudgetsActivity::class.java))
+        }
+
+        view.findViewById<ImageButton>(R.id.card_side_menu_inner).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, CardActivity::class.java))
+        }
+
+        view.findViewById<ImageButton>(R.id.categories_side_menu_inner).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, CategoriesActivity::class.java))
+        }
+
+        dialog.setContentView(view)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
 
     private fun setButtonStartActivityExtract(){
