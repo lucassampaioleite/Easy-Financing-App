@@ -27,9 +27,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class Resume : Fragment() {
     val viewModel: NewMovViewModel by activityViewModels()
+
+    var recurenceIndex = 0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_new_mov_resume, container, false)
-        view.findViewById<TextView>(R.id.mov_date_resume).setText(viewModel.getDateFormmated())
+
+        view.findViewById<TextView>(R.id.mov_date_resume).setText(viewModel.getDateExpanded())
         view.findViewById<ImageView>(R.id.mov_type_resume).setImageResource(getType(viewModel.movType))
         view.findViewById<TextView>(R.id.mov_value_resume).setText(viewModel.movValue)
         view.findViewById<TextView>(R.id.mov_desc_resume).setText(viewModel.movDesc)
@@ -38,28 +41,41 @@ class Resume : Fragment() {
         setDialogBudgets(view)
         setDialogCard(view)
 
-        var recurenceIndex = 0
-
         view.findViewById<ImageButton>(R.id.recurence_selection_inner).setOnClickListener {
             recurenceIndex++
-            when(recurenceIndex){
-                1 -> {
-                    view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_blue)
-                    view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_dark))
-                    view.findViewById<TextView>(R.id.text_recurence_selection).setText("Diário")
-                }
-                2 -> view.findViewById<TextView>(R.id.text_recurence_selection).setText("Semanal")
-                3 -> view.findViewById<TextView>(R.id.text_recurence_selection).setText("Mensal")
-                else -> {
-                    view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_medium_blue)
-                    view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_light))
-                    view.findViewById<TextView>(R.id.text_recurence_selection).setText("Recorrência")
-                    recurenceIndex = 0
-                }
-            }
+            getRecurence(view)
         }
 
         return view
+    }
+
+    private fun getRecurence(view: View){
+        when(recurenceIndex){
+            1 -> {
+                view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_blue)
+                view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_dark))
+                view.findViewById<TextView>(R.id.text_recurence_selection).setText("Diário")
+
+                viewModel.movRecurence = 1
+            }
+            2 -> {
+                view.findViewById<TextView>(R.id.text_recurence_selection).setText("Semanal")
+
+                viewModel.movRecurence = 2
+            }
+            3 -> {
+                view.findViewById<TextView>(R.id.text_recurence_selection).setText("Mensal")
+                viewModel.movRecurence = 3
+            }
+            else -> {
+                view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_medium_blue)
+                view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_light))
+                view.findViewById<TextView>(R.id.text_recurence_selection).setText("Recorrência")
+                recurenceIndex = 0
+
+                viewModel.movRecurence = 0
+            }
+        }
     }
 
     fun getType(type : Boolean): Int {
@@ -80,17 +96,20 @@ class Resume : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(view.context)
             recyclerView.setHasFixedSize(true)
 
-            categories.add(Category(0, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0))
-            categories.add(Category(0, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1))
-            categories.add(Category(0, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1))
-            categories.add(Category(0, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1))
-            categories.add(Category(0, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1))
+            categories.add(Category(1, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0))
+            categories.add(Category(2, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1))
+            categories.add(Category(3, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1))
+            categories.add(Category(4, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1))
+            categories.add(Category(5, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1))
 
             val dialogAdapter = DialogCategoryAdapter(view.context, categories){
                 view.findViewById<ImageButton>(R.id.category_selection_inner).setImageResource(it.icon)
                 view.findViewById<TextView>(R.id.text_category_selection).setText(it.name)
                 view.findViewById<ImageButton>(R.id.category_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
                 view.findViewById<ImageButton>(R.id.category_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+
+                viewModel.movCatId = it.id
+
                 dialog.dismiss()
             }
 
@@ -112,15 +131,17 @@ class Resume : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(view.context)
             recyclerView.setHasFixedSize(true)
 
-            budgets.add(Budget("Lazer", "0,00"))
-            budgets.add(Budget("Combustivel", "0,00"))
-            budgets.add(Budget("Gás", "0,00"))
-            budgets.add(Budget("Investimentos", "0,00"))
+            budgets.add(Budget(1,"Lazer", "0,00"))
+            budgets.add(Budget(2,"Combustivel", "0,00"))
+            budgets.add(Budget(3,"Gás", "0,00"))
+            budgets.add(Budget(4,"Investimentos", "0,00"))
 
             val dialogAdapter = DialogBudgetAdapter(view.context, budgets){
                 view.findViewById<TextView>(R.id.text_budget_selection).setText(it.name)
                 view.findViewById<ImageButton>(R.id.budget_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
                 view.findViewById<ImageButton>(R.id.budget_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+
+                viewModel.movBudgetId = it.id
 
                 dialog.dismiss()
             }
@@ -142,10 +163,10 @@ class Resume : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(view.context)
             recyclerView.setHasFixedSize(true)
 
-            cards.add(CardBill("Inter", "00"))
-            cards.add(CardBill("Nubank", "00"))
-            cards.add(CardBill("Santander", "00"))
-            cards.add(CardBill("Itaú", "00"))
+            cards.add(CardBill(1,"Inter", "00"))
+            cards.add(CardBill(2,"Nubank", "00"))
+            cards.add(CardBill(3,"Santander", "00"))
+            cards.add(CardBill(4,"Itaú", "00"))
 
             val dialogAdapter = DialogCardAdapter(view.context, cards){
 
@@ -156,6 +177,9 @@ class Resume : Fragment() {
                     view.findViewById<TextView>(R.id.due_card_selection).setText(dialogView.findViewById<EditText>(R.id.instalments_number).text.toString() + "x")
                     view.findViewById<ImageButton>(R.id.card_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
                     view.findViewById<ImageButton>(R.id.card_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+
+                    viewModel.movCardId = selectedCardInfo.id
+                    viewModel.movCardInstalments = dialogView.findViewById<EditText>(R.id.instalments_number).text.toString().toInt()
 
                     dialog.dismiss()
                 }

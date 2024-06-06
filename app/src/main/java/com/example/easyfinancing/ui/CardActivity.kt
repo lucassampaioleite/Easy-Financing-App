@@ -25,10 +25,10 @@ class CardActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.card_recycleview)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.setHasFixedSize(true)
-        cardList.add(CardBill("Inter", "07"))
-        cardList.add(CardBill("Bradesco", "15"))
-        cardList.add(CardBill("Itaú", "10"))
-        cardList.add(CardBill("Nubank", "25"))
+        cardList.add(CardBill(1,"Inter", "07"))
+        cardList.add(CardBill(2,"Bradesco", "15"))
+        cardList.add(CardBill(3,"Itaú", "10"))
+        cardList.add(CardBill(4,"Nubank", "25"))
         val cardAdapter = CardAdapter(this, cardList)
         recyclerView.adapter = cardAdapter
 

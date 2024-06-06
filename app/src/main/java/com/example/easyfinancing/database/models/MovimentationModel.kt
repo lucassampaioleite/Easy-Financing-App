@@ -5,11 +5,15 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class MovimentationModel (
-    val date : String,
+    val data : String,
     val tipo : String,
-    val descricao1 : String,
-    val descricao2 : String,
-    val valor : String
+    val descricao : String,
+    val categoriaId : Int,
+    val valor : String,
+    val recorrencia : Int,
+    val cartaoId : Int,
+    val cartaoParcelas : Int,
+    val orcamentoId : Int
 ){
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0

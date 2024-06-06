@@ -71,11 +71,15 @@ class NewMovActivity : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         addMovimentation.insertMov(
                             MovimentationModel(
-                            viewModel.getDateFormmated(),
-                            if (viewModel.movType) "E" else "S",
+                                viewModel.getFormatedDate(viewModel.movDate),
+                                if (viewModel.movType) "E" else "S",
                                 viewModel.movDesc,
-                            "Testando",
-                                viewModel.movValue
+                                viewModel.movCatId,
+                                viewModel.movValue,
+                                viewModel.movRecurence,
+                                viewModel.movCardId,
+                                viewModel.movCardInstalments,
+                                viewModel.movBudgetId
                             )
                         )
                     }

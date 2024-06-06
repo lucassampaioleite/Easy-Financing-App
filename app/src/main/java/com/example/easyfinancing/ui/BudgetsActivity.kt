@@ -29,7 +29,7 @@ class BudgetsActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        budgets.add(Budget("Teste", "R$ 10,00"))
+        budgets.add(Budget(1,"Teste", "R$ 10,00"))
         val adapter = BudgetAdapter(this, budgets)
         recyclerView.adapter = adapter
     }

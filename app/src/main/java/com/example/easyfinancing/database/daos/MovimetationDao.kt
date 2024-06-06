@@ -11,7 +11,7 @@ interface MovimetationDao {
     @Insert
     suspend fun insertMov(movimentation: MovimentationModel)
 
-    @Query("SELECT * FROM MovimentationModel")
+    @Query("SELECT * FROM movimentationmodel ORDER BY data")
     suspend fun getMovs() : List<MovimentationModel>
 
 }

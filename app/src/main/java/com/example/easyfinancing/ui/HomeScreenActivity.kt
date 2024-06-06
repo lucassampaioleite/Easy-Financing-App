@@ -26,6 +26,9 @@ import com.example.easyfinancing.ui.models.home_screen.Page2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class HomeScreenActivity : AppCompatActivity() {
     private lateinit var recyclerView_HomeScreen_Resumos: RecyclerView
@@ -73,7 +76,26 @@ class HomeScreenActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             for (mov in addMovimentation.getMovs().toTypedArray()){
-                setNovaMovimentacao(arrayOf(mov.date, mov.tipo, mov.descricao1, mov.descricao2, mov.valor, mov.id.toString()), movimentacoes)
+                setNovaMovimentacao(
+                    arrayOf(
+                        mov.id.toString(),
+                        getDateExpanded(mov.data),
+                        mov.tipo,
+                        mov.descricao,
+                        getCategoryName(mov.categoriaId),
+                        if (mov.cartaoId != 0) getInstalmentValue(mov.valor, mov.cartaoParcelas) else mov.valor,
+                        mov.cartaoId.toString(),
+                        mov.recorrencia.toString(),
+                        mov.orcamentoId.toString()
+                    )
+                    , movimentacoes)
+            }
+            recyclerViewExtrato(movimentacoes)
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+            for (mov in addMovimentation.getMovs().toTypedArray()){
+                //setNovaMovimentacao(arrayOf(mov.date, mov.tipo, mov.descricao1, mov.descricao2, mov.valor, mov.id.toString()), movimentacoes)
             }
             recyclerViewExtrato(movimentacoes)
         }
@@ -208,41 +230,58 @@ class HomeScreenActivity : AppCompatActivity() {
         }
 
         if(listMov.isEmpty()){
-            listMov.add(MovDate(novaMov[0]))
+            listMov.add(MovDate(novaMov[1]))
             listMov.add(Movimentation(
-                novaMov[5].toInt(),
-                novaMov[0],
-                icon_type(novaMov[1]),
-                novaMov[2],
+                novaMov[0].toInt(),
+                novaMov[1],
+                icon_type(novaMov[2]),
                 novaMov[3],
-                novaMov[4]
+                novaMov[4],
+                novaMov[5],
+                novaMov[6] != "0",
+                novaMov[7] != "0",
+                novaMov[8] != "0"
             ))
         }else{
 
             val lastItem = listMov.last()
 
-            if(lastItem is Movimentation && lastItem.date == novaMov[0]){
+            if(lastItem is Movimentation && lastItem.date == novaMov[1]){
                 listMov.add(Movimentation(
-                    novaMov[5].toInt(),
-                    novaMov[0],
-                    icon_type(novaMov[1]),
-                    novaMov[2],
+                    novaMov[0].toInt(),
+                    novaMov[1],
+                    icon_type(novaMov[2]),
                     novaMov[3],
-                    novaMov[4]
+                    novaMov[4],
+                    novaMov[5],
+                    novaMov[6] != "0",
+                    novaMov[7] != "0",
+                    novaMov[8] != "0"
                 ))
             }
             else{
-                listMov.add(MovDate(novaMov[0]))
+                listMov.add(MovDate(novaMov[1]))
                 listMov.add(Movimentation(
-                    novaMov[5].toInt(),
-                    novaMov[0],
-                    icon_type(novaMov[1]),
-                    novaMov[2],
+                    novaMov[0].toInt(),
+                    novaMov[1],
+                    icon_type(novaMov[2]),
                     novaMov[3],
-                    novaMov[4]
+                    novaMov[4],
+                    novaMov[5],
+                    novaMov[6] != "0",
+                    novaMov[7] != "0",
+                    novaMov[8] != "0"
                 ))
             }
         }
+    }
+
+    fun getInstalmentValue(valor : String, parcelas : Int) : String{
+
+        val valorFloat = valor.replace("R$ ", "").replace(".", "").replace(",", ".").toFloat()
+        val valorParcela = NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(valorFloat / parcelas)
+
+        return valorParcela
     }
 
     fun recyclerViewExtrato(list : MutableList<Any>){
@@ -250,5 +289,23 @@ class HomeScreenActivity : AppCompatActivity() {
         recyclerViewHSmovimentation.setHasFixedSize(true)
         val combinedAdapterExtract = AdapterCombinedEx(this, list)
         recyclerViewHSmovimentation.adapter = combinedAdapterExtract
+    }
+
+    fun getCategoryName(categoryId : Int) : String{
+        //Essa funçao faz um consulta na tabela de categoria no Bando de Dados
+        //E retorna o nome da categoria com base no Id
+
+        val categoryName : String = "Categoria"
+
+        return categoryName
+    }
+
+    fun getDateExpanded(date: String) : String{
+        val formmater = SimpleDateFormat("EEEE, dd MMM yyyy", Locale("pt", "BR"))
+        var dateFormatted = formmater.format(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date))
+        dateFormatted = dateFormatted.replaceFirstChar{it.uppercase()}
+        dateFormatted = dateFormatted.replace("-feira", "")
+
+        return dateFormatted
     }
 }

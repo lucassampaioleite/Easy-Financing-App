@@ -40,7 +40,7 @@ class CardAdapter(val context: Context, val listCard : MutableList<CardBill>) : 
             recyclerView.layoutManager = LinearLayoutManager(itemView.context)
             recyclerView.setHasFixedSize(true)
             movimentation.add(MovDate("Terça, 04 jun. 2024"))
-            movimentation.add(Movimentation(0, "Terça, 04 jun. 2024", R.drawable.arrow_drop_up, "Teste", "Teste", "R$ 0,00"))
+            movimentation.add(Movimentation(0, "Terça, 04 jun. 2024", R.drawable.arrow_drop_up, "Teste", "Teste", "R$ 0,00", true, true, true))
             val cardMovsAdapter = AdapterCombinedEx(itemView.context, movimentation)
             recyclerView.adapter = cardMovsAdapter
         }

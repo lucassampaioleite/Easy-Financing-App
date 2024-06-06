@@ -35,7 +35,7 @@ class AdapterCombinedEx (private val context : Context, private val list : Mutab
             }
             VIEW_TYPE_MOV -> {
                 val view = LayoutInflater.from(context).inflate(R.layout.recycle_extratct_mov, parent, false)
-                MovimentationViewHolder(view, list)
+                MovimentationViewHolder(view)
             }
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -58,29 +58,17 @@ class AdapterCombinedEx (private val context : Context, private val list : Mutab
         }
     }
 
-    inner class MovimentationViewHolder(itemView: View, private val list : MutableList<Any>) :
-        ViewHolder(itemView) {
-        val img = itemView.findViewById<ImageView>(R.id.mov_icon)
-        val mainDescription = itemView.findViewById<TextView>(R.id.mov_main_text)
-        val auxDescription = itemView.findViewById<TextView>(R.id.mov_aux_text)
-        val movAmount = itemView.findViewById<TextView>(R.id.mov_amount)
+    inner class MovimentationViewHolder(itemView: View) : ViewHolder(itemView) {
 
-        init{
-            itemView.setOnClickListener(){
-                val position = adapterPosition
-
-                if(position != RecyclerView.NO_POSITION && list[position] is Movimentation){
-                    val item = list[position] as Movimentation
-
-                    Toast.makeText(itemView.context, "callResumeActivityById(${item.id})", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
         fun bind(movimentation: Movimentation) {
-            img.setImageResource(movimentation.img)
-            mainDescription.text = movimentation.mainDescription
-            auxDescription.text = movimentation.auxDescription
-            movAmount.text = movimentation.movAmount
+            itemView.findViewById<ImageView>(R.id.mov_icon).setImageResource(movimentation.icon)
+            itemView.findViewById<TextView>(R.id.mov_main_text).text = movimentation.mainDescription
+            itemView.findViewById<TextView>(R.id.mov_aux_text).text = movimentation.categoryName
+            itemView.findViewById<TextView>(R.id.mov_amount).text = movimentation.movAmount
+
+            if (!movimentation.cardIcon) itemView.findViewById<ImageView>(R.id.mov_card_icon).setImageDrawable(null)
+            if (!movimentation.recurenceIcon) itemView.findViewById<ImageView>(R.id.mov_recurence_icon).setImageDrawable(null)
+            if (!movimentation.budgetIcon) itemView.findViewById<ImageView>(R.id.mov_budget_icon).setImageDrawable(null)
         }
     }
 }

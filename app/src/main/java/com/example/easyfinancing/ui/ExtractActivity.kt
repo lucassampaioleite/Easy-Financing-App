@@ -23,12 +23,14 @@ import com.example.easyfinancing.ui.viewmodels.NewMovViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ExtractActivity : AppCompatActivity() {
 
     lateinit var recyclerView_Extract : RecyclerView
     val viewModel: NewMovViewModel by viewModels()
-    val movimentacoes : MutableList<Any> = mutableListOf()
 
     lateinit var dataBase : AppDatabase
     lateinit var addMovimentation : MovimetationDao
@@ -40,31 +42,49 @@ class ExtractActivity : AppCompatActivity() {
         this.dataBase = AppDatabase.getInstance(this)
         this.addMovimentation = dataBase.movimentationDao()
 
-
-        recyclerView_Extract = findViewById(R.id.recyclerView_extract)
-        /*AREA DESTINADA A TESTES DA ACTIVITY*/
-
-        CoroutineScope(Dispatchers.Main).launch {
-            for (mov in addMovimentation.getMovs().toTypedArray()){
-                setNovaMovimentacao(arrayOf(mov.date, mov.tipo, mov.descricao1, mov.descricao2, mov.valor, mov.id.toString()), movimentacoes)
-            }
-            recyclerView(movimentacoes)
-        }
-        /*FIM AREA DESTINADA A TESTES DA ACTIVITY*/
-
-        /* BOTAO NOVA MOVIMENTACAO -> CHAMA A ACTIVITY DE INCLUSADO DE NOVA MOVIMENTACAO */
-        val addNewMovBtn : ImageButton = findViewById(R.id.addMov)
-        addNewMovBtn.setOnClickListener{
-            Toast.makeText(this, "callNewMovActivity()", Toast.LENGTH_SHORT).show()
-        }
-
         /* BOTAO VOLTAR -> VOLTA PARA ACTIVITY ANTERIOR */
         findViewById<ImageView>(R.id.back_button).setOnClickListener{finish()}
 
+        /* BOTAO NOVA MOVIMENTACAO -> CHAMA A ACTIVITY DE INCLUSADO DE NOVA MOVIMENTACAO */
         findViewById<ImageButton>(R.id.addMov).setOnClickListener{
             val NEW_MOV = Intent(this, NewMovActivity::class.java)
             startActivity(NEW_MOV)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val movimentacoes : MutableList<Any> = mutableListOf()
+
+        recyclerView_Extract = findViewById(R.id.recyclerView_extract)
+
+        /*CONSULTA BANCO DE DADOS TABELA MOVIMENTAÇÕES*/
+        CoroutineScope(Dispatchers.Main).launch {
+            for (mov in addMovimentation.getMovs().toTypedArray()){
+                setNovaMovimentacao(
+                    arrayOf(
+                        mov.id.toString(),
+                        getDateExpanded(mov.data),
+                        mov.tipo,
+                        mov.descricao,
+                        getCategoryName(mov.categoriaId),
+                        if (mov.cartaoId != 0) getInstalmentValue(mov.valor, mov.cartaoParcelas) else mov.valor,
+                        mov.cartaoId.toString(),
+                        mov.recorrencia.toString(),
+                        mov.orcamentoId.toString()
+                    )
+                    , movimentacoes)
+            }
+            recyclerView(movimentacoes)
+        }
+    }
+
+    fun recyclerView(list : MutableList<Any>){
+        recyclerView_Extract.layoutManager = LinearLayoutManager(this)
+        recyclerView_Extract.setHasFixedSize(true)
+        val combinedAdapter = AdapterCombinedEx(this, list)
+        recyclerView_Extract.adapter = combinedAdapter
     }
 
     fun setNovaMovimentacao(novaMov : Array<String>, listMov : MutableList<Any>){
@@ -76,47 +96,75 @@ class ExtractActivity : AppCompatActivity() {
         }
 
         if(listMov.isEmpty()){
-            listMov.add(MovDate(novaMov[0]))
+            listMov.add(MovDate(novaMov[1]))
             listMov.add(Movimentation(
-                novaMov[5].toInt(),
-                novaMov[0],
-                icon_type(novaMov[1]),
-                novaMov[2],
+                novaMov[0].toInt(),
+                novaMov[1],
+                icon_type(novaMov[2]),
                 novaMov[3],
-                novaMov[4]
+                novaMov[4],
+                novaMov[5],
+                novaMov[6] != "0",
+                novaMov[7] != "0",
+                novaMov[8] != "0"
             ))
         }else{
 
             val lastItem = listMov.last()
 
-            if(lastItem is Movimentation && lastItem.date == novaMov[0]){
+            if(lastItem is Movimentation && lastItem.date == novaMov[1]){
                 listMov.add(Movimentation(
-                    novaMov[5].toInt(),
-                    novaMov[0],
-                    icon_type(novaMov[1]),
-                    novaMov[2],
+                    novaMov[0].toInt(),
+                    novaMov[1],
+                    icon_type(novaMov[2]),
                     novaMov[3],
-                    novaMov[4]
+                    novaMov[4],
+                    novaMov[5],
+                    novaMov[6] != "0",
+                    novaMov[7] != "0",
+                    novaMov[8] != "0"
                 ))
             }
             else{
-                listMov.add(MovDate(novaMov[0]))
+                listMov.add(MovDate(novaMov[1]))
                 listMov.add(Movimentation(
-                    novaMov[5].toInt(),
-                    novaMov[0],
-                    icon_type(novaMov[1]),
-                    novaMov[2],
+                    novaMov[0].toInt(),
+                    novaMov[1],
+                    icon_type(novaMov[2]),
                     novaMov[3],
-                    novaMov[4]
+                    novaMov[4],
+                    novaMov[5],
+                    novaMov[6] != "0",
+                    novaMov[7] != "0",
+                    novaMov[8] != "0"
                 ))
             }
         }
     }
 
-    fun recyclerView(list : MutableList<Any>){
-        recyclerView_Extract.layoutManager = LinearLayoutManager(this)
-        recyclerView_Extract.setHasFixedSize(true)
-        val combinedAdapter = AdapterCombinedEx(this, list)
-        recyclerView_Extract.adapter = combinedAdapter
+    fun getInstalmentValue(valor : String, parcelas : Int) : String{
+
+        val valorFloat = valor.replace("R$ ", "").replace(".", "").replace(",", ".").toFloat()
+        val valorParcela = NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(valorFloat / parcelas)
+
+        return valorParcela
+    }
+
+    fun getCategoryName(categoryId : Int) : String{
+        //Essa funçao faz um consulta na tabela de categoria no Bando de Dados
+        //E retorna o nome da categoria com base no Id
+
+        val categoryName : String = "Categoria"
+
+        return categoryName
+    }
+
+    fun getDateExpanded(date: String) : String{
+        val formmater = SimpleDateFormat("EEEE, dd MMM yyyy", Locale("pt", "BR"))
+        var dateFormatted = formmater.format(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date))
+        dateFormatted = dateFormatted.replaceFirstChar{it.uppercase()}
+        dateFormatted = dateFormatted.replace("-feira", "")
+
+        return dateFormatted
     }
 }

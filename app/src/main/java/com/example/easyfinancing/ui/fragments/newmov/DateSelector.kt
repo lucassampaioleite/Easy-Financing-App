@@ -20,14 +20,13 @@ class DateSelector : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_date_selector, container, false)
 
-        //viewModel = ViewModelProvider(requireActivity()).get(NewMovViewModel::class.java)
-
         date = view.findViewById(R.id.calendario)
+
         date.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth)
             val selectedDate = calendar.time
-            viewModel.setChosenMovDate(selectedDate)
+            viewModel.movDate = selectedDate
         }
 
         return view
