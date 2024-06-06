@@ -1,4 +1,4 @@
-package com.example.easyfinancing.ui.adapters.dialogs.category
+package com.example.easyfinancing.ui.adapters.dialogs
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -18,7 +18,7 @@ class DialogCategoryAdapter(val context: Context, val list: MutableList<Category
         return DialogCategoryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: DialogCategoryAdapter.DialogCategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DialogCategoryViewHolder, position: Int) {
         holder.bind(list[position])
     }
 

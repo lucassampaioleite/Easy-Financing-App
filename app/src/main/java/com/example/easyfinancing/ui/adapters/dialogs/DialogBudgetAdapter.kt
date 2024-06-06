@@ -1,4 +1,4 @@
-package com.example.easyfinancing.ui.adapters.dialogs.budgets
+package com.example.easyfinancing.ui.adapters.dialogs
 
 import android.content.Context
 import android.view.LayoutInflater

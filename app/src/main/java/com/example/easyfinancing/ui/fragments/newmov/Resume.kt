@@ -1,6 +1,5 @@
 package com.example.easyfinancing.ui.fragments.newmov
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,12 +13,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
-import com.example.easyfinancing.ui.adapters.dialogs.budgets.DialogBudgetAdapter
-import com.example.easyfinancing.ui.adapters.dialogs.category.DialogCategoryAdapter
+import com.example.easyfinancing.ui.adapters.dialogs.DialogBudgetAdapter
+import com.example.easyfinancing.ui.adapters.dialogs.DialogCardAdapter
+import com.example.easyfinancing.ui.adapters.dialogs.DialogCategoryAdapter
 import com.example.easyfinancing.ui.models.budget.Budget
+import com.example.easyfinancing.ui.models.card.CardBill
 import com.example.easyfinancing.ui.models.category.Category
 import com.example.easyfinancing.ui.viewmodels.NewMovViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class Resume : Fragment() {
@@ -36,6 +36,7 @@ class Resume : Fragment() {
         setDialogCard(view)
 
         var recurenceIndex = 0
+
         view.findViewById<ImageButton>(R.id.recurence_selection_inner).setOnClickListener {
             recurenceIndex++
             when(recurenceIndex){
@@ -117,9 +118,22 @@ class Resume : Fragment() {
     private fun setDialogCard(view: View){
         view.findViewById<ImageButton>(R.id.card_selection_inner).setOnClickListener {
 
-            val dialogView = layoutInflater.inflate(R.layout.dialog_category_new_mov_selection, null)
-
+            val dialogView = layoutInflater.inflate(R.layout.dialog_card_new_mov_selection, null)
+            val recyclerView : RecyclerView = dialogView.findViewById(R.id.card_itens_recycle)
             val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+            val cards : MutableList<CardBill> = mutableListOf()
+
+            recyclerView.layoutManager = LinearLayoutManager(view.context)
+            recyclerView.setHasFixedSize(true)
+
+            cards.add(CardBill("Inter"))
+            cards.add(CardBill("Nubank"))
+            cards.add(CardBill("Santander"))
+            cards.add(CardBill("Itaú"))
+
+            val dialogAdapter = DialogCardAdapter(view.context, cards)
+            recyclerView.adapter = dialogAdapter
+
             dialog.setContentView(dialogView)
             dialog.show()
         }
