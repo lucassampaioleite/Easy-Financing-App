@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView android:id="@+id/card_cardview_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/light_background"
+        app:cardBackgroundColor="@color/light_background"
         android:layout_marginVertical="2.5dp"
 
         app:layout_constraintTop_toTopOf="parent"

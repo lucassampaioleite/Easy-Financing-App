@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.models.budget.Budget
 
-class DialogBudgetAdapter(val context: Context, val list: MutableList<Budget>) :
+class DialogBudgetAdapter(val context: Context, val list: MutableList<Budget>, val onItemCliked : (Budget) -> Unit) :
     RecyclerView.Adapter<DialogBudgetAdapter.DialogBudgetViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DialogBudgetViewHolder {
@@ -19,12 +20,18 @@ class DialogBudgetAdapter(val context: Context, val list: MutableList<Budget>) :
     }
 
     override fun onBindViewHolder(holder: DialogBudgetViewHolder, position: Int) {
+        val budget = list[position]
         holder.bind(list[position])
+
+        holder.cardView.setOnClickListener {
+            onItemCliked(budget)
+        }
     }
 
     override fun getItemCount(): Int = list.size
 
     inner class DialogBudgetViewHolder(itemView: View) : ViewHolder(itemView){
+        val cardView : CardView = itemView.findViewById(R.id.budget_cardview_dialog)
         fun bind(dialogBudget : Budget){
             itemView.findViewById<TextView>(R.id.dialog_recycle_budget_name).setText(dialogBudget.name)
             itemView.findViewById<TextView>(R.id.dialog_recycle_budget_percent).setText("0%")

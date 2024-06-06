@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,7 +86,14 @@ class Resume : Fragment() {
             categories.add(Category(0, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1))
             categories.add(Category(0, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1))
 
-            val dialogAdapter = DialogCategoryAdapter(view.context, categories)
+            val dialogAdapter = DialogCategoryAdapter(view.context, categories){
+                view.findViewById<ImageButton>(R.id.category_selection_inner).setImageResource(it.icon)
+                view.findViewById<TextView>(R.id.text_category_selection).setText(it.name)
+                view.findViewById<ImageButton>(R.id.category_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
+                view.findViewById<ImageButton>(R.id.category_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+                dialog.dismiss()
+            }
+
             recyclerView.adapter = dialogAdapter
 
             dialog.setContentView(dialogView)
@@ -107,7 +117,13 @@ class Resume : Fragment() {
             budgets.add(Budget("Gás", "0,00"))
             budgets.add(Budget("Investimentos", "0,00"))
 
-            val dialogAdapter = DialogBudgetAdapter(view.context, budgets)
+            val dialogAdapter = DialogBudgetAdapter(view.context, budgets){
+                view.findViewById<TextView>(R.id.text_budget_selection).setText(it.name)
+                view.findViewById<ImageButton>(R.id.budget_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
+                view.findViewById<ImageButton>(R.id.budget_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+
+                dialog.dismiss()
+            }
             recyclerView.adapter = dialogAdapter
 
             dialog.setContentView(dialogView)
@@ -126,12 +142,24 @@ class Resume : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(view.context)
             recyclerView.setHasFixedSize(true)
 
-            cards.add(CardBill("Inter"))
-            cards.add(CardBill("Nubank"))
-            cards.add(CardBill("Santander"))
-            cards.add(CardBill("Itaú"))
+            cards.add(CardBill("Inter", "00"))
+            cards.add(CardBill("Nubank", "00"))
+            cards.add(CardBill("Santander", "00"))
+            cards.add(CardBill("Itaú", "00"))
 
-            val dialogAdapter = DialogCardAdapter(view.context, cards)
+            val dialogAdapter = DialogCardAdapter(view.context, cards){
+
+                val selectedCardInfo = it
+
+                dialogView.findViewById<Button>(R.id.get_card_selected).setOnClickListener {
+                    view.findViewById<TextView>(R.id.text_card_selection).setText(selectedCardInfo.nickname)
+                    view.findViewById<TextView>(R.id.due_card_selection).setText(dialogView.findViewById<EditText>(R.id.instalments_number).text.toString() + "x")
+                    view.findViewById<ImageButton>(R.id.card_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
+                    view.findViewById<ImageButton>(R.id.card_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+
+                    dialog.dismiss()
+                }
+            }
             recyclerView.adapter = dialogAdapter
 
             dialog.setContentView(dialogView)
