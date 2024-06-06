@@ -12,38 +12,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyFinancing"
         tools:targetApi="31">
-
-        <activity android:name=".ui.HomeScreenActivity"
+        <activity
+            android:name=".ui.HomeScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.ExtractActivity"
-            android:exported="false">
-        </activity>
-
-        <activity android:name=".ui.CategoriesActivity"
-            android:exported="false">
-        </activity>
-
-        <activity android:name=".ui.NewCategoryForm"
-            android:exported="false">
-        </activity>
-
-        <activity android:name=".ui.BudgetsActivity"
-            android:exported="false">
-        </activity>
-
-        <activity android:name=".ui.NewMovActivity"
-            android:exported="false">
-        </activity>
-
-        <activity android:name=".ui.CardActivity"
-            android:exported="false">
-        </activity>
+        <activity
+            android:name=".ui.ExtractActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".ui.CategoriesActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".ui.NewCategoryForm"
+            android:exported="false"></activity>
+        <activity
+            android:name=".ui.BudgetsActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".ui.NewMovActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".ui.CardActivity"
+            android:exported="false"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

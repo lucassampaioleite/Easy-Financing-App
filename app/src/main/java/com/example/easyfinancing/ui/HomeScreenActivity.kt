@@ -1,7 +1,11 @@
 package com.example.easyfinancing.ui
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -40,6 +44,10 @@ class HomeScreenActivity : AppCompatActivity() {
         setButtonStartActivityNewMovimentation()
         setButtonStartActivityCategories()
 
+        findViewById<ImageButton>(R.id.menu).setOnClickListener {
+            openMenuPopUp()
+        }
+
         setPeriodo("MAI 2024")
         setSaldoDisponivel("R$ 0,00")
         setSaldo("R$ 0,00")
@@ -69,6 +77,35 @@ class HomeScreenActivity : AppCompatActivity() {
             }
             recyclerViewExtrato(movimentacoes)
         }
+    }
+
+    private fun openMenuPopUp(){
+        val view = LayoutInflater.from(this).inflate(R.layout.dialog_main_menu, null)
+        val dialog = Dialog(this)
+
+        view.findViewById<ImageButton>(R.id.extract_side_menu_inner).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, ExtractActivity::class.java))
+        }
+
+        view.findViewById<ImageButton>(R.id.budget_side_menu_inner).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, BudgetsActivity::class.java))
+        }
+
+        view.findViewById<ImageButton>(R.id.card_side_menu_inner).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, CardActivity::class.java))
+        }
+
+        view.findViewById<ImageButton>(R.id.categories_side_menu_inner).setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, CategoriesActivity::class.java))
+        }
+
+        dialog.setContentView(view)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
 
     private fun setButtonStartActivityExtract(){

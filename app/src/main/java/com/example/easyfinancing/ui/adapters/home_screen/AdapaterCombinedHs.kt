@@ -31,11 +31,11 @@ class AdapaterCombinedHs (private val context : Context, private val list: Mutab
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
             VIEW_PAGE1 -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.activity_hs_hscroll_page1, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.recycle_hs_budget, parent, false)
                 Page1ViewHolder(view)
             }
             VIEW_PAGE2 -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.activity_hs_hscroll_page2, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.recycle_hs_cardbill, parent, false)
                 Page2ViewHolder(view)
             }
             else -> throw IllegalArgumentException("Aconteceu um erro ao buscar os resumos")

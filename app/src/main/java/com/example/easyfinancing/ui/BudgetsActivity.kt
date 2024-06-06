@@ -1,28 +1,16 @@
 package com.example.easyfinancing.ui
 
-import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Im
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnClickListener
-import android.widget.CursorTreeAdapter
 import android.widget.EditText
 import android.widget.ImageButton
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
-import com.example.easyfinancing.databinding.ActivityBudgetsBinding
 import com.example.easyfinancing.ui.adapters.budget.BudgetAdapter
 import com.example.easyfinancing.ui.models.budget.Budget
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -55,7 +43,7 @@ class BudgetsActivity : AppCompatActivity() {
     private fun buttonNewBudget(){
         findViewById<ImageButton>(R.id.add_new_budget).setOnClickListener {
 
-            val dialogView = layoutInflater.inflate(R.layout.activity_budget_new_item_form, null)
+            val dialogView = layoutInflater.inflate(R.layout.dialog_budget_new_item_form, null)
 
             EditTextMoneyMask(dialogView.findViewById(R.id.budget_value))
 

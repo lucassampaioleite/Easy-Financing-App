@@ -13,8 +13,8 @@
         android:padding="5dp"
         android:background="@drawable/round_background_green"
 
-        app:layout_constraintTop_toTopOf="@id/category_card"
-        app:layout_constraintBottom_toTopOf="@id/category_card"
+        app:layout_constraintBottom_toBottomOf="@id/category_card"
+        app:layout_constraintTop_toBottomOf="@id/category_card"
         app:layout_constraintStart_toStartOf="@id/category_card"
         app:layout_constraintEnd_toEndOf="@id/category_card"/>
 
