@@ -24,7 +24,11 @@ class CategoriesActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.categories_recycleview)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
-        categories.add(Category(R.drawable.cat_ic_credit_card, "Cartão de Credito", "R$ 0,00"))
+        categories.add(Category(0, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0))
+        categories.add(Category(0, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1))
+        categories.add(Category(0, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1))
+        categories.add(Category(0, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1))
+        categories.add(Category(0, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1))
         val categoryAdapter = CategoryAdapter(this, categories)
         recyclerView.adapter = categoryAdapter
     }

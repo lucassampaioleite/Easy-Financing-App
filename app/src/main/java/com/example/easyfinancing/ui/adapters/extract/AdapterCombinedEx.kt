@@ -30,11 +30,11 @@ class AdapterCombinedEx (private val context : Context, private val list : Mutab
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
             VIEW_TYPE_DATE -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.activity_date, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.recycle_mov_date, parent, false)
                 DateViewHolder(view)
             }
             VIEW_TYPE_MOV -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.activity_extratct_movimentation, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.recycle_extratct_mov, parent, false)
                 MovimentationViewHolder(view, list)
             }
             else -> throw IllegalArgumentException("Invalid view type")

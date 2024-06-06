@@ -18,7 +18,7 @@ class CardAdapter(val context: Context, val list : MutableList<CardBill>) :
     Adapter<CardAdapter.CardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.activity_card_item, parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.recycle_card_item, parent,false)
         return CardViewHolder(view)
     }
 
