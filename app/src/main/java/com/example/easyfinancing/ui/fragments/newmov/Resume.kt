@@ -28,9 +28,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class Resume : Fragment() {
     val viewModel: NewMovViewModel by activityViewModels()
 
+    val categories : MutableList<Category> = mutableListOf()
+    val budgets : MutableList<Budget> = mutableListOf()
+    val cards : MutableList<CardBill> = mutableListOf()
+
     var recurenceIndex = 0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_new_mov_resume, container, false)
+
+        recurenceIndex = viewModel.movRecurence
 
         view.findViewById<TextView>(R.id.mov_date_resume).setText(viewModel.getDateExpanded())
         view.findViewById<ImageView>(R.id.mov_type_resume).setImageResource(getType(viewModel.movType))
@@ -38,6 +44,7 @@ class Resume : Fragment() {
         view.findViewById<TextView>(R.id.mov_desc_resume).setText(viewModel.movDesc)
 
         setDialogCategories(view)
+        getRecurence(view)
         setDialogBudgets(view)
         setDialogCard(view)
 
@@ -46,27 +53,72 @@ class Resume : Fragment() {
             getRecurence(view)
         }
 
+        categories.add(Category(1, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0))
+        categories.add(Category(2, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1))
+        categories.add(Category(3, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1))
+        categories.add(Category(4, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1))
+        categories.add(Category(5, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1))
+
+        budgets.add(Budget(1,"Lazer", "0,00"))
+        budgets.add(Budget(2,"Combustivel", "0,00"))
+        budgets.add(Budget(3,"Gás", "0,00"))
+        budgets.add(Budget(4,"Investimentos", "0,00"))
+
+        cards.add(CardBill(1,"Inter", "00"))
+        cards.add(CardBill(2,"Nubank", "00"))
+        cards.add(CardBill(3,"Santander", "00"))
+        cards.add(CardBill(4,"Itaú", "00"))
+
+
+
+        if (viewModel.movCatId != 0){
+            for(i in 0 until categories.size){
+                if (categories[i].id == viewModel.movCatId){
+                    view.findViewById<ImageButton>(R.id.category_selection_inner).setImageResource(categories[i].icon)
+                    view.findViewById<TextView>(R.id.text_category_selection).setText(categories[i].name)
+                    view.findViewById<ImageButton>(R.id.category_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
+                    view.findViewById<ImageButton>(R.id.category_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+                }
+            }
+        }
+
+        if (viewModel.movBudgetId != 0){
+            for(i in 0 until budgets.size){
+                if (budgets[i].id == viewModel.movBudgetId){
+                    view.findViewById<TextView>(R.id.text_budget_selection).setText(budgets[i].name)
+                    view.findViewById<ImageButton>(R.id.budget_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
+                    view.findViewById<ImageButton>(R.id.budget_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+                }
+            }
+        }
+
+        if (viewModel.movCardId != 0){
+            for(i in 0 until cards.size){
+                if (cards[i].id == viewModel.movCardId){
+                    view.findViewById<TextView>(R.id.text_card_selection).setText(cards[i].nickname)
+                    view.findViewById<TextView>(R.id.due_card_selection).setText(viewModel.movCardInstalments.toString() + "x")
+                    view.findViewById<ImageButton>(R.id.card_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
+                    view.findViewById<ImageButton>(R.id.card_selection_inner).background = ContextCompat.getDrawable(view.context, R.drawable.round_background_blue)
+                }
+            }
+        }
+
         return view
     }
 
     private fun getRecurence(view: View){
+
+        fun setBlueBackGround(text: String, recurence : Int){
+            view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_blue)
+            view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_dark))
+            view.findViewById<TextView>(R.id.text_recurence_selection).setText(text)
+            viewModel.movRecurence = recurence
+        }
+
         when(recurenceIndex){
-            1 -> {
-                view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_blue)
-                view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_dark))
-                view.findViewById<TextView>(R.id.text_recurence_selection).setText("Diário")
-
-                viewModel.movRecurence = 1
-            }
-            2 -> {
-                view.findViewById<TextView>(R.id.text_recurence_selection).setText("Semanal")
-
-                viewModel.movRecurence = 2
-            }
-            3 -> {
-                view.findViewById<TextView>(R.id.text_recurence_selection).setText("Mensal")
-                viewModel.movRecurence = 3
-            }
+            1 -> setBlueBackGround("Diário", 1)
+            2 -> setBlueBackGround("Semanal", 2)
+            3 -> setBlueBackGround("Mensal", 3)
             else -> {
                 view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_medium_blue)
                 view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_light))
@@ -90,19 +142,13 @@ class Resume : Fragment() {
 
             val dialogView = layoutInflater.inflate(R.layout.dialog_category_new_mov_selection, null)
             var recyclerView : RecyclerView = dialogView.findViewById(R.id.category_itens_recycle)
-            val categories : MutableList<Category> = mutableListOf()
             val dialog = BottomSheetDialog(requireActivity(), R.style.BottomSheetDialogTheme)
 
             recyclerView.layoutManager = LinearLayoutManager(view.context)
             recyclerView.setHasFixedSize(true)
 
-            categories.add(Category(1, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0))
-            categories.add(Category(2, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1))
-            categories.add(Category(3, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1))
-            categories.add(Category(4, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1))
-            categories.add(Category(5, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1))
-
             val dialogAdapter = DialogCategoryAdapter(view.context, categories){
+
                 view.findViewById<ImageButton>(R.id.category_selection_inner).setImageResource(it.icon)
                 view.findViewById<TextView>(R.id.text_category_selection).setText(it.name)
                 view.findViewById<ImageButton>(R.id.category_selection_inner).setColorFilter(ContextCompat.getColor(view.context, R.color.light_background))
@@ -126,15 +172,9 @@ class Resume : Fragment() {
             val dialogView = layoutInflater.inflate(R.layout.dialog_budget_new_mov_selection, null)
             val recyclerView : RecyclerView = dialogView.findViewById(R.id.budget_itens_recycle)
             val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-            val budgets : MutableList<Budget> = mutableListOf()
 
             recyclerView.layoutManager = LinearLayoutManager(view.context)
             recyclerView.setHasFixedSize(true)
-
-            budgets.add(Budget(1,"Lazer", "0,00"))
-            budgets.add(Budget(2,"Combustivel", "0,00"))
-            budgets.add(Budget(3,"Gás", "0,00"))
-            budgets.add(Budget(4,"Investimentos", "0,00"))
 
             val dialogAdapter = DialogBudgetAdapter(view.context, budgets){
                 view.findViewById<TextView>(R.id.text_budget_selection).setText(it.name)
@@ -158,15 +198,11 @@ class Resume : Fragment() {
             val dialogView = layoutInflater.inflate(R.layout.dialog_card_new_mov_selection, null)
             val recyclerView : RecyclerView = dialogView.findViewById(R.id.card_itens_recycle)
             val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-            val cards : MutableList<CardBill> = mutableListOf()
 
             recyclerView.layoutManager = LinearLayoutManager(view.context)
             recyclerView.setHasFixedSize(true)
 
-            cards.add(CardBill(1,"Inter", "00"))
-            cards.add(CardBill(2,"Nubank", "00"))
-            cards.add(CardBill(3,"Santander", "00"))
-            cards.add(CardBill(4,"Itaú", "00"))
+            dialogView.findViewById<EditText>(R.id.instalments_number).setText(viewModel.movCardInstalments.toString())
 
             val dialogAdapter = DialogCardAdapter(view.context, cards){
 

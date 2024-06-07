@@ -28,6 +28,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Date
 import java.util.Locale
 
 class HomeScreenActivity : AppCompatActivity() {
@@ -77,28 +79,13 @@ class HomeScreenActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             for (mov in addMovimentation.getMovs().toTypedArray()){
                 setNovaMovimentacao(
-                    arrayOf(
-                        mov.id.toString(),
-                        getDateExpanded(mov.data),
-                        mov.tipo,
-                        mov.descricao,
-                        getCategoryName(mov.categoriaId),
-                        if (mov.cartaoId != 0) getInstalmentValue(mov.valor, mov.cartaoParcelas) else mov.valor,
-                        mov.cartaoId.toString(),
-                        mov.recorrencia.toString(),
-                        mov.orcamentoId.toString()
-                    )
-                    , movimentacoes)
+                    Movimentation(mov.id, LocalDate.parse(mov.data), mov.tipo, mov.descricao, mov.categoriaId, mov.valor, mov.cartaoId, mov.cartaoParcelas, mov.recorrencia, mov.orcamentoId),
+                    movimentacoes
+                )
             }
             recyclerViewExtrato(movimentacoes)
         }
 
-        CoroutineScope(Dispatchers.Main).launch {
-            for (mov in addMovimentation.getMovs().toTypedArray()){
-                //setNovaMovimentacao(arrayOf(mov.date, mov.tipo, mov.descricao1, mov.descricao2, mov.valor, mov.id.toString()), movimentacoes)
-            }
-            recyclerViewExtrato(movimentacoes)
-        }
     }
 
     private fun openMenuPopUp(){
@@ -221,91 +208,29 @@ class HomeScreenActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.outcome_value).text = valor
     }
 
-    fun setNovaMovimentacao(novaMov : Array<String>, listMov : MutableList<Any>){
-        fun icon_type(tipo : String) : Int{
-            if(tipo == "E"){
-                return R.drawable.arrow_drop_up
-            }
-            return R.drawable.arrow_drop_down
-        }
+    fun setNovaMovimentacao(novaMov : Movimentation, listMov : MutableList<Any>){
 
         if(listMov.isEmpty()){
-            listMov.add(MovDate(novaMov[1]))
-            listMov.add(Movimentation(
-                novaMov[0].toInt(),
-                novaMov[1],
-                icon_type(novaMov[2]),
-                novaMov[3],
-                novaMov[4],
-                novaMov[5],
-                novaMov[6] != "0",
-                novaMov[7] != "0",
-                novaMov[8] != "0"
-            ))
+            listMov.add(MovDate(novaMov.date.toString()))
+            listMov.add(novaMov)
         }else{
 
             val lastItem = listMov.last()
 
-            if(lastItem is Movimentation && lastItem.date == novaMov[1]){
-                listMov.add(Movimentation(
-                    novaMov[0].toInt(),
-                    novaMov[1],
-                    icon_type(novaMov[2]),
-                    novaMov[3],
-                    novaMov[4],
-                    novaMov[5],
-                    novaMov[6] != "0",
-                    novaMov[7] != "0",
-                    novaMov[8] != "0"
-                ))
+            if(lastItem is Movimentation && lastItem.date == novaMov.date){
+                listMov.add(novaMov)
             }
             else{
-                listMov.add(MovDate(novaMov[1]))
-                listMov.add(Movimentation(
-                    novaMov[0].toInt(),
-                    novaMov[1],
-                    icon_type(novaMov[2]),
-                    novaMov[3],
-                    novaMov[4],
-                    novaMov[5],
-                    novaMov[6] != "0",
-                    novaMov[7] != "0",
-                    novaMov[8] != "0"
-                ))
+                listMov.add(MovDate(novaMov.date.toString()))
+                listMov.add(novaMov)
             }
         }
-    }
-
-    fun getInstalmentValue(valor : String, parcelas : Int) : String{
-
-        val valorFloat = valor.replace("R$ ", "").replace(".", "").replace(",", ".").toFloat()
-        val valorParcela = NumberFormat.getCurrencyInstance(Locale("pt", "BR")).format(valorFloat / parcelas)
-
-        return valorParcela
     }
 
     fun recyclerViewExtrato(list : MutableList<Any>){
         recyclerViewHSmovimentation.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewHSmovimentation.setHasFixedSize(true)
-        val combinedAdapterExtract = AdapterCombinedEx(this, list)
+        val combinedAdapterExtract = AdapterCombinedEx(this, list){}
         recyclerViewHSmovimentation.adapter = combinedAdapterExtract
-    }
-
-    fun getCategoryName(categoryId : Int) : String{
-        //Essa funçao faz um consulta na tabela de categoria no Bando de Dados
-        //E retorna o nome da categoria com base no Id
-
-        val categoryName : String = "Categoria"
-
-        return categoryName
-    }
-
-    fun getDateExpanded(date: String) : String{
-        val formmater = SimpleDateFormat("EEEE, dd MMM yyyy", Locale("pt", "BR"))
-        var dateFormatted = formmater.format(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date))
-        dateFormatted = dateFormatted.replaceFirstChar{it.uppercase()}
-        dateFormatted = dateFormatted.replace("-feira", "")
-
-        return dateFormatted
     }
 }

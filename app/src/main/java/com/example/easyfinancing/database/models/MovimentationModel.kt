@@ -2,11 +2,12 @@ package com.example.easyfinancing.database.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity
 data class MovimentationModel (
     val data : String,
-    val tipo : String,
+    val tipo : Boolean,
     val descricao : String,
     val categoriaId : Int,
     val valor : String,
