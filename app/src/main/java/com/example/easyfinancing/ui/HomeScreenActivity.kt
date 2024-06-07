@@ -230,7 +230,9 @@ class HomeScreenActivity : AppCompatActivity() {
     fun recyclerViewExtrato(list : MutableList<Any>){
         recyclerViewHSmovimentation.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewHSmovimentation.setHasFixedSize(true)
-        val combinedAdapterExtract = AdapterCombinedEx(this, list){}
+        val combinedAdapterExtract = AdapterCombinedEx(this, list){
+            startActivity(Intent(this, ExtractActivity::class.java))
+        }
         recyclerViewHSmovimentation.adapter = combinedAdapterExtract
     }
 }
