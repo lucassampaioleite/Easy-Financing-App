@@ -137,6 +137,8 @@ class NewMovActivity : AppCompatActivity() {
 
         }else{
 
+            ResumeFg.readonly = true
+
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.fragment_placer, fragments[2])
                 commit()
@@ -161,6 +163,8 @@ class NewMovActivity : AppCompatActivity() {
             findViewById<ImageButton>(R.id.bt_avancar_fg).setOnClickListener{
 
                 if(editMovimentation){
+                    ResumeFg.readonly = false
+
                     findViewById<ImageButton>(R.id.bt_avancar_fg).setImageResource(R.drawable.ic_right)
                     findViewById<ImageButton>(R.id.bt_cancelar).setImageResource(R.drawable.ic_close)
 

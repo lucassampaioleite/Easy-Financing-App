@@ -33,24 +33,20 @@ class Resume : Fragment() {
     val cards : MutableList<CardBill> = mutableListOf()
 
     var recurenceIndex = 0
+    var readonly = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_new_mov_resume, container, false)
-
-        recurenceIndex = viewModel.movRecurence
 
         view.findViewById<TextView>(R.id.mov_date_resume).setText(viewModel.getDateExpanded())
         view.findViewById<ImageView>(R.id.mov_type_resume).setImageResource(getType(viewModel.movType))
         view.findViewById<TextView>(R.id.mov_value_resume).setText(viewModel.movValue)
         view.findViewById<TextView>(R.id.mov_desc_resume).setText(viewModel.movDesc)
+        setRecurence(view)
 
-        setDialogCategories(view)
-        getRecurence(view)
-        setDialogBudgets(view)
-        setDialogCard(view)
-
-        view.findViewById<ImageButton>(R.id.recurence_selection_inner).setOnClickListener {
-            recurenceIndex++
-            getRecurence(view)
+        if(!readonly){
+            setDialogCategories(view)
+            setDialogBudgets(view)
+            setDialogCard(view)
         }
 
         categories.add(Category(1, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0))
@@ -106,7 +102,7 @@ class Resume : Fragment() {
         return view
     }
 
-    private fun getRecurence(view: View){
+    private fun setRecurence(view: View){
 
         fun setBlueBackGround(text: String, recurence : Int){
             view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_blue)
@@ -115,18 +111,30 @@ class Resume : Fragment() {
             viewModel.movRecurence = recurence
         }
 
-        when(recurenceIndex){
-            1 -> setBlueBackGround("Diário", 1)
-            2 -> setBlueBackGround("Semanal", 2)
-            3 -> setBlueBackGround("Mensal", 3)
-            else -> {
-                view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_medium_blue)
-                view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_light))
-                view.findViewById<TextView>(R.id.text_recurence_selection).setText("Recorrência")
-                recurenceIndex = 0
+        fun updateRecurence(recurenceIndex : Int){
+            when(recurenceIndex){
+                1 -> setBlueBackGround("Diário", 1)
+                2 -> setBlueBackGround("Semanal", 2)
+                3 -> setBlueBackGround("Mensal", 3)
+                else -> {
+                    view.findViewById<ImageButton>(R.id.recurence_selection_inner).background = ContextCompat.getDrawable(requireContext(), R.drawable.round_background_medium_blue)
+                    view.findViewById<ImageButton>(R.id.recurence_selection_inner).setColorFilter(ContextCompat.getColor(requireContext(), R.color.blue_light))
+                    view.findViewById<TextView>(R.id.text_recurence_selection).setText("Recorrência")
+                    this.recurenceIndex = 0
 
-                viewModel.movRecurence = 0
+                    viewModel.movRecurence = 0
+                }
             }
+        }
+
+        recurenceIndex = viewModel.movRecurence
+        updateRecurence(recurenceIndex)
+
+        if (readonly) return
+
+        view.findViewById<ImageButton>(R.id.recurence_selection_inner).setOnClickListener {
+            recurenceIndex++
+            updateRecurence(recurenceIndex)
         }
     }
 
