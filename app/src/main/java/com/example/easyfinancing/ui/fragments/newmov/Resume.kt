@@ -28,12 +28,37 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class Resume : Fragment() {
     val viewModel: NewMovViewModel by activityViewModels()
 
-    val categories : MutableList<Category> = mutableListOf()
-    val budgets : MutableList<Budget> = mutableListOf()
-    val cards : MutableList<CardBill> = mutableListOf()
+    lateinit var categories : MutableList<Category>
+    lateinit var budgets : MutableList<Budget>
+    lateinit var cards : MutableList<CardBill>
 
     var recurenceIndex = 0
     var readonly = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        categories = mutableListOf(
+            Category(1, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0),
+            Category(2, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1),
+            Category(3, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1),
+            Category(4, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1),
+            Category(5, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1)
+        )
+
+        budgets = mutableListOf(
+            Budget(1, "Lazer", "0,00"),
+            Budget(2, "Combustivel", "0,00"),
+            Budget(3, "Gás", "0,00"),
+            Budget(4, "Investimentos", "0,00")
+        )
+
+        cards = mutableListOf(
+            CardBill(1, "Inter", "00"),
+            CardBill(2, "Nubank", "00"),
+            CardBill(3, "Santander", "00"),
+            CardBill(4, "Itaú", "00")
+        )
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_new_mov_resume, container, false)
 
@@ -48,24 +73,6 @@ class Resume : Fragment() {
             setDialogBudgets(view)
             setDialogCard(view)
         }
-
-        categories.add(Category(1, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0))
-        categories.add(Category(2, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1))
-        categories.add(Category(3, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1))
-        categories.add(Category(4, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1))
-        categories.add(Category(5, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1))
-
-        budgets.add(Budget(1,"Lazer", "0,00"))
-        budgets.add(Budget(2,"Combustivel", "0,00"))
-        budgets.add(Budget(3,"Gás", "0,00"))
-        budgets.add(Budget(4,"Investimentos", "0,00"))
-
-        cards.add(CardBill(1,"Inter", "00"))
-        cards.add(CardBill(2,"Nubank", "00"))
-        cards.add(CardBill(3,"Santander", "00"))
-        cards.add(CardBill(4,"Itaú", "00"))
-
-
 
         if (viewModel.movCatId != 0){
             for(i in 0 until categories.size){
