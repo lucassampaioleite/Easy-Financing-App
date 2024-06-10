@@ -10,12 +10,13 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
+import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.CategoryDao
 import com.example.easyfinancing.ui.adapters.dialogs.DialogBudgetAdapter
 import com.example.easyfinancing.ui.adapters.dialogs.DialogCardAdapter
 import com.example.easyfinancing.ui.adapters.dialogs.DialogCategoryAdapter
@@ -24,26 +25,40 @@ import com.example.easyfinancing.ui.models.card.CardBill
 import com.example.easyfinancing.ui.models.category.Category
 import com.example.easyfinancing.ui.viewmodels.NewMovViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class Resume : Fragment() {
     val viewModel: NewMovViewModel by activityViewModels()
 
-    lateinit var categories : MutableList<Category>
+    lateinit var categories : List<Category>
     lateinit var budgets : MutableList<Budget>
     lateinit var cards : MutableList<CardBill>
 
     var recurenceIndex = 0
     var readonly = false
 
+    lateinit var dataBase : AppDatabase
+    lateinit var categoryDao : CategoryDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        categories = mutableListOf(
-            Category(1, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0),
-            Category(2, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1),
-            Category(3, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1),
-            Category(4, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1),
-            Category(5, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1)
-        )
+
+        this.dataBase = AppDatabase.getInstance(requireContext())
+        this.categoryDao = dataBase.categoryDao()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val DB_Categories = categoryDao.getAllCategories()
+
+            val CategoriesQueryResult : MutableList<Category> = mutableListOf()
+
+            for (i in 0 until DB_Categories.size){
+                CategoriesQueryResult.add(Category(DB_Categories[i].id, DB_Categories[i].icon, DB_Categories[i].name, "0", 0))
+            }
+
+            categories = CategoriesQueryResult
+        }
 
         budgets = mutableListOf(
             Budget(1, "Lazer", "0,00"),

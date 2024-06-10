@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.models.icons.Icons
 
-class CategoryIconPickerAdapter (val context: Context, val list: MutableList<Icons>):
+class CategoryIconPickerAdapter (val context: Context, val list: MutableList<Icons>, val inconSelected : (Icons) -> Unit):
     RecyclerView.Adapter<CategoryIconPickerAdapter.IconViewHolder>() {
         private val viewHolders = mutableListOf<IconViewHolder>()
         var selectedItemPosition = RecyclerView.NO_POSITION
@@ -24,56 +24,29 @@ class CategoryIconPickerAdapter (val context: Context, val list: MutableList<Ico
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: IconViewHolder, position: Int) {
-        holder.bind(list[position], position == selectedItemPosition)
+        val icon = list[position]
+        holder.bind(list[position])
+
+        holder.iconView.setOnClickListener {
+
+            for (i in 0 until viewHolders.size){
+                viewHolders[i].iconView.background = ContextCompat.getDrawable(viewHolders[i].iconView.context, R.drawable.transparent)
+                viewHolders[i].iconView.setColorFilter(ContextCompat.getColor(viewHolders[i].iconView.context, R.color.blue_light))
+            }
+
+            holder.iconView.background = ContextCompat.getDrawable(holder.iconView.context, R.drawable.round_background_blue)
+            holder.iconView.setColorFilter(ContextCompat.getColor(holder.iconView.context, R.color.white))
+
+            inconSelected(icon)
+        }
     }
 
     inner class IconViewHolder(itemView : View) : ViewHolder(itemView) {
 
-        init {
+        val iconView = itemView.findViewById<ImageButton>(R.id.category_icon_selection)
 
-            itemView.findViewById<ImageButton>(R.id.category_icon_selection).setOnClickListener {
-
-                val position = adapterPosition
-
-                if (position != RecyclerView.NO_POSITION) {
-
-                    selectedItemPosition = position
-
-                    notifyDataSetChanged()
-
-                }
-
-            }
-
-        }
-
-        fun bind(icon: Icons, isSelected: Boolean) {
-
-            val iconButton = itemView.findViewById<ImageButton>(R.id.category_icon_selection)
-
-            iconButton.setImageResource(icon.icon)
-
-            if (isSelected) {
-
-                iconButton.background =
-                    ContextCompat.getDrawable(itemView.context, R.drawable.round_background_blue)
-
-                iconButton.setColorFilter(ContextCompat.getColor(itemView.context, R.color.white))
-
-            } else {
-
-                iconButton.background =
-                    ContextCompat.getDrawable(itemView.context, R.drawable.transparent)
-
-                iconButton.setColorFilter(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.blue_light
-                    )
-                )
-
-            }
-
+        fun bind(icon: Icons) {
+            iconView.setImageResource(icon.icon)
         }
     }
 }

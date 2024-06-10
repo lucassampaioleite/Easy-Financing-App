@@ -1,6 +1,7 @@
 package com.example.easyfinancing.ui.adapters.extract
 
 import android.content.Context
+import android.content.SyncResult
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,15 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.easyfinancing.R
+import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.CategoryDao
 import com.example.easyfinancing.ui.models.extract.MovDate
 import com.example.easyfinancing.ui.models.extract.Movimentation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -83,6 +91,9 @@ class AdapterCombinedEx (private val context : Context, private val list : Mutab
     inner class MovimentationViewHolder(itemView: View) : ViewHolder(itemView) {
         val cardView : CardView = itemView.findViewById(R.id.mov_card)
 
+        val dataBase : AppDatabase = AppDatabase.getInstance(context)
+        val categoryDao : CategoryDao = dataBase.categoryDao()
+
         fun bind(movimentation: Movimentation) {
             itemView.findViewById<ImageView>(R.id.mov_icon).setImageResource(icon_type(movimentation.type))
             itemView.findViewById<TextView>(R.id.mov_main_text).text = movimentation.mainDescription
@@ -107,9 +118,16 @@ class AdapterCombinedEx (private val context : Context, private val list : Mutab
         }
 
         fun getCategoryName(CategoryId : Int) : String{
-            //Deve Consultar o Banco de Dados e buscar pelo Nome da Categoria com base Id
 
-            return "Categoria"
+            var CategoryName : String
+
+            runBlocking {
+                CategoryName = withContext(Dispatchers.IO){
+                    categoryDao.getCategoryName(CategoryId)
+                }
+            }
+
+            return CategoryName
         }
 
         fun getInstalmentValue(valor : String, parcelas : Int) : String{

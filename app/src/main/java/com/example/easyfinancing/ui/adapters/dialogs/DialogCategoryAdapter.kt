@@ -6,15 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.models.category.Category
 
-class DialogCategoryAdapter(val context: Context, val list: MutableList<Category>, val onItemCliked : (Category) -> Unit) :
+class DialogCategoryAdapter(val context: Context, val list: List<Category>, val onItemCliked: (Category) -> Unit) :
     RecyclerView.Adapter<DialogCategoryAdapter.DialogCategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DialogCategoryViewHolder {

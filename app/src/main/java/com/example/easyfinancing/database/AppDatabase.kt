@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.easyfinancing.database.daos.CategoryDao
 import com.example.easyfinancing.database.daos.MovimetationDao
+import com.example.easyfinancing.database.models.CategoryModel
 import com.example.easyfinancing.database.models.MovimentationModel
 
-@Database(entities = [MovimentationModel::class], version = 1)
+@Database(entities = [MovimentationModel::class, CategoryModel::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun movimentationDao() : MovimetationDao
+    abstract fun categoryDao() : CategoryDao
 
     companion object {
 

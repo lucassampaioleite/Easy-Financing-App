@@ -1,30 +1,56 @@
 package com.example.easyfinancing.ui
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
+import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.CategoryDao
+import com.example.easyfinancing.database.models.CategoryModel
 import com.example.easyfinancing.ui.adapters.category.CategoryIconPickerAdapter
+import com.example.easyfinancing.ui.models.category.Category
 import com.example.easyfinancing.ui.models.icons.Icons
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class NewCategoryForm : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
     val icons : MutableList<Icons> = mutableListOf()
+
+    lateinit var dataBase : AppDatabase
+    lateinit var categoryDao : CategoryDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_new_item_form)
 
+        this.dataBase = AppDatabase.getInstance(this)
+        this.categoryDao = dataBase.categoryDao()
+
         setCloseFormButton()
 
+        var icon : Int = 0
         recyclerView = findViewById(R.id.new_category_icon)
         recyclerView.layoutManager = GridLayoutManager(this, 5)
         recyclerView.setHasFixedSize(true)
         iconsLib()
-        val adpater = CategoryIconPickerAdapter(this, icons)
+        val adpater = CategoryIconPickerAdapter(this, icons){
+             icon = it.icon
+        }
         recyclerView.adapter = adpater
+
+        findViewById<Button>(R.id.create_new_category).setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch {
+                categoryDao.insertCategory(CategoryModel(icon, findViewById<EditText>(R.id.new_category_name).text.toString()))
+            }
+            finish()
+        }
     }
 
     private fun setCloseFormButton(){
