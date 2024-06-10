@@ -113,7 +113,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
 
         app:layout_constraintTop_toBottomOf="@+id/division_line_resume2"
         app:layout_constraintStart_toStartOf="parent">
@@ -129,7 +129,6 @@
                 android:layout_height="66dp"
                 android:background="@drawable/bg_add_movimentation_btn"
                 android:contentDescription="@string/submit_personal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -172,7 +171,6 @@
                 android:layout_height="66dp"
                 android:background="@drawable/bg_add_movimentation_btn"
                 android:contentDescription="@string/submit_personal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -215,7 +213,6 @@
                 android:layout_height="66dp"
                 android:background="@drawable/bg_add_movimentation_btn"
                 android:contentDescription="@string/submit_personal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -257,8 +254,6 @@
                 android:layout_width="66dp"
                 android:layout_height="66dp"
                 android:background="@drawable/bg_add_movimentation_btn"
-                android:contentDescription="@string/submit_personal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -286,6 +281,18 @@
                 android:fontFamily="@font/inter"
 
                 app:layout_constraintTop_toBottomOf="@+id/card_selection_border"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView android:id="@+id/due_card_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text=""
+                android:textColor="@color/blue_line"
+                android:fontFamily="@font/inter"
+
+                app:layout_constraintTop_toBottomOf="@+id/text_card_selection"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 

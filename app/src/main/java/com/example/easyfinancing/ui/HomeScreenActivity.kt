@@ -26,6 +26,11 @@ import com.example.easyfinancing.ui.models.home_screen.Page2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Date
+import java.util.Locale
 
 class HomeScreenActivity : AppCompatActivity() {
     private lateinit var recyclerView_HomeScreen_Resumos: RecyclerView
@@ -73,10 +78,14 @@ class HomeScreenActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             for (mov in addMovimentation.getMovs().toTypedArray()){
-                setNovaMovimentacao(arrayOf(mov.date, mov.tipo, mov.descricao1, mov.descricao2, mov.valor, mov.id.toString()), movimentacoes)
+                setNovaMovimentacao(
+                    Movimentation(mov.id, LocalDate.parse(mov.data), mov.tipo, mov.descricao, mov.categoriaId, mov.valor, mov.cartaoId, mov.cartaoParcelas, mov.recorrencia, mov.orcamentoId),
+                    movimentacoes
+                )
             }
             recyclerViewExtrato(movimentacoes)
         }
+
     }
 
     private fun openMenuPopUp(){
@@ -199,48 +208,21 @@ class HomeScreenActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.outcome_value).text = valor
     }
 
-    fun setNovaMovimentacao(novaMov : Array<String>, listMov : MutableList<Any>){
-        fun icon_type(tipo : String) : Int{
-            if(tipo == "E"){
-                return R.drawable.arrow_drop_up
-            }
-            return R.drawable.arrow_drop_down
-        }
+    fun setNovaMovimentacao(novaMov : Movimentation, listMov : MutableList<Any>){
 
         if(listMov.isEmpty()){
-            listMov.add(MovDate(novaMov[0]))
-            listMov.add(Movimentation(
-                novaMov[5].toInt(),
-                novaMov[0],
-                icon_type(novaMov[1]),
-                novaMov[2],
-                novaMov[3],
-                novaMov[4]
-            ))
+            listMov.add(MovDate(novaMov.date.toString()))
+            listMov.add(novaMov)
         }else{
 
             val lastItem = listMov.last()
 
-            if(lastItem is Movimentation && lastItem.date == novaMov[0]){
-                listMov.add(Movimentation(
-                    novaMov[5].toInt(),
-                    novaMov[0],
-                    icon_type(novaMov[1]),
-                    novaMov[2],
-                    novaMov[3],
-                    novaMov[4]
-                ))
+            if(lastItem is Movimentation && lastItem.date == novaMov.date){
+                listMov.add(novaMov)
             }
             else{
-                listMov.add(MovDate(novaMov[0]))
-                listMov.add(Movimentation(
-                    novaMov[5].toInt(),
-                    novaMov[0],
-                    icon_type(novaMov[1]),
-                    novaMov[2],
-                    novaMov[3],
-                    novaMov[4]
-                ))
+                listMov.add(MovDate(novaMov.date.toString()))
+                listMov.add(novaMov)
             }
         }
     }
@@ -248,7 +230,9 @@ class HomeScreenActivity : AppCompatActivity() {
     fun recyclerViewExtrato(list : MutableList<Any>){
         recyclerViewHSmovimentation.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewHSmovimentation.setHasFixedSize(true)
-        val combinedAdapterExtract = AdapterCombinedEx(this, list)
+        val combinedAdapterExtract = AdapterCombinedEx(this, list){
+            startActivity(Intent(this, ExtractActivity::class.java))
+        }
         recyclerViewHSmovimentation.adapter = combinedAdapterExtract
     }
 }

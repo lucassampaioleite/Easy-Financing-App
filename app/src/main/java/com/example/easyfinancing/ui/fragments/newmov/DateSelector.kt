@@ -10,6 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.viewmodels.NewMovViewModel
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.Calendar
 
 class DateSelector : Fragment() {
@@ -20,14 +22,12 @@ class DateSelector : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_date_selector, container, false)
 
-        //viewModel = ViewModelProvider(requireActivity()).get(NewMovViewModel::class.java)
-
         date = view.findViewById(R.id.calendario)
+
+        date.date = viewModel.movDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+
         date.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val calendar = Calendar.getInstance()
-            calendar.set(year, month, dayOfMonth)
-            val selectedDate = calendar.time
-            viewModel.setChosenMovDate(selectedDate)
+            viewModel.movDate = LocalDate.of(year, month+1, dayOfMonth)
         }
 
         return view

@@ -21,7 +21,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 > [!TIP]
 > ### Recomendações
-> - __Não dar commits na *branch main*__
+> - __Não dar commits na *banch main*__
 > - Utilizar a branch/updateAll para dar seu merge
 > - Usar issue para dizer no que irá trabalhar (opcional)
 > - Recomendamos criar sua branch remota onde irão conter seus commits e apartir dele dar o merge

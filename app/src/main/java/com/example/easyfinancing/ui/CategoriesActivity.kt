@@ -7,30 +7,51 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
+import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.CategoryDao
 import com.example.easyfinancing.ui.adapters.category.CategoryAdapter
 import com.example.easyfinancing.ui.models.category.Category
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CategoriesActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
-    val categories : MutableList<Category> = mutableListOf()
+
+    lateinit var dataBase : AppDatabase
+    lateinit var categoryDao : CategoryDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
 
+        this.dataBase = AppDatabase.getInstance(this)
+        this.categoryDao = dataBase.categoryDao()
+
         setButtonCallBack()
         setButtonNewCategory()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val categories : MutableList<Category> = mutableListOf()
 
         recyclerView = findViewById(R.id.categories_recycleview)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
-        categories.add(Category(0, R.drawable.cat_ic_account_balance, "Salário", "R$ 0,00", 0))
-        categories.add(Category(0, R.drawable.cat_ic_beach, "Lazer", "R$ 0,00", 1))
-        categories.add(Category(0, R.drawable.cat_ic_house, "Aluguel", "R$ 0,00", 1))
-        categories.add(Category(0, R.drawable.cat_ic_book, "Estudos", "R$ 0,00", 1))
-        categories.add(Category(0, R.drawable.cat_ic_local_gas, "Combustível", "R$ 0,00", 1))
+            CoroutineScope(Dispatchers.IO).launch {
+                val DB_categories = categoryDao.getAllCategories()
+
+                for (i in 0 until DB_categories.size){
+                    categories.add(
+                        Category(DB_categories[i].id, DB_categories[i].icon, DB_categories[i].name, "R$ 0,00", 1)
+                    )
+                }
+            }
         val categoryAdapter = CategoryAdapter(this, categories)
         recyclerView.adapter = categoryAdapter
+
     }
 
     private fun setButtonCallBack(){

@@ -30,10 +30,12 @@ class CategoryAdapter(val context: Context, val list : MutableList<Category>) :
 
     inner class CategoryVieHolder(itemView: View) : ViewHolder(itemView){
         fun bind(category: Category){
+
             itemView.findViewById<TextView>(R.id.category_name).setText(category.name)
             itemView.findViewById<ImageView>(R.id.category_icon).setImageResource(category.icon)
             itemView.findViewById<ImageView>(R.id.category_icon).colorFilter = PorterDuffColorFilter(ContextCompat.getColor(itemView.context, R.color.blue_light), PorterDuff.Mode.SRC_ATOP)
             itemView.findViewById<TextView>(R.id.category_total_value)
+
             if(category.type != 0){
                 itemView.findViewById<ImageView>(R.id.category_card_icon).background = ContextCompat.getDrawable(itemView.context, R.drawable.round_background_red)
                 itemView.findViewById<ImageView>(R.id.category_card_icon).rotation = 180.0f

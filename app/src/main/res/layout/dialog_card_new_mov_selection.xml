@@ -63,7 +63,7 @@
             android:textColor="@color/blue_light"
             android:fontFamily="@font/inter"/>
 
-        <EditText
+        <EditText android:id="@+id/instalments_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
