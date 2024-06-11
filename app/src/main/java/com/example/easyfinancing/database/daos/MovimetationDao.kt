@@ -17,6 +17,18 @@ interface MovimetationDao {
 
     @Query("SELECT valor FROM movimentationmodel")
     suspend fun findAllValues(): List<String>
+  
+    @Query("SELECT EXISTS (SELECT 1 FROM movimentationmodel WHERE categoriaId = :categoryId LIMIT 1) ")
+    suspend fun verifyIfCategoryExist(categoryId : Int) : Boolean
+
+    @Query("SELECT * FROM movimentationmodel WHERE categoriaId = :categoryId")
+    suspend fun getMovimentationByCategory(categoryId: Int) : List<MovimentationModel>
+
+    @Query("SELECT EXISTS (SELECT 1 FROM movimentationmodel WHERE cartaoId = :cartaoId LIMIT 1) ")
+    suspend fun verifyIfCardUsed(cartaoId : Int) : Boolean
+
+    @Query("SELECT * FROM movimentationmodel WHERE cartaoId = :cardId")
+    suspend fun getMovimentationByCard(cardId: Int) : List<MovimentationModel>
 
     @Query("DELETE FROM movimentationmodel WHERE id = :movId")
     suspend fun deleteMov(movId : Int)

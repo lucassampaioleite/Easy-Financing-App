@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -70,9 +71,15 @@ class BudgetsActivity : AppCompatActivity() {
         this.budgetsDAO = database.budgetsDao()
     }
 
+
     private fun buttonNewBudget() {
         findViewById<ImageButton>(R.id.add_new_budget).setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.dialog_budget_new_item_form, null)
+
+            dialogView.findViewById<Button>(R.id.new_budget_save_button).setOnClickListener {
+                Toast.makeText(dialogView.context, dialogView.findViewById<EditText>(R.id.budget_value).text.toString(), Toast.LENGTH_SHORT).show()
+            }
+
             val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
             editTextMoneyMask(dialogView.findViewById(R.id.budget_value))
             dialogView.findViewById<Button>(R.id.new_budget_save_button).setOnClickListener {

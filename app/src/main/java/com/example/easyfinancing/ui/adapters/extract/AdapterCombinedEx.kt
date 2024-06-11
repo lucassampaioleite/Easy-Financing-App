@@ -97,7 +97,11 @@ class AdapterCombinedEx (private val context : Context, private val list : Mutab
         fun bind(movimentation: Movimentation) {
             itemView.findViewById<ImageView>(R.id.mov_icon).setImageResource(icon_type(movimentation.type))
             itemView.findViewById<TextView>(R.id.mov_main_text).text = movimentation.mainDescription
-            itemView.findViewById<TextView>(R.id.mov_aux_text).text = getCategoryName(movimentation.categoryId)
+            if (movimentation.categoryId != 0) {
+                itemView.findViewById<TextView>(R.id.mov_aux_text).text = getCategoryName(movimentation.categoryId)
+            } else {
+                itemView.findViewById<TextView>(R.id.mov_aux_text).visibility = View.GONE
+            }
 
             if (movimentation.cardId !=0) {
                 itemView.findViewById<TextView>(R.id.mov_amount).text = getInstalmentValue(movimentation.movAmount, movimentation.cardInstalments)
@@ -105,9 +109,9 @@ class AdapterCombinedEx (private val context : Context, private val list : Mutab
                 itemView.findViewById<TextView>(R.id.mov_amount).text = movimentation.movAmount
             }
 
-            if (movimentation.cardId == 0) itemView.findViewById<ImageView>(R.id.mov_card_icon).setImageDrawable(null)
-            if (movimentation.recurenceId  == 0) itemView.findViewById<ImageView>(R.id.mov_recurence_icon).setImageDrawable(null)
-            if (movimentation.budgetId  == 0) itemView.findViewById<ImageView>(R.id.mov_budget_icon).setImageDrawable(null)
+            if (movimentation.cardId == 0) itemView.findViewById<ImageView>(R.id.mov_card_icon).visibility = View.GONE
+            if (movimentation.recurenceId  == 0) itemView.findViewById<ImageView>(R.id.mov_recurence_icon).visibility = View.GONE
+            if (movimentation.budgetId  == 0) itemView.findViewById<ImageView>(R.id.mov_budget_icon).visibility = View.GONE
         }
 
         fun icon_type(tipo : Boolean) : Int{

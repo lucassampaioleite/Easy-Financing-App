@@ -58,7 +58,7 @@ class HomeScreenActivity : AppCompatActivity() {
         setSaldo("R$ 0,00")
 
         recyclerView_HomeScreen_Resumos = findViewById(R.id.resumes_homescreen)
-        orcamentos.setValores("0,00", "0,00")
+        orcamentos.setValores("100,00", "50,00")
         faturas.setValores("0,00", "01/01")
         recyclerViewResumos()
 

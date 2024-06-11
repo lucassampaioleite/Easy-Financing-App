@@ -3,6 +3,8 @@ package com.example.easyfinancing.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,9 +51,13 @@ class CategoriesActivity : AppCompatActivity() {
                     )
                 }
             }
-        val categoryAdapter = CategoryAdapter(this, categories)
-        recyclerView.adapter = categoryAdapter
 
+        val categoryAdapter = CategoryAdapter(this, categories){entradas, saidas ->
+            findViewById<TextView>(R.id.income_total_value).text = entradas.toString()
+            findViewById<TextView>(R.id.outcome_total_value).text = saidas.toString()
+        }
+
+        recyclerView.adapter = categoryAdapter
     }
 
     private fun setButtonCallBack(){
