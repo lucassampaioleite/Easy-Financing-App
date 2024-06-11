@@ -15,6 +15,6 @@ interface CardDao {
     @Query("SELECT * FROM CardModel")
     suspend fun getAllCard() : MutableList<CardModel>
 
-    @Delete
-    suspend fun deleteCard(card: CardModel)
+    @Query("DELETE FROM cardmodel WHERE id = :id")
+    suspend fun deleteCard(id : Int)
 }

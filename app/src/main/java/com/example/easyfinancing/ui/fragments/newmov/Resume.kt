@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
 import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.CardDao
 import com.example.easyfinancing.database.daos.CategoryDao
+import com.example.easyfinancing.database.models.CardModel
 import com.example.easyfinancing.ui.adapters.dialogs.DialogBudgetAdapter
 import com.example.easyfinancing.ui.adapters.dialogs.DialogCardAdapter
 import com.example.easyfinancing.ui.adapters.dialogs.DialogCategoryAdapter
@@ -41,12 +43,14 @@ class Resume : Fragment() {
 
     lateinit var dataBase : AppDatabase
     lateinit var categoryDao : CategoryDao
+    lateinit var cardDao : CardDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         this.dataBase = AppDatabase.getInstance(requireContext())
         this.categoryDao = dataBase.categoryDao()
+        this.cardDao = dataBase.cardDao()
 
         CoroutineScope(Dispatchers.IO).launch {
             val DB_Categories = categoryDao.getAllCategories()
@@ -67,12 +71,17 @@ class Resume : Fragment() {
             Budget(4, "Investimentos", "0,00")
         )
 
-        cards = mutableListOf(
-            CardBill(1, "Inter", "00"),
-            CardBill(2, "Nubank", "00"),
-            CardBill(3, "Santander", "00"),
-            CardBill(4, "Itaú", "00")
-        )
+        CoroutineScope(Dispatchers.IO).launch {
+            val DB_Cards = cardDao.getAllCard()
+
+            val CardsQueryResult : MutableList<CardBill> = mutableListOf()
+
+            for (card in DB_Cards){
+                CardsQueryResult.add(CardBill(card.id, card.nickname, card.dueDate))
+            }
+
+            cards = CardsQueryResult
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_new_mov_resume, container, false)
