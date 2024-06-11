@@ -2,7 +2,6 @@ package com.example.easyfinancing.database.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
 
 @Entity
 data class MovimentationModel (

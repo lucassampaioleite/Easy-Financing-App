@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.models.icons.Icons
 
-class CategoryIconPickerAdapter (val context: Context, val list: MutableList<Icons>, val inconSelected : (Icons) -> Unit):
+class CategoryIconPickerAdapter (val context: Context, val list: MutableList<Icons>, val iconSelected : (Icons) -> Unit):
     RecyclerView.Adapter<CategoryIconPickerAdapter.IconViewHolder>() {
         private val viewHolders = mutableListOf<IconViewHolder>()
-        var selectedItemPosition = RecyclerView.NO_POSITION
+
+        var lastItemSelected = RecyclerView.NO_POSITION
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IconViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.recycle_icon_category_picker, parent, false)
         viewHolders.add(IconViewHolder(view))
@@ -29,15 +31,17 @@ class CategoryIconPickerAdapter (val context: Context, val list: MutableList<Ico
 
         holder.iconView.setOnClickListener {
 
-            for (i in 0 until viewHolders.size){
-                viewHolders[i].iconView.background = ContextCompat.getDrawable(viewHolders[i].iconView.context, R.drawable.transparent)
-                viewHolders[i].iconView.setColorFilter(ContextCompat.getColor(viewHolders[i].iconView.context, R.color.blue_light))
+            if (lastItemSelected != RecyclerView.NO_POSITION){
+                viewHolders[lastItemSelected].iconView.background = ContextCompat.getDrawable(viewHolders[lastItemSelected].iconView.context, R.drawable.transparent)
+                viewHolders[lastItemSelected].iconView.setColorFilter(ContextCompat.getColor(viewHolders[lastItemSelected].iconView.context, R.color.blue_light))
             }
 
             holder.iconView.background = ContextCompat.getDrawable(holder.iconView.context, R.drawable.round_background_blue)
             holder.iconView.setColorFilter(ContextCompat.getColor(holder.iconView.context, R.color.white))
 
-            inconSelected(icon)
+            lastItemSelected = position
+
+            iconSelected(icon)
         }
     }
 

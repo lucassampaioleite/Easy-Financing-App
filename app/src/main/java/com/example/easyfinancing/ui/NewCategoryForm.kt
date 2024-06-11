@@ -60,6 +60,7 @@ class NewCategoryForm : AppCompatActivity() {
     }
 
     private fun iconsLib(){
+        icons.add(Icons(R.drawable.cat_ic_payments))
         icons.add(Icons(R.drawable.cat_ic_key))
         icons.add(Icons(R.drawable.cat_ic_book))
         icons.add(Icons(R.drawable.cat_ic_account_balance))
@@ -100,5 +101,14 @@ class NewCategoryForm : AppCompatActivity() {
         icons.add(Icons(R.drawable.cat_ic_subway))
         icons.add(Icons(R.drawable.cat_ic_wallet))
         icons.add(Icons(R.drawable.cat_ic_shopping_bag))
+        icons.add(Icons(R.drawable.cat_ic_calculate))
+        icons.add(Icons(R.drawable.cat_ic_currency_exchange))
+        icons.add(Icons(R.drawable.cat_ic_deployed))
+        icons.add(Icons(R.drawable.cat_ic_description))
+        icons.add(Icons(R.drawable.cat_ic_handshake))
+        icons.add(Icons(R.drawable.cat_ic_music_note))
+        icons.add(Icons(R.drawable.cat_ic_receipt))
+        icons.add(Icons(R.drawable.cat_ic_rewarded))
+        icons.add(Icons(R.drawable.cat_ic_sports_esports))
     }
 }

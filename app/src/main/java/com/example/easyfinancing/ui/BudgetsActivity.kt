@@ -3,8 +3,10 @@ package com.example.easyfinancing.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,6 +48,10 @@ class BudgetsActivity : AppCompatActivity() {
             val dialogView = layoutInflater.inflate(R.layout.dialog_budget_new_item_form, null)
 
             EditTextMoneyMask(dialogView.findViewById(R.id.budget_value))
+
+            dialogView.findViewById<Button>(R.id.new_budget_save_button).setOnClickListener {
+                Toast.makeText(dialogView.context, dialogView.findViewById<EditText>(R.id.budget_value).text.toString(), Toast.LENGTH_SHORT).show()
+            }
 
             val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
             dialog.setContentView(dialogView)

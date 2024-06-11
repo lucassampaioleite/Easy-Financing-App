@@ -15,6 +15,12 @@ interface MovimetationDao {
     @Query("SELECT * FROM movimentationmodel ORDER BY data")
     suspend fun getMovs() : List<MovimentationModel>
 
+    @Query("SELECT EXISTS (SELECT 1 FROM movimentationmodel WHERE categoriaId = :categoryId LIMIT 1) ")
+    suspend fun verifyIfCategoryExist(categoryId : Int) : Boolean
+
+    @Query("SELECT * FROM movimentationmodel WHERE categoriaId = :categoryId")
+    suspend fun getMovimentationByCategory(categoryId: Int) : List<MovimentationModel>
+
     @Query("DELETE FROM movimentationmodel WHERE id = :movId")
     suspend fun deleteMov(movId : Int)
 
