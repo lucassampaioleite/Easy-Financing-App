@@ -40,7 +40,9 @@ class BudgetsActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
         val budgetsToEntity: MutableList<BudgetsModel> = mutableListOf()
+
         recyclerView = findViewById(R.id.budgets_list)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)

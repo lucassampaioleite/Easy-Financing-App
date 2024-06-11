@@ -59,6 +59,9 @@ class BudgetsAdapter(
     }
 
     private fun adjustElements(value: String): Double =
-        value.replace("R$", "").replace(",", ".").trim().toDouble()
-
+        value
+            .replace("R$", "")
+            .replace(".", "")
+            .replace(",", ".")
+            .toDouble()
 }

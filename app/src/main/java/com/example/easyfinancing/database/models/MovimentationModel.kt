@@ -12,7 +12,9 @@ data class MovimentationModel (
     val valor : String,
     val recorrencia : Int,
     val cartaoId : Int,
+    val cartoParcela : Int,
     val cartaoParcelas : Int,
+    val codigoParcelamento : String,
     val orcamentoId : Int
 ){
     @PrimaryKey(autoGenerate = true)

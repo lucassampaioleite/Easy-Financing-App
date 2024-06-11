@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
 import com.example.easyfinancing.database.AppDatabase
 import com.example.easyfinancing.database.daos.CardDao
-import com.example.easyfinancing.database.daos.MovimetationDao
 import com.example.easyfinancing.database.models.CardModel
 import com.example.easyfinancing.ui.adapters.card.CardAdapter
 import com.example.easyfinancing.ui.models.card.CardBill

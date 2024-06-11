@@ -25,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.util.UUID
 
 class NewMovActivity : AppCompatActivity() {
 
@@ -95,19 +96,55 @@ class NewMovActivity : AppCompatActivity() {
                         bar.requestLayout()
                     }else{
                         CoroutineScope(Dispatchers.IO).launch {
-                            movimentationDao.insertMov(
-                                MovimentationModel(
-                                    viewModel.getFormatedDate(viewModel.movDate),
-                                    viewModel.movType,
-                                    viewModel.movDesc,
-                                    viewModel.movCatId,
-                                    viewModel.movValue,
-                                    viewModel.movRecurence,
-                                    viewModel.movCardId,
-                                    viewModel.movCardInstalments,
-                                    viewModel.movBudgetId
+                            if (viewModel.movCardId != 0){
+                                val uuid = UUID.randomUUID().toString()
+
+                                for (i in 1..viewModel.movCardInstalments){
+
+                                    fun instalmentDate (date : String, step : Int) : String{
+
+                                        val stringDate = date.split("-")
+
+                                        if ((stringDate[1].toInt() + i) > 12){
+                                            return "${stringDate[0].toInt() + 1}-${if (i < 10) "0" + i else i}-${stringDate[2]}"
+                                        }
+
+                                        return "${stringDate[0]}-${if ((stringDate[1].toInt() + i) < 10) "0" + (stringDate[1].toInt() + i) else (stringDate[1].toInt() + i)}-${stringDate[2]}"
+                                    }
+
+                                    movimentationDao.insertMov(
+                                        MovimentationModel(
+                                            instalmentDate(viewModel.getFormatedDate(viewModel.movDate), i),
+                                            viewModel.movType,
+                                            viewModel.movDesc,
+                                            viewModel.movCatId,
+                                            viewModel.movValue,
+                                            viewModel.movRecurence,
+                                            viewModel.movCardId,
+                                            i,
+                                            viewModel.movCardInstalments,
+                                            uuid,
+                                            viewModel.movBudgetId
+                                        )
+                                    )
+                                }
+                            }else{
+                                movimentationDao.insertMov(
+                                    MovimentationModel(
+                                        viewModel.getFormatedDate(viewModel.movDate),
+                                        viewModel.movType,
+                                        viewModel.movDesc,
+                                        viewModel.movCatId,
+                                        viewModel.movValue,
+                                        viewModel.movRecurence,
+                                        viewModel.movCardId,
+                                        0,
+                                        viewModel.movCardInstalments,
+                                        "",
+                                        viewModel.movBudgetId
+                                    )
                                 )
-                            )
+                            }
                         }
                         finish()
                     }
@@ -151,7 +188,11 @@ class NewMovActivity : AppCompatActivity() {
             findViewById<ImageButton>(R.id.bt_cancelar).setOnClickListener{
                 if (editMovimentation){
                     CoroutineScope(Dispatchers.IO).launch {
-                        movimentationDao.deleteMov(viewModel.movId)
+                        if (viewModel.movCardId != 0){
+                            movimentationDao.deleteCardMov(movimentationDao.getInstalmentsCode(viewModel.movId))
+                        }else{
+                            movimentationDao.deleteMov(viewModel.movId)
+                        }
                     }
                     finish()
                 }else{
@@ -197,18 +238,73 @@ class NewMovActivity : AppCompatActivity() {
                             bar.requestLayout()
                         }else{
                             CoroutineScope(Dispatchers.IO).launch {
-                                movimentationDao.updateMov(
-                                    viewModel.getFormatedDate(viewModel.movDate),
-                                    viewModel.movType,
-                                    viewModel.movDesc,
-                                    viewModel.movCatId,
-                                    viewModel.movValue,
-                                    viewModel.movRecurence,
-                                    viewModel.movCardId,
-                                    viewModel.movCardInstalments,
-                                    viewModel.movBudgetId,
-                                    viewModel.movId
-                                )
+
+                                if(movimentationDao.verifyIfMovHasCard(viewModel.movId) != 0){
+                                    movimentationDao.deleteCardMov(movimentationDao.getInstalmentsCode(viewModel.movId))
+
+                                    if (viewModel.movCardId != 0){
+                                        val uuid = UUID.randomUUID().toString()
+
+                                        for (i in 1..viewModel.movCardInstalments){
+
+                                            fun instalmentDate (date : String, step : Int) : String{
+
+                                                val stringDate = date.split("-")
+
+                                                if ((stringDate[1].toInt() + i) > 12){
+                                                    return "${stringDate[0].toInt() + 1}-${if (i<10) "0" + i else i}-${stringDate[2]}"
+                                                }
+
+                                                return "${stringDate[0]}-${if ((stringDate[1].toInt() + i) < 10) "0" + (stringDate[1].toInt() + i) else (stringDate[1].toInt() + i)}-${stringDate[2]}"
+                                            }
+
+                                            movimentationDao.insertMov(
+                                                MovimentationModel(
+                                                    instalmentDate(viewModel.getFormatedDate(viewModel.movDate), i),
+                                                    viewModel.movType,
+                                                    viewModel.movDesc,
+                                                    viewModel.movCatId,
+                                                    viewModel.movValue,
+                                                    viewModel.movRecurence,
+                                                    viewModel.movCardId,
+                                                    i,
+                                                    viewModel.movCardInstalments,
+                                                    uuid,
+                                                    viewModel.movBudgetId
+                                                )
+                                            )
+                                        }
+                                    }else{
+                                        movimentationDao.insertMov(
+                                            MovimentationModel(
+                                                viewModel.getFormatedDate(viewModel.movDate),
+                                                viewModel.movType,
+                                                viewModel.movDesc,
+                                                viewModel.movCatId,
+                                                viewModel.movValue,
+                                                viewModel.movRecurence,
+                                                viewModel.movCardId,
+                                                0,
+                                                viewModel.movCardInstalments,
+                                                "",
+                                                viewModel.movBudgetId
+                                            )
+                                        )
+                                    }
+                                }else{
+                                    movimentationDao.updateMov(
+                                        viewModel.getFormatedDate(viewModel.movDate),
+                                        viewModel.movType,
+                                        viewModel.movDesc,
+                                        viewModel.movCatId,
+                                        viewModel.movValue,
+                                        viewModel.movRecurence,
+                                        viewModel.movCardId,
+                                        viewModel.movCardInstalments,
+                                        viewModel.movBudgetId,
+                                        viewModel.movId
+                                    )
+                                }
                             }
                             finish()
                         }
