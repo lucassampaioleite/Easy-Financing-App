@@ -45,7 +45,7 @@ class CategoriesActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 val DB_categories = categoryDao.getAllCategories()
 
-                for (i in 0 until DB_categories.size){
+                for (i in DB_categories.indices){
                     categories.add(
                         Category(DB_categories[i].id, DB_categories[i].icon, DB_categories[i].name, "R$ 0,00", 1)
                     )
