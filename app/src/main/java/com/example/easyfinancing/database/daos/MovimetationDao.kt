@@ -15,6 +15,9 @@ interface MovimetationDao {
     @Query("SELECT * FROM movimentationmodel ORDER BY data")
     suspend fun getMovs() : List<MovimentationModel>
 
+    @Query("SELECT valor FROM movimentationmodel")
+    suspend fun findAllValues(): List<String>
+
     @Query("DELETE FROM movimentationmodel WHERE id = :movId")
     suspend fun deleteMov(movId : Int)
 

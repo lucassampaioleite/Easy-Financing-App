@@ -94,7 +94,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
 
-                        android:text="R$ 1.738,00"
+                        android:text="R$ 0,00"
                         android:fontFamily="@font/inter_semibold"
                         android:textColor="#8BCAD9"/>
 
