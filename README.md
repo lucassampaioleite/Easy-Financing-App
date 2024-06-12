@@ -40,8 +40,8 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-| [<img loading="lazy" src="https://avatars.githubusercontent.com/u/128269826?v=4" width=80><br><sub>Wanderson Lira</sub>](https://github.com/wandersonlira) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/100952904?v=4" width=80><br><sub>Rivyson Claudio</sub>](https://github.com/RivysonClaudio) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/131713626?v=4" width=80><br><sub>Tiago Neri</sub>](https://github.com/TiagoNerii) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/137109972?v=4" width=80><br><sub>Kaio Emmanuel</sub>](https://github.com/kaioems) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/99299276?v=4" width=80><br><sub>Lucas Cardoso</sub>](https://github.com/cardosineo98) |
-| :---: | :---: | :---: | :---: | :---: |
+| [<img loading="lazy" src="https://avatars.githubusercontent.com/u/128269826?v=4" width=80><br><sub>Wanderson Lira</sub>](https://github.com/wandersonlira) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/100952904?v=4" width=80><br><sub>Rivyson Claudio</sub>](https://github.com/RivysonClaudio) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/131713626?v=4" width=80><br><sub>Tiago Neri</sub>](https://github.com/TiagoNerii) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/137109972?v=4" width=80><br><sub>Kaio Emmanuel</sub>](https://github.com/kaioems) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/99299276?v=4" width=80><br><sub>Lucas Cardoso</sub>](https://github.com/cardosineo98) | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/13689528?v=4" width=80><br><sub>Lucas Sampaio (orientador)](https://github.com/lucassampaioleite)) 
+| :---: | :---: | :---: | :---: | :---: | :---: |
 
 ### Contribuição
 
