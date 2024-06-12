@@ -78,9 +78,9 @@ class BudgetsActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.add_new_budget).setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.dialog_budget_new_item_form, null)
 
-            dialogView.findViewById<Button>(R.id.new_budget_save_button).setOnClickListener {
-                Toast.makeText(dialogView.context, dialogView.findViewById<EditText>(R.id.budget_value).text.toString(), Toast.LENGTH_SHORT).show()
-            }
+//            dialogView.findViewById<Button>(R.id.new_budget_save_button).setOnClickListener {
+//                Toast.makeText(dialogView.context, dialogView.findViewById<EditText>(R.id.budget_value).text.toString(), Toast.LENGTH_SHORT).show()
+//            }
 
             val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
             editTextMoneyMask(dialogView.findViewById(R.id.budget_value))

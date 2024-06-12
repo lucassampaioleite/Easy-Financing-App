@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
 import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.BudgetsDAO
 import com.example.easyfinancing.database.daos.CardDao
 import com.example.easyfinancing.database.daos.MovimetationDao
 import com.example.easyfinancing.ui.adapters.extract.AdapterCombinedEx
@@ -47,6 +48,7 @@ class HomeScreenActivity : AppCompatActivity() {
     lateinit var dataBase : AppDatabase
     lateinit var addMovimentation : MovimetationDao
     lateinit var cardDao: CardDao
+    lateinit var budgetDao : BudgetsDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +73,7 @@ class HomeScreenActivity : AppCompatActivity() {
         this.dataBase = AppDatabase.getInstance(this)
         this.addMovimentation = dataBase.movimentationDao()
         this.cardDao = dataBase.cardDao()
+        this.budgetDao = dataBase.budgetsDao()
 
         recyclerViewHSmovimentation = findViewById(R.id.HSmovimentation)
 
@@ -94,7 +97,19 @@ class HomeScreenActivity : AppCompatActivity() {
             }
 
             faturas.setValores(formatFloatToReais(Math.abs(TotalBill)), cardDao.getNumberOfCards().toString())
-            orcamentos.setValores("100,00", "50,00")
+
+            var TotalBudgetsReserved = 0.0
+            var TotalBudgetsUsed = 0f
+
+            for (budget in budgetDao.findAll()){
+                TotalBudgetsReserved += budget.valueBudgets
+            }
+
+            for (mov in addMovimentation.getMovimentationBudgets()){
+                TotalBudgetsUsed += if (!mov.tipo) formatNumberToFloat(mov.valor) else 0f
+            }
+
+            orcamentos.setValores(formatFloatToReais(TotalBudgetsReserved.toFloat()), formatFloatToReais(TotalBudgetsUsed))
             recyclerViewResumos()
         }
 

@@ -46,13 +46,17 @@ class BudgetsAdapter(
         val movimentationDAO = dataBase.movimentationDao()
 
         holder.bindingBudgets(budgets[position])
-        var valueEntityTotal: Double = 0.0
-        CoroutineScope(Dispatchers.IO).launch {
-            val valueMovimentation = movimentationDAO.findAllValues()
+
+        var valueEntityTotal = 0.0
+
+        CoroutineScope(Dispatchers.Main).launch {
+            val valueMovimentation = movimentationDAO.findAllValues(budgets[position].idBudgetsModel)
+
             for (i in valueMovimentation.indices) {
                 valueEntityTotal += adjustElements(valueMovimentation[i])
             }
-            "R$ ${valueEntityTotal.toString()}".also {
+
+            "R$ ${valueEntityTotal}".also {
                 holder.itemView.findViewById<TextView>(R.id.budget_used).text = it
             }
         }

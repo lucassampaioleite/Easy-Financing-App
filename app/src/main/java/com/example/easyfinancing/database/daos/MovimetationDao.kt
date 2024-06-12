@@ -15,8 +15,8 @@ interface MovimetationDao {
     @Query("SELECT * FROM movimentationmodel ORDER BY data")
     suspend fun getMovs() : List<MovimentationModel>
 
-    @Query("SELECT valor FROM movimentationmodel")
-    suspend fun findAllValues(): List<String>
+    @Query("SELECT valor FROM movimentationmodel WHERE orcamentoId = :id AND tipo = false")
+    suspend fun findAllValues(id: Long?): List<String>
   
     @Query("SELECT EXISTS (SELECT 1 FROM movimentationmodel WHERE categoriaId = :categoryId LIMIT 1) ")
     suspend fun verifyIfCategoryExist(categoryId : Int) : Boolean
@@ -32,6 +32,9 @@ interface MovimetationDao {
 
     @Query("SELECT * FROM movimentationmodel WHERE cartaoId != 0")
     suspend fun getMovimentationCards() : List<MovimentationModel>
+
+    @Query("SELECT * FROM movimentationmodel WHERE orcamentoId != 0")
+    suspend fun getMovimentationBudgets() : List<MovimentationModel>
 
     @Query("DELETE FROM movimentationmodel WHERE id = :movId")
     suspend fun deleteMov(movId : Int)
