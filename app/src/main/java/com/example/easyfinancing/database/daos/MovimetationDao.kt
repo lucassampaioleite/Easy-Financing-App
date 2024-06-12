@@ -47,6 +47,11 @@ interface MovimetationDao {
     @Query("SELECT cartaoId FROM MovimentationModel WHERE id = :id")
     suspend fun verifyIfMovHasCard(id : Int) : Int
 
-    @Query("UPDATE movimentationmodel SET data = :data, tipo = :tipo, descricao = :descricao, categoriaId = :categoriaId, valor = :valor, recorrencia = :recorrencia, cartaoId = :cartaoId, cartaoParcelas = :cartaoParcelas, orcamentoId = :orcamentoId WHERE id = :id")
-    suspend fun updateMov(data: String, tipo: Boolean, descricao: String, categoriaId: Int, valor: String, recorrencia: Int, cartaoId: Int, cartaoParcelas: Int, orcamentoId: Int, id: Int)
+    @Query("UPDATE movimentationmodel SET data = :data, tipo = :tipo, descricao = :descricao," +
+            " categoriaId = :categoriaId, valor = :valor, recorrencia = :recorrencia, " +
+            "cartaoId = :cartaoId, cartaoParcelas = :cartaoParcelas, orcamentoId = :orcamentoId" +
+            " WHERE id = :id")
+    suspend fun updateMov(data: String, tipo: Boolean, descricao: String, categoriaId: Int,
+                          valor: String, recorrencia: Int, cartaoId: Int, cartaoParcelas: Int,
+                          orcamentoId: Int, id: Int)
 }
