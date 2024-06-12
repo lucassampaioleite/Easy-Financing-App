@@ -183,7 +183,7 @@
 
                 <LinearLayout
                     android:id="@+id/income_info"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
@@ -192,7 +192,7 @@
 
                     <TextView
                         android:id="@+id/income_title"
-                        android:layout_width="80dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:text="Entradas"
@@ -201,12 +201,12 @@
 
                     <TextView
                         android:id="@+id/income_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:text="0,00"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -233,7 +233,7 @@
 
                 <LinearLayout
                     android:id="@+id/outcome_info"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
@@ -242,7 +242,7 @@
 
                     <TextView
                         android:id="@+id/outcome_title"
-                        android:layout_width="80dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:text="Saídas"
@@ -257,7 +257,7 @@
                         android:singleLine="true"
                         android:text="0,00"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>

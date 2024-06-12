@@ -1,6 +1,7 @@
 package com.example.easyfinancing.ui
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,13 +10,17 @@ import android.view.LayoutInflater
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
 import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.BudgetsDAO
+import com.example.easyfinancing.database.daos.CardDao
 import com.example.easyfinancing.database.daos.MovimetationDao
 import com.example.easyfinancing.ui.adapters.extract.AdapterCombinedEx
 import com.example.easyfinancing.ui.adapters.home_screen.AdapaterCombinedHs
@@ -26,6 +31,8 @@ import com.example.easyfinancing.ui.models.home_screen.Page2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -40,6 +47,8 @@ class HomeScreenActivity : AppCompatActivity() {
 
     lateinit var dataBase : AppDatabase
     lateinit var addMovimentation : MovimetationDao
+    lateinit var cardDao: CardDao
+    lateinit var budgetDao : BudgetsDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,17 +62,7 @@ class HomeScreenActivity : AppCompatActivity() {
             openMenuPopUp()
         }
 
-        setPeriodo("MAI 2024")
-        setSaldoDisponivel("R$ 0,00")
-        setSaldo("R$ 0,00")
-
         recyclerView_HomeScreen_Resumos = findViewById(R.id.resumes_homescreen)
-        orcamentos.setValores("100,00", "50,00")
-        faturas.setValores("0,00", "01/01")
-        recyclerViewResumos()
-
-        setEntradas("0,00")
-        setSaidas("0,00")
     }
 
     override fun onResume() {
@@ -73,6 +72,8 @@ class HomeScreenActivity : AppCompatActivity() {
 
         this.dataBase = AppDatabase.getInstance(this)
         this.addMovimentation = dataBase.movimentationDao()
+        this.cardDao = dataBase.cardDao()
+        this.budgetDao = dataBase.budgetsDao()
 
         recyclerViewHSmovimentation = findViewById(R.id.HSmovimentation)
 
@@ -84,8 +85,36 @@ class HomeScreenActivity : AppCompatActivity() {
                 )
             }
             recyclerViewExtrato(movimentacoes)
+
+            setSaldoDisponivel(movimentacoes)
+            setEntradas(movimentacoes)
+            setSaidas(movimentacoes)
+
+            var TotalBill = 0f
+
+            for(mov in addMovimentation.getMovimentationCards()){
+                TotalBill += if (mov.tipo) (formatNumberToFloat(mov.valor)/mov.cartaoParcelas) else -(formatNumberToFloat(mov.valor)/mov.cartaoParcelas)
+            }
+
+            faturas.setValores(formatFloatToReais(Math.abs(TotalBill)), cardDao.getNumberOfCards().toString())
+
+            var TotalBudgetsReserved = 0.0
+            var TotalBudgetsUsed = 0f
+
+            for (budget in budgetDao.findAll()){
+                TotalBudgetsReserved += budget.valueBudgets
+            }
+
+            for (mov in addMovimentation.getMovimentationBudgets()){
+                TotalBudgetsUsed += if (!mov.tipo) formatNumberToFloat(mov.valor) else 0f
+            }
+
+            orcamentos.setValores(formatFloatToReais(TotalBudgetsReserved.toFloat()), formatFloatToReais(TotalBudgetsUsed))
+            recyclerViewResumos()
         }
 
+        setPeriodo("MAI 2024")
+        setSaldo("R$ 0,00")
     }
 
     private fun openMenuPopUp(){
@@ -142,8 +171,20 @@ class HomeScreenActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.period).text = periodo
     }
 
-    fun setSaldoDisponivel(saldo : String){
-        findViewById<TextView>(R.id.value_balance).text = saldo
+    fun setSaldoDisponivel(movimentation: MutableList<Any>){
+        var Saldo = 0f
+
+        for (mov in movimentation){
+            if (mov is Movimentation){
+                if(mov.cardId != 0){
+                    Saldo += if (mov.type) (formatNumberToFloat(mov.movAmount)/mov.cardInstalments) else -(formatNumberToFloat(mov.movAmount)/mov.cardInstalments)
+                }else{
+                    Saldo += if (mov.type) formatNumberToFloat(mov.movAmount) else -formatNumberToFloat(mov.movAmount)
+                }
+            }
+        }
+
+        findViewById<TextView>(R.id.value_balance).text = "R$ ${formatFloatToReais(Saldo)}"
     }
 
     fun setSaldo(saldo : String){
@@ -196,16 +237,59 @@ class HomeScreenActivity : AppCompatActivity() {
         val combinedAdapterPages = AdapaterCombinedHs(this, mutableListOf(orcamentos.getValores(), faturas.getValores()))
         recyclerView_HomeScreen_Resumos.adapter = combinedAdapterPages
 
+        setupSnapHelper(recyclerView_HomeScreen_Resumos)
+    }
+
+    private fun setupSnapHelper(recyclerView: RecyclerView) {
+        if (recyclerView.onFlingListener != null) {
+            recyclerView.onFlingListener = null
+        }
+
         val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(recyclerView_HomeScreen_Resumos)
+        snapHelper.attachToRecyclerView(recyclerView)
     }
 
-    fun setEntradas(valor: String){
-        findViewById<TextView>(R.id.income_value).text = valor
+    fun setEntradas(movimentation: MutableList<Any>){
+        var TotalEntradas = 0f
+
+        for (mov in movimentation){
+            if (mov is Movimentation && mov.type){
+                TotalEntradas += formatNumberToFloat(mov.movAmount)
+            }
+        }
+
+        findViewById<TextView>(R.id.income_value).text = formatFloatToReais(TotalEntradas)
     }
 
-    fun setSaidas(valor: String){
-        findViewById<TextView>(R.id.outcome_value).text = valor
+    fun setSaidas(movimentation: MutableList<Any>){
+        var TotalSaidas = 0f
+
+        for (mov in movimentation){
+            if (mov is Movimentation && !mov.type){
+                if(mov.cardId != 0){
+                    TotalSaidas += (formatNumberToFloat(mov.movAmount)/mov.cardInstalments)
+                }else{
+                    TotalSaidas += formatNumberToFloat(mov.movAmount)
+                }
+            }
+        }
+
+        findViewById<TextView>(R.id.outcome_value).text = formatFloatToReais(TotalSaidas)
+    }
+
+    fun formatNumberToFloat(number : String) : Float{
+        return number
+            .replace("R$ ", "")
+            .replace(".", "")
+            .replace(",", ".").toFloat()
+    }
+
+    fun formatFloatToReais(number : Float) : String{
+        val symbols = DecimalFormatSymbols(Locale("pt", "BR"))
+        symbols.decimalSeparator = ','
+        symbols.groupingSeparator = '.'
+
+        return "${DecimalFormat("#,##0.00", symbols).format(number)}"
     }
 
     fun setNovaMovimentacao(novaMov : Movimentation, listMov : MutableList<Any>){
