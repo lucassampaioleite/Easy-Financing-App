@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/card_color"
+    android:background="#384C59"
     tools:context=".ui.fragments.newmov.Value">
 
     <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/mov_type"
@@ -81,7 +81,7 @@
         android:layout_marginTop="35dp"
         android:layout_centerHorizontal="true"
 
-        android:background="@color/card_color"
+        android:background="#384C59"
         android:fontFamily="@font/inter_semibold"
         android:gravity="end"
         android:hint="R$ 0,00"
@@ -137,7 +137,7 @@
             android:textColor="@color/blue_light"
             android:fontFamily="@font/inter"
             android:textSize="16sp"
-            android:backgroundTint="@color/card_color"
+            android:backgroundTint="#384C59"
             android:singleLine="true"/>
 
     </LinearLayout>

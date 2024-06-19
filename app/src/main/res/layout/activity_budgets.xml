@@ -1,189 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_blue_dark"
+    android:background="#384C59"
     tools:context=".ui.BudgetsActivity">
 
-    <ImageButton
-        android:id="@+id/imageButton_arrow_back"
+    <ImageButton android:id="@+id/arrow_back_budgets"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="16dp"
-        android:background="@null"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/submit_left"
-        android:padding="0dp"
-        android:src="@drawable/ic_arrow_back" />
+        android:src="@drawable/arrow_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_orcamento_activity_budgets"
+    <ImageButton android:id="@+id/add_new_budget"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageButton_arrow_back"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/orcamentos"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <View
-        android:id="@+id/view_barra_activity_budgets"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@+id/text_orcamento_activity_budgets"
-        android:layout_marginHorizontal="16dp"
-        android:background="@color/blue_light" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cadView_reserva_emergencia"
-        android:layout_width="300dp"
+    <TextView android:id="@+id/page_title_budgets"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view_barra_activity_budgets"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#193F44"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="16dp">
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="ORÇAMENTOS"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrow_back_budgets" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+    <View android:id="@+id/division_line"
 
-            <ImageView
-                android:id="@+id/imageView_payments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:contentDescription="@string/submit_payment"
-                android:padding="0dp"
-                android:src="@drawable/ic_payments"
-                app:tint="@color/blue_light" />
-
-            <TextView
-                android:id="@+id/text_reserva_emergencia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView_payments"
-                android:layout_centerHorizontal="true"
-                android:layout_marginVertical="8dp"
-                android:text="@string/reserva_de_emergencia"
-                android:textColor="@color/blue_light"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/text_valor_reservado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_reserva_emergencia"
-                android:layout_alignParentStart="true"
-                android:text="Valor Reservado:"
-                android:textColor="#969696"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/text_valor_5000"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_reserva_emergencia"
-                android:layout_alignParentEnd="true"
-                android:text="R$ 5.000,00"
-                android:textColor="#969696"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/text_valor_atualizado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_valor_reservado"
-                android:layout_alignParentStart="true"
-                android:text="Valor Utilizado:"
-                android:textColor="#969696"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/text_valor_1738"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_valor_5000"
-                android:layout_alignParentEnd="true"
-                android:text="R$ 1.738,00"
-                android:textColor="@color/blue_light"
-                android:textStyle="bold" />
-
-            <View
-                android:id="@+id/view_barra_graphic"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_below="@id/text_valor_atualizado"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="32dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/green_blue_dark" />
-
-            <View
-                android:id="@+id/view_barra_graphic_moving"
-                android:layout_width="80dp"
-                android:layout_height="32dp"
-                android:layout_alignStart="@+id/view_barra_graphic"
-                android:layout_alignTop="@+id/view_barra_graphic"
-                android:layout_alignBottom="@+id/view_barra_graphic"
-                android:layout_margin="2dp"
-                android:background="@color/blue_light" />
-
-            <TextView
-                android:id="@+id/text_porcento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/view_barra_graphic"
-                android:layout_alignBottom="@+id/view_barra_graphic"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="35%"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_orcamento"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/fab_add_orcamento"
-        app:backgroundTint="#193F44"
-        app:borderWidth="1dp"
-        app:elevation="5dp"
-        app:srcCompat="@drawable/ic_add"
-        app:tint="@color/blue_light" />
-
-    <FrameLayout
-        android:id="@+id/frame_list_budgets"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/cadView_reserva_emergencia"
-        android:visibility="visible"/>
+        android:layout_height="1dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="50dp"
+        android:background="@color/blue_line"
+        android:elevation="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_title_budgets" />
 
-    <FrameLayout
-        android:id="@+id/frame_access_budgets"
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/budgets_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:layout_height="0dp"
 
-</RelativeLayout>
+        app:layout_constraintTop_toBottomOf="@+id/division_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/recycle_budget_item"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 

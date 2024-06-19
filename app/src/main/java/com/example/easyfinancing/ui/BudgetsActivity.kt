@@ -1,70 +1,140 @@
 package com.example.easyfinancing.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.view.View.OnClickListener
-import androidx.activity.enableEdgeToEdge
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfinancing.R
-import com.example.easyfinancing.databinding.ActivityBudgetsBinding
-
-private const val WIDTH_MAX: Double = 550.00
-private const val PORCENTAGEM_TOTAL_WIDTH: Int = 100
+import com.example.easyfinancing.database.AppDatabase
+import com.example.easyfinancing.database.daos.BudgetsDAO
+import com.example.easyfinancing.database.models.BudgetsModel
+import com.example.easyfinancing.ui.adapters.budget.BudgetsAdapter
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
 class BudgetsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBudgetsBinding
+    private lateinit var database: AppDatabase
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var budgetsDAO: BudgetsDAO
+    private lateinit var budgetsEntity: BudgetsModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        setContentView(R.layout.activity_budgets)
+        botaoVoltar()
+        buttonNewBudget()
+        openConnection()
+    }
 
-        binding = ActivityBudgetsBinding.inflate(layoutInflater)
+    override fun onResume() {
+        super.onResume()
 
-        setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        val budgetsToEntity: MutableList<BudgetsModel> = mutableListOf()
+
+        recyclerView = findViewById(R.id.budgets_list)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+        CoroutineScope(Dispatchers.IO).launch {
+            val listBudgets = budgetsDAO.findAll()
+            for (i in listBudgets.indices) {
+                budgetsToEntity.add(
+                    BudgetsModel(listBudgets[i].idBudgetsModel, listBudgets[i].nameBudgets,
+                        listBudgets[i].valueBudgets
+                    )
+                )
+            }
         }
+        recyclerView.adapter = BudgetsAdapter(applicationContext, budgetsToEntity)
+    }
 
-        binding.viewBarraGraphicMoving.layoutParams.width =
-            calculateGraphicWidth(calculaPorcentagemDeValorUtilizadoSobreValorReservado()).toInt()
-        "${calculaPorcentagemDeValorUtilizadoSobreValorReservado()}%".also { binding.textPorcento.text = it }
+    private fun botaoVoltar() {
+        findViewById<ImageButton>(R.id.arrow_back_budgets).setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun getElementToEntity(name: String, value: String) =
+        BudgetsModel(nameBudgets = name, valueBudgets = value.toDouble())
+
+    private fun openConnection() {
+        this.database = AppDatabase.getInstance(this)
+        this.budgetsDAO = database.budgetsDao()
+    }
 
 
-        binding.fabAddOrcamento.setOnClickListener(object : OnClickListener {
-            override fun onClick(v: View?) =
-                startActivity(Intent(applicationContext, AccessBudgetsActivity::class.java))
-//                binding.frameAccessBudgets.visibility = VISIBLE // Faz o frame que registra orçamento ficar visível a tela
-//                binding.cadViewReservaEmergencia.visibility = View.GONE // Faz o frame que registra orçamento ficar sair da tela
-//                binding.fabAddOrcamento.visibility = View.GONE // Faz o frame que registra orçamento ficar faz sair da tela
+    private fun buttonNewBudget() {
+        findViewById<ImageButton>(R.id.add_new_budget).setOnClickListener {
+            val dialogView = layoutInflater.inflate(R.layout.dialog_budget_new_item_form, null)
+
+//            dialogView.findViewById<Button>(R.id.new_budget_save_button).setOnClickListener {
+//                Toast.makeText(dialogView.context, dialogView.findViewById<EditText>(R.id.budget_value).text.toString(), Toast.LENGTH_SHORT).show()
+//            }
+
+            val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+            editTextMoneyMask(dialogView.findViewById(R.id.budget_value))
+            dialogView.findViewById<Button>(R.id.new_budget_save_button).setOnClickListener {
+                val arrayFormsBudgets = adjustElements(
+                    dialogView.findViewById<EditText>(R.id.budget_name).text,
+                    dialogView.findViewById<EditText>(R.id.budget_value).text
+                )
+                budgetsEntity = getElementToEntity(arrayFormsBudgets[0], arrayFormsBudgets[1])
+                CoroutineScope(Dispatchers.IO).launch {
+                    budgetsDAO.insert(budgetsEntity)
+                }
+                dialog.dismiss()
+            }
+            dialog.setContentView(dialogView)
+            dialog.show()
+        }
+    }
+
+    var current = ""
+    private fun editTextMoneyMask(editText: EditText) {
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString() != current) {
+                    editText.removeTextChangedListener(this)
+
+                    val cleanString = s.toString().replace("[R$,.]".toRegex(), "")
+                    val parsed = cleanString.toDoubleOrNull() ?: 0.0
+
+                    val symbols = DecimalFormatSymbols(Locale("pt", "BR"))
+                    symbols.decimalSeparator = ','
+                    symbols.groupingSeparator = '.'
+
+                    val decimalFormat = DecimalFormat("#,##0.00", symbols)
+                    val formatted = decimalFormat.format((parsed / 100))
+
+                    current = "R$ $formatted"
+                    editText.setText(current)
+                    editText.setSelection(current.length)
+
+                    editText.addTextChangedListener(this)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
         })
-
     }
 
-    private fun calculateGraphicWidth(porcentageDeUtilizadoSobreReservado: Double): Double {
-        val porcentagemUtilizadaParaTamanhoViewBarraMoving =
-            (porcentageDeUtilizadoSobreReservado * WIDTH_MAX) / PORCENTAGEM_TOTAL_WIDTH
-
-        return porcentagemUtilizadaParaTamanhoViewBarraMoving
+    private fun adjustElements(viewName: Editable, viewValue: Editable): Array<String> {
+        val name = viewName.toString()
+        val value = viewValue.toString().replace("R$ ", "").replace(".", "")
+            .replace(",", ".")
+        return arrayOf(name, value)
     }
-
-    private fun calculaPorcentagemDeValorUtilizadoSobreValorReservado(): Double { // receberá os parâmetros do banco
-        val valueReservado = 5000.00 // este valor virá do banco de dados
-        val valueUtilizado = 1738.00 // este valor virá do banco de dados
-
-        return (valueUtilizado * PORCENTAGEM_TOTAL_WIDTH) / valueReservado
-    }
-
-//
-//    private fun openAccessBudgets(fragment: Fragment) {
-//        val fragmentTransaction = supportFragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.frame_access_budgets, fragment)
-//        fragmentTransaction.commit()
-//    }
-
 }

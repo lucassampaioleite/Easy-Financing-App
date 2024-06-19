@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#384C59">
+
+    <ImageButton android:id="@+id/card_icon_image"
+        android:layout_width="320dp"
+        android:layout_height="195dp"
+
+        android:background="@drawable/cartao2"
+        android:layout_marginTop="10dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton android:id="@+id/delete_card_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+
+        android:layout_marginTop="20dp"
+        android:src="@drawable/delete"
+        android:background="@drawable/round_background_red"
+
+        app:layout_constraintTop_toBottomOf="@+id/card_icon_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View android:id="@+id/division_line"
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_card_button" />
+
+    <TextView android:id="@+id/card_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="CARD_NAME"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="#8BCAD9"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textSize="18sp"
+
+        app:layout_constraintTop_toBottomOf="@+id/division_line"/>
+
+    <LinearLayout android:id="@+id/card_bill_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@+id/card_name">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="25dp"
+
+            android:text="Valor da Fatura:"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="#8BCAD9"/>
+
+        <TextView android:id="@+id/card_bill_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+
+            android:layout_marginRight="35dp"
+
+            android:text="R$ 0,00"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="#8BCAD9"/>
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/card_due_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@+id/card_bill_info">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="25dp"
+
+            android:text="Dia do Vencimento:"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="#8BCAD9"/>
+
+        <TextView android:id="@+id/card_due"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+
+            android:layout_marginRight="35dp"
+
+            android:text="00/00"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="#8BCAD9"/>
+
+    </LinearLayout>
+
+    <View android:id="@+id/division_line2"
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_due_info" />
+
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/card_movimentation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="10dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/division_line2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/recycle_extratct_mov"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

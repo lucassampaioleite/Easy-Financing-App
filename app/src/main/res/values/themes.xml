@@ -6,4 +6,17 @@
     </style>
 
     <style name="Theme.EasyFinancing" parent="Base.Theme.EasyFinancing" />
+
+    <style name="WeekDayTextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- Define o estilo para o texto das datas -->
+    <style name="DateTextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="SelectedDateTextAppearance">
+        <item name="android:textColor">@color/blue_light</item>
+    </style>
 </resources>

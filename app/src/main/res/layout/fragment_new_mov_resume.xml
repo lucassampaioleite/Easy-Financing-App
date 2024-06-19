@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.newmov.Resume"
-    android:background="@color/card_color">
+    android:background="#384C59">
 
     <TextView
         android:layout_width="wrap_content"
@@ -110,145 +110,194 @@
 
         app:layout_constraintTop_toBottomOf="@+id/comment_icon_resume"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/category_selection"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
 
         app:layout_constraintTop_toBottomOf="@+id/division_line_resume2"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton android:id="@+id/category_selection_border"
-
-            android:layout_width="66dp"
-            android:layout_height="66dp"
-            android:background="@drawable/bg_add_movimentation_btn"
-            android:contentDescription="@string/submit_personal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton android:id="@+id/category_selection_inner"
-
-            android:layout_width="64.5dp"
-            android:layout_height="64.5dp"
-            android:background="@drawable/round_dark_blue"
-            android:contentDescription="@string/submit_personal"
-            android:src="@drawable/ic_category"
-            app:layout_constraintBottom_toBottomOf="@+id/category_selection_border"
-            app:layout_constraintEnd_toEndOf="@+id/category_selection_border"
-            app:layout_constraintStart_toStartOf="@+id/category_selection_border"
-            app:layout_constraintTop_toTopOf="@+id/category_selection_border" />
-
-        <TextView android:id="@+id/text_category_selection"
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/category_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-            android:layout_marginTop="3dp"
-            android:text="Categorias"
-            android:textColor="@color/blue_line"
-            android:fontFamily="@font/inter"
+            <ImageButton android:id="@+id/category_selection_border"
 
-            app:layout_constraintTop_toBottomOf="@+id/category_selection_border"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="@drawable/bg_add_movimentation_btn"
+                android:contentDescription="@string/submit_personal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton android:id="@+id/category_selection_inner"
 
-    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/recurence_selection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                android:layout_width="64.5dp"
+                android:layout_height="64.5dp"
+                android:background="@drawable/round_mid_blue"
+                android:contentDescription="@string/submit_personal"
+                android:src="@drawable/ic_category"
+                app:layout_constraintBottom_toBottomOf="@+id/category_selection_border"
+                app:layout_constraintEnd_toEndOf="@+id/category_selection_border"
+                app:layout_constraintStart_toStartOf="@+id/category_selection_border"
+                app:layout_constraintTop_toTopOf="@+id/category_selection_border" />
 
-        android:layout_marginLeft="20dp"
+            <TextView android:id="@+id/text_category_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@+id/division_line_resume2"
-        app:layout_constraintStart_toEndOf="@+id/category_selection">
+                android:layout_marginTop="3dp"
+                android:text="Categorias"
+                android:textColor="@color/blue_line"
+                android:fontFamily="@font/inter"
 
-        <ImageButton android:id="@+id/recurence_selection_border"
+                app:layout_constraintTop_toBottomOf="@+id/category_selection_border"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-            android:layout_width="66dp"
-            android:layout_height="66dp"
-            android:background="@drawable/bg_add_movimentation_btn"
-            android:contentDescription="@string/submit_personal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageButton android:id="@+id/recurence_selection_inner"
-
-            android:layout_width="64.5dp"
-            android:layout_height="64.5dp"
-            android:background="@drawable/round_dark_blue"
-            android:contentDescription="@string/submit_personal"
-            android:src="@drawable/fiber_smart_record"
-            app:layout_constraintBottom_toBottomOf="@+id/recurence_selection_border"
-            app:layout_constraintEnd_toEndOf="@+id/recurence_selection_border"
-            app:layout_constraintStart_toStartOf="@+id/recurence_selection_border"
-            app:layout_constraintTop_toTopOf="@+id/recurence_selection_border" />
-
-        <TextView android:id="@+id/text_recurence_selection"
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/recurence_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-            android:layout_marginTop="3dp"
-            android:text="Recorrência"
-            android:textColor="@color/blue_line"
-            android:fontFamily="@font/inter"
+            <ImageButton android:id="@+id/recurence_selection_border"
 
-            app:layout_constraintTop_toBottomOf="@+id/recurence_selection_border"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="@drawable/bg_add_movimentation_btn"
+                android:contentDescription="@string/submit_personal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton android:id="@+id/recurence_selection_inner"
 
-    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/budget_selection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                android:layout_width="64.5dp"
+                android:layout_height="64.5dp"
+                android:background="@drawable/round_mid_blue"
+                android:contentDescription="@string/submit_personal"
+                android:src="@drawable/fiber_smart_record"
+                app:layout_constraintBottom_toBottomOf="@+id/recurence_selection_border"
+                app:layout_constraintEnd_toEndOf="@+id/recurence_selection_border"
+                app:layout_constraintStart_toStartOf="@+id/recurence_selection_border"
+                app:layout_constraintTop_toTopOf="@+id/recurence_selection_border" />
 
-        android:layout_marginLeft="20dp"
+            <TextView android:id="@+id/text_recurence_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@+id/division_line_resume2"
-        app:layout_constraintStart_toEndOf="@+id/recurence_selection">
+                android:layout_marginTop="3dp"
+                android:text="Recorrência"
+                android:textColor="@color/blue_line"
+                android:fontFamily="@font/inter"
 
-        <ImageButton android:id="@+id/budget_selection_border"
+                app:layout_constraintTop_toBottomOf="@+id/recurence_selection_border"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-            android:layout_width="66dp"
-            android:layout_height="66dp"
-            android:background="@drawable/bg_add_movimentation_btn"
-            android:contentDescription="@string/submit_personal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageButton android:id="@+id/budget_selection_inner"
-
-            android:layout_width="64.5dp"
-            android:layout_height="64.5dp"
-            android:background="@drawable/round_dark_blue"
-            android:contentDescription="@string/submit_personal"
-            android:src="@drawable/savings"
-            app:layout_constraintBottom_toBottomOf="@+id/budget_selection_border"
-            app:layout_constraintEnd_toEndOf="@+id/budget_selection_border"
-            app:layout_constraintStart_toStartOf="@+id/budget_selection_border"
-            app:layout_constraintTop_toTopOf="@+id/budget_selection_border" />
-
-        <TextView android:id="@+id/text_budget_selection"
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/budget_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-            android:layout_marginTop="3dp"
-            android:text="Orçamento"
-            android:textColor="@color/blue_line"
-            android:fontFamily="@font/inter"
+            <ImageButton android:id="@+id/budget_selection_border"
 
-            app:layout_constraintTop_toBottomOf="@+id/budget_selection_border"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="@drawable/bg_add_movimentation_btn"
+                android:contentDescription="@string/submit_personal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton android:id="@+id/budget_selection_inner"
+
+                android:layout_width="64.5dp"
+                android:layout_height="64.5dp"
+                android:background="@drawable/round_mid_blue"
+                android:contentDescription="@string/submit_personal"
+                android:src="@drawable/savings"
+                app:layout_constraintBottom_toBottomOf="@+id/budget_selection_border"
+                app:layout_constraintEnd_toEndOf="@+id/budget_selection_border"
+                app:layout_constraintStart_toStartOf="@+id/budget_selection_border"
+                app:layout_constraintTop_toTopOf="@+id/budget_selection_border" />
+
+            <TextView android:id="@+id/text_budget_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="3dp"
+                android:text="Orçamento"
+                android:textColor="@color/blue_line"
+                android:fontFamily="@font/inter"
+
+                app:layout_constraintTop_toBottomOf="@+id/budget_selection_border"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/card_selection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageButton android:id="@+id/card_selection_border"
+
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="@drawable/bg_add_movimentation_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton android:id="@+id/card_selection_inner"
+
+                android:layout_width="64.5dp"
+                android:layout_height="64.5dp"
+                android:background="@drawable/round_mid_blue"
+                android:contentDescription="@string/submit_personal"
+                android:src="@drawable/cat_ic_credit_card"
+                app:layout_constraintBottom_toBottomOf="@+id/card_selection_border"
+                app:layout_constraintEnd_toEndOf="@+id/card_selection_border"
+                app:layout_constraintStart_toStartOf="@+id/card_selection_border"
+                app:layout_constraintTop_toTopOf="@+id/card_selection_border"
+                app:tint="@color/blue_light" />
+
+            <TextView android:id="@+id/text_card_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="3dp"
+                android:text="Cartão"
+                android:textColor="@color/blue_line"
+                android:fontFamily="@font/inter"
+
+                app:layout_constraintTop_toBottomOf="@+id/card_selection_border"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView android:id="@+id/due_card_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text=""
+                android:textColor="@color/blue_line"
+                android:fontFamily="@font/inter"
+
+                app:layout_constraintTop_toBottomOf="@+id/text_card_selection"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

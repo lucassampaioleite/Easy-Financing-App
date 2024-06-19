@@ -1,6 +1,7 @@
 package com.example.easyfinancing.ui.adapters.home_screen
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.easyfinancing.R
+import com.example.easyfinancing.ui.BudgetsActivity
+import com.example.easyfinancing.ui.CardActivity
 import com.example.easyfinancing.ui.models.home_screen.Page1
 import com.example.easyfinancing.ui.models.home_screen.Page2
 
@@ -28,11 +31,11 @@ class AdapaterCombinedHs (private val context : Context, private val list: Mutab
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
             VIEW_PAGE1 -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.activity_hs_hscroll_page1, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.recycle_hs_budget, parent, false)
                 Page1ViewHolder(view)
             }
             VIEW_PAGE2 -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.activity_hs_hscroll_page2, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.recycle_hs_cardbill, parent, false)
                 Page2ViewHolder(view)
             }
             else -> throw IllegalArgumentException("Aconteceu um erro ao buscar os resumos")
@@ -53,6 +56,13 @@ class AdapaterCombinedHs (private val context : Context, private val list: Mutab
         val totaUsado = itemView.findViewById<TextView>(R.id.budget_used)
         val barText = itemView.findViewById<TextView>(R.id.budget_bar_porcent)
         val bar = itemView.findViewById<View>(R.id.inner_budget_bar)
+
+        init {
+            itemView.setOnClickListener {
+                val BUDGETSACTIVITY = Intent(itemView.context, BudgetsActivity::class.java)
+                itemView.context.startActivity(BUDGETSACTIVITY)
+            }
+        }
 
         fun bind(page1: Page1) {
             totalReservado.text = page1.TotalReservado
@@ -75,6 +85,13 @@ class AdapaterCombinedHs (private val context : Context, private val list: Mutab
     inner class Page2ViewHolder(itemView: View) : ViewHolder(itemView){
         val valorTotal = itemView.findViewById<TextView>(R.id.TotalBill)
         val vencimento = itemView.findViewById<TextView>(R.id.DueDate)
+
+        init {
+            itemView.setOnClickListener {
+                val CARDBILLACTIVITY = Intent(itemView.context, CardActivity::class.java)
+                itemView.context.startActivity(CARDBILLACTIVITY)
+            }
+        }
 
         fun bind(page2: Page2) {
             valorTotal.text = page2.ValorTotal
