@@ -3,6 +3,7 @@ package com.example.easyfinancing.ui.fragments.newmov
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.easyfinancing.R
 import com.example.easyfinancing.ui.viewmodels.NewMovViewModel
@@ -20,7 +22,7 @@ import java.util.Locale
 
 class Value : Fragment() {
 
-    lateinit var viewModel : NewMovViewModel
+    val viewModel : NewMovViewModel by activityViewModels()
     var type : Boolean = true
     lateinit var value: EditText
     lateinit var description : EditText
@@ -29,24 +31,18 @@ class Value : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_new_mov_values, container, false)
 
-        viewModel = ViewModelProvider(requireActivity()).get(NewMovViewModel::class.java)
-
-        val btnEntrada = view.findViewById<Button>(R.id.btn_type_entrada)
-        val btnSaida = view.findViewById<Button>(R.id.btn_type_saida)
-
-        btnEntrada.setOnClickListener{
-            btnEntrada.background = ContextCompat.getDrawable(requireContext(), R.drawable.mov_type_clicked)
-            btnSaida.background = ContextCompat.getDrawable(requireContext(), R.drawable.transparent)
+        view.findViewById<Button>(R.id.btn_type_entrada).setOnClickListener{
+            getType(view, true)
             viewModel.movType = true
         }
 
-        btnSaida.setOnClickListener{
-            btnSaida.background = ContextCompat.getDrawable(requireContext(), R.drawable.mov_type_clicked)
-            btnEntrada.background = ContextCompat.getDrawable(requireContext(), R.drawable.transparent)
+        view.findViewById<Button>(R.id.btn_type_saida).setOnClickListener{
+            getType(view, false)
             viewModel.movType = false
         }
 
         value = view.findViewById(R.id.edit_value)
+
         value.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -86,6 +82,22 @@ class Value : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        if (viewModel.movId != 0){
+            getType(view, viewModel.movType)
+            value.setText(viewModel.movValue)
+            description.setText(viewModel.movDesc)
+        }
+
         return view
+    }
+
+    fun getType(view :View, type : Boolean){
+        if (type){
+            view.findViewById<Button>(R.id.btn_type_entrada).background = ContextCompat.getDrawable(requireContext(), R.drawable.mov_type_clicked)
+            view.findViewById<Button>(R.id.btn_type_saida).background = ContextCompat.getDrawable(requireContext(), R.drawable.transparent)
+        }else{
+            view.findViewById<Button>(R.id.btn_type_saida).background = ContextCompat.getDrawable(requireContext(), R.drawable.mov_type_clicked)
+            view.findViewById<Button>(R.id.btn_type_entrada).background = ContextCompat.getDrawable(requireContext(), R.drawable.transparent)
+        }
     }
 }

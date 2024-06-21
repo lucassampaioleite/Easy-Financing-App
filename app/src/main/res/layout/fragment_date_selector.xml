@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/card_color"
+    android:background="@android:color/transparent"
     tools:context=".ui.fragments.newmov.DateSelector"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -30,6 +30,12 @@
             android:background="@drawable/calendar"
 
             android:layout_marginTop="45dp"
+
+            android:weekDayTextAppearance="@style/WeekDayTextAppearance"
+            android:dateTextAppearance="@style/DateTextAppearance"
+            android:focusedMonthDateColor="@android:color/white"
+            android:unfocusedMonthDateColor="@android:color/white"
+            android:selectedDateVerticalBar="@android:color/white"
 
             app:layout_constraintTop_toBottomOf="@+id/fg_title"
             app:layout_constraintStart_toStartOf="parent"

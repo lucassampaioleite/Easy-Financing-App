@@ -6,8 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/light_background">
 
-    <ImageView
-        android:id="@+id/back_button"
+    <ImageView android:id="@+id/back_button"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25sp"
@@ -48,12 +48,11 @@
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="25dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/division_line"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/activity_extratct_movimentation" />
+        tools:listitem="@layout/recycle_extratct_mov" />
 
     <ImageButton
         android:id="@+id/addMov"

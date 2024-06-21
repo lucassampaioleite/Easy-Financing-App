@@ -1,40 +1,43 @@
 package com.example.easyfinancing.ui.viewmodels
 
+import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.easyfinancing.ui.models.extract.Movimentation
+import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
 
 class NewMovViewModel : ViewModel(){
 
-    var movimentationList : List<String> = mutableListOf()
+    private val _movimentationList: MutableLiveData<Array<String>> = MutableLiveData()
+    val movimentationList: LiveData<Array<String>> get() = _movimentationList
 
+    var movId : Int = 0
+    var movDate : LocalDate = LocalDate.now()
     var movType : Boolean = true
-    var movValue : String = ""
     var movDesc : String = "Sem descrição"
-    var movDate : Date = Date()
+    var movValue : String = ""
+    var movCatId : Int = 0
+    var movRecurence : Int = 0
+    var movCardId : Int = 0
+    var movCardInstalments : Int = 0
+    var movBudgetId : Int = 0
 
-    fun setDataValues(type : Boolean,value : String, description : String){
-        this.movType = type
-        this.movValue = value
-        this.movDesc = description
+    fun getFormatedDate(date: LocalDate) : String{
+        val formmater = SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR"))
+        return formmater.format(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()))
     }
 
-    fun setChosenMovDate(chosenDate : Date){
-        this.movDate = chosenDate
-    }
-
-    fun getDate() : String{
-        val formmater = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        return formmater.format(movDate)
-    }
-
-    fun getDateFormmated() : String{
+    fun getDateExpanded() : String{
         val formmater = SimpleDateFormat("EEEE, dd MMM yyyy", Locale("pt", "BR"))
-        var dateFormatted = formmater.format(movDate)
-        dateFormatted = dateFormatted.replaceFirstChar{it.toUpperCase()}
+        val date = Date.from(movDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
+        var dateFormatted = formmater.format(date)
+        dateFormatted = dateFormatted.replaceFirstChar{it.uppercase()}
         dateFormatted = dateFormatted.replace("-feira", "")
 
         return dateFormatted
